@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mooc.mooc.mapper.UserInfoMapper">
+  <!--<resultMap id="BaseResultMap" type="com.mooc.mooc.model.UserInfo">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+  </resultMap>-->
+  <!--<insert id="insert" parameterType="com.mooc.mooc.model.UserInfo">
+    insert into user_info (id, username, password, 
+      email, name, sex, birthday, 
+      address, postcode, phone, 
+      register_time)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{address,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, username, password, email, name, sex, birthday, address, postcode, phone, 
+    register_time
+    from user_info
+  </select>-->
+  <resultMap id="BaseResultMap" type="com.mooc.mooc.model.UserInfo">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_status" jdbcType="VARCHAR" property="userStatus" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="teacher_state" jdbcType="INTEGER" property="teacherState" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="prohibit_state" jdbcType="INTEGER" property="prohibitState" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mooc.mooc.model.UserInfo">
+    insert into user_info (user_id, user_status, user_name, 
+      user_password, sex, school, 
+      phone, grade, major, 
+      teacher_state, register_time, prohibit_state, 
+      name)
+    values (#{userId,jdbcType=INTEGER}, #{userStatus,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{school,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{teacherState,jdbcType=INTEGER}, #{registerTime,jdbcType=TIMESTAMP}, #{prohibitState,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.UserInfo">
+    update user_info
+    set user_status = #{userStatus,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      school = #{school,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      teacher_state = #{teacherState,jdbcType=INTEGER},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      prohibit_state = #{prohibitState,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select user_id, user_status, user_name, user_password, sex, school, phone, grade, 
+    major, teacher_state, register_time, prohibit_state, name
+    from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, user_status, user_name, user_password, sex, school, phone, grade, 
+    major, teacher_state, register_time, prohibit_state, name
+    from user_info
+  </select>
+</mapper>

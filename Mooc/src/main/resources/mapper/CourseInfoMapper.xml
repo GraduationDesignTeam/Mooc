@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mooc.mooc.mapper.CourseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.mooc.mooc.model.CourseInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="target" jdbcType="VARCHAR" property="target" />
+    <result column="reference" jdbcType="VARCHAR" property="reference" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="open_time" jdbcType="TIMESTAMP" property="openTime" />
+    <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
+    <result column="course_state" jdbcType="INTEGER" property="courseState" />
+    <result column="check_state" jdbcType="INTEGER" property="checkState" />
+    <result column="course_authority" jdbcType="INTEGER" property="courseAuthority" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from course_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mooc.mooc.model.CourseInfo">
+    insert into course_info (id, name, type, 
+      intro, detail, target, 
+      reference, teacher_id, teacher_name, 
+      open_time, close_time, course_state, 
+      check_state, course_authority)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{intro,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, 
+      #{reference,jdbcType=VARCHAR}, #{teacherId,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, 
+      #{openTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, #{courseState,jdbcType=INTEGER}, 
+      #{checkState,jdbcType=INTEGER}, #{courseAuthority,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.CourseInfo">
+    update course_info
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      target = #{target,jdbcType=VARCHAR},
+      reference = #{reference,jdbcType=VARCHAR},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
+      teacher_name = #{teacherName,jdbcType=VARCHAR},
+      open_time = #{openTime,jdbcType=TIMESTAMP},
+      close_time = #{closeTime,jdbcType=TIMESTAMP},
+      course_state = #{courseState,jdbcType=INTEGER},
+      check_state = #{checkState,jdbcType=INTEGER},
+      course_authority = #{courseAuthority,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, type, intro, detail, target, reference, teacher_id, teacher_name, 
+    open_time, close_time, course_state, check_state, course_authority
+    from course_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, type, intro, detail, target, reference, teacher_id, teacher_name, 
+    open_time, close_time, course_state, check_state, course_authority
+    from course_info
+  </select>
+</mapper>

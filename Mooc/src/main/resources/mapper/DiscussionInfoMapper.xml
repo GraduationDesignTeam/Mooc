@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mooc.mooc.mapper.DiscussionInfoMapper">
+  <resultMap id="BaseResultMap" type="com.mooc.mooc.model.DiscussionInfo">
+    <id column="discussion_id" jdbcType="INTEGER" property="discussionId" />
+    <result column="discussion_name" jdbcType="VARCHAR" property="discussionName" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <result column="assistant_id" jdbcType="INTEGER" property="assistantId" />
+    <result column="discussion_state" jdbcType="INTEGER" property="discussionState" />
+    <result column="discussion_description" jdbcType="VARCHAR" property="discussionDescription" />
+    <result column="open_date" jdbcType="TIMESTAMP" property="openDate" />
+    <result column="close_date" jdbcType="TIMESTAMP" property="closeDate" />
+    <result column="discussion_authority" jdbcType="INTEGER" property="discussionAuthority" />
+    <result column="discussion_popularity" jdbcType="INTEGER" property="discussionPopularity" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from discussion_info
+    where discussion_id = #{discussionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mooc.mooc.model.DiscussionInfo">
+    insert into discussion_info (discussion_id, discussion_name, course_id, 
+      teacher_id, assistant_id, discussion_state, 
+      discussion_description, open_date, close_date, 
+      discussion_authority, discussion_popularity
+      )
+    values (#{discussionId,jdbcType=INTEGER}, #{discussionName,jdbcType=VARCHAR}, #{courseId,jdbcType=INTEGER}, 
+      #{teacherId,jdbcType=INTEGER}, #{assistantId,jdbcType=INTEGER}, #{discussionState,jdbcType=INTEGER}, 
+      #{discussionDescription,jdbcType=VARCHAR}, #{openDate,jdbcType=TIMESTAMP}, #{closeDate,jdbcType=TIMESTAMP}, 
+      #{discussionAuthority,jdbcType=INTEGER}, #{discussionPopularity,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.DiscussionInfo">
+    update discussion_info
+    set discussion_name = #{discussionName,jdbcType=VARCHAR},
+      course_id = #{courseId,jdbcType=INTEGER},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
+      assistant_id = #{assistantId,jdbcType=INTEGER},
+      discussion_state = #{discussionState,jdbcType=INTEGER},
+      discussion_description = #{discussionDescription,jdbcType=VARCHAR},
+      open_date = #{openDate,jdbcType=TIMESTAMP},
+      close_date = #{closeDate,jdbcType=TIMESTAMP},
+      discussion_authority = #{discussionAuthority,jdbcType=INTEGER},
+      discussion_popularity = #{discussionPopularity,jdbcType=INTEGER}
+    where discussion_id = #{discussionId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select discussion_id, discussion_name, course_id, teacher_id, assistant_id, discussion_state, 
+    discussion_description, open_date, close_date, discussion_authority, discussion_popularity
+    from discussion_info
+    where discussion_id = #{discussionId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select discussion_id, discussion_name, course_id, teacher_id, assistant_id, discussion_state, 
+    discussion_description, open_date, close_date, discussion_authority, discussion_popularity
+    from discussion_info
+  </select>
+</mapper>
