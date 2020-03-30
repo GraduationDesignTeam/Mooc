@@ -3,98 +3,78 @@ package com.mooc.mooc.model;
 import java.util.Date;
 
 public class UserInfo {
-    private Integer id;
+    private Integer userId;
 
-    private String username;
+    private String userStatus;
 
-    private String password;
+    private String userName;
 
-    private String email;
+    private String userPassword;
 
-    private String name;
+    private Integer sex;
 
-    private String sex;
-
-    private Date birthday;
-
-    private String address;
-
-    private String postcode;
+    private String school;
 
     private String phone;
 
+    private String grade;
+
+    private String major;
+
+    private Integer teacherState;
+
     private Date registerTime;
 
-    public Integer getId() {
-        return id;
+    private Integer prohibitState;
+
+    private String name;
+
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserStatus() {
+        return userStatus;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus == null ? null : userStatus.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword == null ? null : userPassword.trim();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getSchool() {
+        return school;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode == null ? null : postcode.trim();
+    public void setSchool(String school) {
+        this.school = school == null ? null : school.trim();
     }
 
     public String getPhone() {
@@ -105,11 +85,51 @@ public class UserInfo {
         this.phone = phone == null ? null : phone.trim();
     }
 
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade == null ? null : grade.trim();
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major == null ? null : major.trim();
+    }
+
+    public Integer getTeacherState() {
+        return teacherState;
+    }
+
+    public void setTeacherState(Integer teacherState) {
+        this.teacherState = teacherState;
+    }
+
     public Date getRegisterTime() {
         return registerTime;
     }
 
     public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
+    }
+
+    public Integer getProhibitState() {
+        return prohibitState;
+    }
+
+    public void setProhibitState(Integer prohibitState) {
+        this.prohibitState = prohibitState;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 }
