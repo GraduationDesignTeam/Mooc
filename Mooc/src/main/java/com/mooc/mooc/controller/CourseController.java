@@ -90,7 +90,7 @@ public class CourseController {
      * 删除失败：ResultVO:{code:1;msg:”删除失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/delete/{courseId}")
-    public ResultVO  delete(Integer courseId){
+    public ResultVO  delete(@PathVariable Integer courseId){
         return new ResultVO(0,"");
     }
 
@@ -107,7 +107,7 @@ public class CourseController {
      * CourseInfo每个结果的课程信息
      */
     @RequestMapping("/search/{userId}")
-    public List<CourseInfo> search(Integer userId,CourseInfo courseInfo){
+    public List<CourseInfo> search(@PathVariable Integer userId,@RequestBody CourseInfo courseInfo){
         return null;
     }
 
@@ -145,8 +145,8 @@ public class CourseController {
      * 成功撤销：ResultVO:{code:0;msg:”撤销成功” }
      * 撤销失败：ResultVO:{code:1;msg:”撤销失败” }【msg中应包含详细错误信息】
      */
-    @RequestMapping("/cancel")
-    public ResultVO cancel(Integer courseId){
+    @RequestMapping("/cancel/{courseId}")
+    public ResultVO cancel(@PathVariable Integer courseId){
         return new ResultVO(0,"");
     }
 
@@ -154,12 +154,12 @@ public class CourseController {
      * @author 涂斌砚
      * 为首页提供分页查询课程列表
      * @param currPage 页号
-     * @param queryInfo 检索信息
+     * @param queryInfo 检索信息 - 可为空、课程名称、课程类别、开课教师姓名等
      * @return List<CourseInfo>
      * 检索结果表，按先后顺序
      */
-    @RequestMapping("list/{currPage}")
-    public PageInfo<CourseInfo> list(@PathVariable Integer currPage, @RequestBody String queryInfo){
+    @RequestMapping("/list/{currPage}")
+    public PageInfo<CourseInfo> list(@PathVariable Integer currPage,@RequestBody String queryInfo){
         return null;
     }
 
@@ -170,7 +170,7 @@ public class CourseController {
      * @return List<CourseInfo>
      * 检索结果表，按先后顺序
      */
-    @RequestMapping("sel/{courseId}")
+    @RequestMapping("/sel/{courseId}")
     public CourseInfo selOne(@PathVariable Integer courseId){
         return null;
     }
