@@ -16,6 +16,7 @@
     <result column="course_state" jdbcType="INTEGER" property="courseState" />
     <result column="check_state" jdbcType="INTEGER" property="checkState" />
     <result column="course_authority" jdbcType="INTEGER" property="courseAuthority" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from course_info
@@ -26,12 +27,14 @@
       intro, detail, target, 
       reference, teacher_id, teacher_name, 
       open_time, close_time, course_state, 
-      check_state, course_authority)
+      check_state, course_authority, picture
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{intro,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, 
       #{reference,jdbcType=VARCHAR}, #{teacherId,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, 
       #{openTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, #{courseState,jdbcType=INTEGER}, 
-      #{checkState,jdbcType=INTEGER}, #{courseAuthority,jdbcType=INTEGER})
+      #{checkState,jdbcType=INTEGER}, #{courseAuthority,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.CourseInfo">
     update course_info
@@ -47,18 +50,19 @@
       close_time = #{closeTime,jdbcType=TIMESTAMP},
       course_state = #{courseState,jdbcType=INTEGER},
       check_state = #{checkState,jdbcType=INTEGER},
-      course_authority = #{courseAuthority,jdbcType=INTEGER}
+      course_authority = #{courseAuthority,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, name, type, intro, detail, target, reference, teacher_id, teacher_name, 
-    open_time, close_time, course_state, check_state, course_authority
+    open_time, close_time, course_state, check_state, course_authority, picture
     from course_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, name, type, intro, detail, target, reference, teacher_id, teacher_name, 
-    open_time, close_time, course_state, check_state, course_authority
+    open_time, close_time, course_state, check_state, course_authority, picture
     from course_info
   </select>
 </mapper>

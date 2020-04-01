@@ -29,6 +29,8 @@ public class UserInfo {
 
     private String name;
 
+    private String picture;
+
     public Integer getUserId() {
         return userId;
     }
@@ -131,5 +133,13 @@ public class UserInfo {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 }

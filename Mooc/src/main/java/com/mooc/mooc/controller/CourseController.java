@@ -1,6 +1,5 @@
 package com.mooc.mooc.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.CourseInfo;
 import com.mooc.mooc.model.CourseStatistic;
 import com.mooc.mooc.service.CourseService;
@@ -90,7 +89,7 @@ public class CourseController {
      * 删除失败：ResultVO:{code:1;msg:”删除失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/delete/{courseId}")
-    public ResultVO  delete(@PathVariable Integer courseId){
+    public ResultVO  delete(Integer courseId){
         return new ResultVO(0,"");
     }
 
@@ -107,71 +106,7 @@ public class CourseController {
      * CourseInfo每个结果的课程信息
      */
     @RequestMapping("/search/{userId}")
-    public List<CourseInfo> search(@PathVariable Integer userId,@RequestBody CourseInfo courseInfo){
-        return null;
-    }
-
-    /**
-     * @author 涂斌砚
-     * 教师在后台页面新建课程
-     * @param courseInfo 课程信息
-     * @return
-     * 成功添加：ResultVO:{code:0;msg:”添加成功” }
-     * 添加失败：ResultVO:{code:1;msg:”添加失败” }【msg中应包含详细错误信息】
-     */
-    @RequestMapping("/add")
-    public ResultVO add(CourseInfo courseInfo){
-        return new ResultVO(0,"");
-    }
-
-    /**
-     * @author 涂斌砚
-     * 教师在后台页面更新课程信息
-     * @param courseInfo 课程信息
-     * @return
-     * 成功更新：ResultVO:{code:0;msg:”更新成功” }
-     * 更新失败：ResultVO:{code:1;msg:”更新失败” }【msg中应包含详细错误信息】
-     */
-    @RequestMapping("/update")
-    public ResultVO update(CourseInfo courseInfo){
-        return new ResultVO(0,"");
-    }
-
-    /**
-     * @author 涂斌砚
-     * 教师在后台页面撤销一个未发布的课程
-     * @param courseId 课程编号
-     * @return
-     * 成功撤销：ResultVO:{code:0;msg:”撤销成功” }
-     * 撤销失败：ResultVO:{code:1;msg:”撤销失败” }【msg中应包含详细错误信息】
-     */
-    @RequestMapping("/cancel/{courseId}")
-    public ResultVO cancel(@PathVariable Integer courseId){
-        return new ResultVO(0,"");
-    }
-
-    /**
-     * @author 涂斌砚
-     * 为首页提供分页查询课程列表
-     * @param currPage 页号
-     * @param queryInfo 检索信息 - 可为空、课程名称、课程类别、开课教师姓名等
-     * @return List<CourseInfo>
-     * 检索结果表，按先后顺序
-     */
-    @RequestMapping("/list/{currPage}")
-    public PageInfo<CourseInfo> list(@PathVariable Integer currPage,@RequestBody String queryInfo){
-        return null;
-    }
-
-    /**
-     * @author 涂斌砚
-     * 查询某一门课程
-     * @param courseId 课程编号
-     * @return List<CourseInfo>
-     * 检索结果表，按先后顺序
-     */
-    @RequestMapping("/sel/{courseId}")
-    public CourseInfo selOne(@PathVariable Integer courseId){
+    public List<CourseInfo> search(Integer userId,CourseInfo courseInfo){
         return null;
     }
 }

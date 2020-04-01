@@ -31,6 +31,8 @@ public class CourseInfo {
 
     private Integer courseAuthority;
 
+    private String picture;
+
     public Integer getId() {
         return id;
     }
@@ -141,5 +143,13 @@ public class CourseInfo {
 
     public void setCourseAuthority(Integer courseAuthority) {
         this.courseAuthority = courseAuthority;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 }

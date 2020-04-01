@@ -15,6 +15,7 @@
     <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
     <result column="prohibit_state" jdbcType="INTEGER" property="prohibitState" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_info
@@ -25,12 +26,12 @@
       user_password, sex, school, 
       phone, grade, major, 
       teacher_state, register_time, prohibit_state, 
-      name)
+      name, picture)
     values (#{userId,jdbcType=INTEGER}, #{userStatus,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{userPassword,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{school,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
       #{teacherState,jdbcType=INTEGER}, #{registerTime,jdbcType=TIMESTAMP}, #{prohibitState,jdbcType=INTEGER}, 
-      #{name,jdbcType=VARCHAR})
+      #{name,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.UserInfo">
     update user_info
@@ -45,18 +46,25 @@
       teacher_state = #{teacherState,jdbcType=INTEGER},
       register_time = #{registerTime,jdbcType=TIMESTAMP},
       prohibit_state = #{prohibitState,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR}
+      name = #{name,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select user_id, user_status, user_name, user_password, sex, school, phone, grade, 
-    major, teacher_state, register_time, prohibit_state, name
+    major, teacher_state, register_time, prohibit_state, name, picture
     from user_info
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select user_id, user_status, user_name, user_password, sex, school, phone, grade, 
-    major, teacher_state, register_time, prohibit_state, name
+    major, teacher_state, register_time, prohibit_state, name, picture
     from user_info
+  </select>
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select user_id, user_status, user_name, user_password, sex, school, phone, grade,
+    major, teacher_state, register_time, prohibit_state, name, picture
+    from user_info
+    where user_name = #{username}
   </select>
 </mapper>

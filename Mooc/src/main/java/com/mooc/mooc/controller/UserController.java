@@ -1,21 +1,16 @@
 package com.mooc.mooc.controller;
 
+import com.mooc.mooc.model.ChangeForm;
 import com.mooc.mooc.model.MajorStatistic;
 import com.mooc.mooc.model.UserInfo;
 import com.mooc.mooc.service.UserService;
 import com.mooc.mooc.vo.ResultVO;
 import com.mooc.mooc.vo.StatisticVO;
 import com.mooc.mooc.vo.UserInfoVO;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 /**
  * 用户模块控制器
@@ -38,11 +33,11 @@ public class UserController {
      * @return
      * 新增成功：ResultVO{code:0,msg:”新增成功”}
      * 验证到用户名重复：ResultVO{code:1,msg:”用户已存在”}
-     * 验证到非法字段：ResultVO{code:2,msg:”信息填写有误”}
+     * 验证到非法字段：ResultVO{code:2,msg:”用户名不能为空”}；3，“密码不能为空”；
      */
     @RequestMapping("/add")
     public ResultVO add(@RequestBody UserInfo userInfo){
-        return new ResultVO(0,"");
+        return userService.add(userInfo);
     }
 
     /**
@@ -57,7 +52,7 @@ public class UserController {
      */
     @RequestMapping("/update")
     public ResultVO update(@RequestBody UserInfo userInfo){
-        return new ResultVO(0,"");
+        return userService.update(userInfo);
     }
 
     /**
@@ -72,8 +67,20 @@ public class UserController {
      * 查询到用户已被封禁：UserInfoVO{code:1,msg:”该用户已被封禁，无法查看信息”，UserInfo：null}
      */
     @RequestMapping("/checkInfo")
-    public UserInfoVO checkInfo(@RequestBody Integer[] userId){
-        return new UserInfoVO(0,"");
+    public UserInfoVO checkInfo(@RequestBody ChangeForm changeForm){
+        UserInfoVO userInfoVO=new UserInfoVO();
+        if(changeForm.getUserId()==changeForm.getTargetId()){
+            //用户查看自己的信息
+            userInfoVO.setCode(0);
+            userInfoVO.setMsg("查看自己的信息");
+            userInfoVO.setUserInfo(userService.checkSelfInfo(changeForm.getTargetId()));
+            return userInfoVO;
+        }else{
+            userInfoVO.setCode(1);
+            userInfoVO.setMsg("查看他人的信息");
+            userInfoVO.setUserInfo(userService.checkOtherInfo(changeForm.getTargetId()));
+            return userInfoVO;
+        }
     }
 
     /**
@@ -161,5 +168,41 @@ public class UserController {
         return null;
     }
 
+    /**
+     * @author 朱翔鹏
+     * 开发中临时用于登录的接口
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping("/timelyLogin")
+    public ResultVO timelyLogin(@RequestBody UserInfo userInfo){
+        Map<String,Object> result=userService.login(userInfo);
+        Integer code=(Integer)result.get("code");
+        ResultVO resultVo=new ResultVO();
+        resultVo.setCode(code);
+        switch (code){
+            case 0:
+                resultVo.setMsg("登录成功");
+                resultVo.setObject(result.get("user"));
+                break;
+            case 1:
+                resultVo.setMsg("用户名错误");
+                break;
+            case 2:
+                resultVo.setMsg("密码错误");
+                break;
+        }
+        return resultVo;
+    }
 
+    /**
+     * @author 朱翔鹏
+     * 取当前用户参加的讨论区数量
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/getUserDiscussionNum/{userId}")
+    public Integer getUserDiscussionNum(@PathVariable Integer userId){
+        return userService.getUserDiscussion().size();
+    }
 }
