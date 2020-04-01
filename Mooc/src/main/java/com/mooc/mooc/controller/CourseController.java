@@ -154,12 +154,24 @@ public class CourseController {
      * @author 涂斌砚
      * 为首页提供分页查询课程列表
      * @param currPage 页号
-     * @param courseInfo 检索信息
+     * @param queryInfo 检索信息
      * @return List<CourseInfo>
      * 检索结果表，按先后顺序
      */
     @RequestMapping("list/{currPage}")
-    public PageInfo<CourseInfo> list(@PathVariable Integer currPage, @RequestBody CourseInfo courseInfo){
+    public PageInfo<CourseInfo> list(@PathVariable Integer currPage, @RequestBody String queryInfo){
+        return null;
+    }
+
+    /**
+     * @author 涂斌砚
+     * 查询某一门课程
+     * @param courseId 课程编号
+     * @return List<CourseInfo>
+     * 检索结果表，按先后顺序
+     */
+    @RequestMapping("sel/{courseId}")
+    public CourseInfo selOne(@PathVariable Integer courseId){
         return null;
     }
 }
