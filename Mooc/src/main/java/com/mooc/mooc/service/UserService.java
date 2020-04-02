@@ -20,4 +20,6 @@ public interface UserService {
     UserInfo checkSelfInfo(Integer userId);
 
     UserInfo checkOtherInfo(Integer targetId);
+
+    ResultVO delete(Integer userId);
 }

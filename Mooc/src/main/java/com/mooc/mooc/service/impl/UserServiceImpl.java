@@ -146,4 +146,28 @@ public class UserServiceImpl implements UserService {
         userInfo.setUserPassword(null);
         return userInfo;
     }
+
+    /**
+     * @author 朱翔鹏
+     * 用户决定注销账号（删除此账号）时，根据当前用户id删除数据库中对应的用户项
+     *1.用户封禁状态验证，若已被封禁则不能注销
+     * @param userId
+     * @return
+     * 成功注销并删除用户信息：ResultVO{code:0,msg:”注销成功” }
+     * 查询到用户已被封禁：ResultVO{code:1,msg:”您已被封禁，暂时无法注销” }
+     */
+    @Override
+    public ResultVO delete(Integer userId) {
+        ResultVO resultVO=new ResultVO();
+        if(checkSelfInfo(userId).getProhibitState()==1){
+            //已被封禁
+            resultVO.setCode(1);
+            resultVO.setMsg("您已被封禁，暂时无法注销");
+            return resultVO;
+        }
+        userInfoMapper.deleteByPrimaryKey(userId);
+        resultVO.setCode(0);
+        resultVO.setMsg("注销成功");
+        return resultVO;
+    }
 }

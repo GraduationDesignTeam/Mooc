@@ -94,7 +94,7 @@ public class UserController {
      */
     @RequestMapping("/delete/{userId}")
     public ResultVO delete(@PathVariable Integer userId){
-        return new ResultVO(0,"");
+        return userService.delete(userId);
     }
 
     /**
