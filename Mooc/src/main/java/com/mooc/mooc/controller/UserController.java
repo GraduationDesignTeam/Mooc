@@ -1,9 +1,11 @@
 package com.mooc.mooc.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.ChangeForm;
 import com.mooc.mooc.model.MajorStatistic;
 import com.mooc.mooc.model.UserInfo;
 import com.mooc.mooc.service.UserService;
+import com.mooc.mooc.util.Define;
 import com.mooc.mooc.vo.ResultVO;
 import com.mooc.mooc.vo.StatisticVO;
 import com.mooc.mooc.vo.UserInfoVO;
@@ -111,6 +113,7 @@ public class UserController {
         return new ResultVO(0,"");
     }
 
+
     /**
      * @author 朱翔鹏
      * 管理员解禁用户（管理员检索被封禁用户，对其中的某个进行解禁，所以无需验证是否被封禁）
@@ -204,5 +207,19 @@ public class UserController {
     @RequestMapping("/getUserDiscussionNum/{userId}")
     public Integer getUserDiscussionNum(@PathVariable Integer userId){
         return userService.getUserDiscussion().size();
+    }
+
+    /**
+     * @author 朱翔鹏
+     * 根据条件查询用户 v1.0
+     * @param userInfo用户条件
+     * @return
+     * List<UserInfo>用户信息对象集合list
+     */
+    @RequestMapping("/queryAll/{currPage}")
+    public PageInfo<UserInfo> queryAll(@PathVariable Integer currPage,@RequestBody UserInfo userInfo){
+        PageInfo<UserInfo> list1=userService.list(currPage, Define.PAGE_SIZE,userInfo);
+        //System.out.println(list1.getList().get(0).getProhibitState());
+        return list1;
     }
 }

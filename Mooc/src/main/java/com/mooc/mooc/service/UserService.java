@@ -1,5 +1,6 @@
 package com.mooc.mooc.service;
 
+import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.UserDiscussion;
 import com.mooc.mooc.model.UserInfo;
 import com.mooc.mooc.vo.ResultVO;
@@ -22,4 +23,6 @@ public interface UserService {
     UserInfo checkOtherInfo(Integer targetId);
 
     ResultVO delete(Integer userId);
+
+    PageInfo<UserInfo> list(Integer currPage, Integer pageSize,UserInfo userInfo);
 }

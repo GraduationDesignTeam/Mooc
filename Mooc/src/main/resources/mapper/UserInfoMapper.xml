@@ -67,4 +67,24 @@
     from user_info
     where user_name = #{username}
   </select>
+  <select id="queryAll" parameterType="com.mooc.mooc.model.UserInfo" resultMap="BaseResultMap">
+    select user_id, user_status, user_name, user_password, sex, school, phone, grade,
+    major, teacher_state, register_time, prohibit_state, name, picture
+    from user_info
+    <where>
+      <if test="userName!=null and userName!=''">
+        and user_name like concat('%',#{userName},'%')
+      </if>
+      <if test="major!=null and major!=''">
+        and major like concat('%',#{major},'%')
+      </if>
+      <if test="userStatus!=null and userStatus!=''">
+        and user_status=#{userStatus}
+      </if>
+      <if test="grade!=null and grade!=''">
+        and grade=#{grade}
+      </if>
+    </where>
+    order by register_time desc
+  </select>
 </mapper>

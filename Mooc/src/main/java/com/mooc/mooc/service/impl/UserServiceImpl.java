@@ -1,5 +1,7 @@
 package com.mooc.mooc.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.mapper.UserDiscussionMapper;
 import com.mooc.mooc.mapper.UserInfoMapper;
 import com.mooc.mooc.model.UserDiscussion;
@@ -169,5 +171,21 @@ public class UserServiceImpl implements UserService {
         resultVO.setCode(0);
         resultVO.setMsg("注销成功");
         return resultVO;
+    }
+
+    /**
+     * @author 朱翔鹏
+     * 更具条件分页查询用户 v1.0
+     * @param currPage 现在在第几页
+     * @param pageSize 每页几项
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public PageInfo<UserInfo> list(Integer currPage, Integer pageSize,UserInfo userInfo) {
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
+        PageInfo<UserInfo> userInfoPageInfo=new PageInfo<>(userInfoMapper.queryAll(userInfo));
+        return userInfoPageInfo;
     }
 }
