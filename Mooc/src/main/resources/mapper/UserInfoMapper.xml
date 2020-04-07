@@ -84,6 +84,9 @@
       <if test="grade!=null and grade!=''">
         and grade=#{grade}
       </if>
+      <if test="teacherState!=null">
+        and teacher_state=#{teacherState}
+      </if>
     </where>
     order by register_time desc
   </select>
