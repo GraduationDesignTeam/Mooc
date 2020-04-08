@@ -5,7 +5,11 @@ import com.mooc.mooc.model.CourseInfo;
 import com.mooc.mooc.model.CourseStatistic;
 import com.mooc.mooc.model.UserInfo;
 import com.mooc.mooc.service.CourseService;
+<<<<<<< HEAD
 import com.mooc.mooc.util.Define;
+=======
+import com.mooc.mooc.vo.CourseInfoVO;
+>>>>>>> b7629e1d041468095be5151f2caffdaf479603ce
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -153,29 +157,54 @@ public class CourseController {
     }
 
     /**
+     * 教师在后台页面查看所有自己可管理的课程
+     * @param teacherId
+     * @return
+     */
+    @RequestMapping("/list_by_teacher_id")
+    public List<CourseInfo> getByTeacherId(@RequestBody Integer teacherId){
+        return null;
+    }
+
+    /**
+     * 助教在后台页面查看所有自己可管理的课程
+     * @param assistantId
+     * @return
+     */
+    @RequestMapping("/list_by_assistant_id")
+    public List<CourseInfo> getByAssistantId(@RequestBody Integer assistantId){
+        return null;
+    }
+
+    /**
      * @author 涂斌砚
      * 为首页提供分页查询课程列表
      * @param currPage 页号
-     * @param queryInfo 检索信息 - 可为空、课程名称、课程类别、开课教师姓名等
+     * @param queryInfo 检索信息 - 可为空、课程名称、课程类别等
      * @return List<CourseInfo>
      * 检索结果表，按先后顺序
      */
     @RequestMapping("/list/{currPage}")
+<<<<<<< HEAD
     public PageInfo<CourseInfo> list(@PathVariable Integer currPage, @RequestBody CourseInfo queryInfo){
         PageInfo<CourseInfo> list1=courseService.list(currPage, Define.PAGE_SIZE,queryInfo);
         //System.out.println(list1.getList().get(0).getProhibitState());
         return list1;
+=======
+    public PageInfo<CourseInfoVO> list(@PathVariable Integer currPage, @RequestBody String queryInfo){
+        return null;
+>>>>>>> b7629e1d041468095be5151f2caffdaf479603ce
     }
 
     /**
      * @author 涂斌砚
      * 查询某一门课程
      * @param courseId 课程编号
-     * @return List<CourseInfo>
-     * 检索结果表，按先后顺序
+     * @param userId 用户编号
+     * @return courseInfoVO
      */
     @RequestMapping("/sel/{courseId}")
-    public CourseInfo selOne(@PathVariable Integer courseId){
+    public CourseInfoVO selOne(@PathVariable Integer courseId, @RequestBody Integer userId){
         return null;
     }
 }
