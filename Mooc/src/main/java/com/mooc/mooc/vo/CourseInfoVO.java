@@ -30,9 +30,9 @@ public class CourseInfoVO {
     private Date closeTime;
     // 课程状态（0表示未开课；1表示已开课；2表示已结课）
     private Integer courseState;
-    // 审核状态（0表示等待审核；1表示已通过；2表示未通过）
+    // 审核状态（0表示未通过；1表示已通过）
     private Integer checkState;
-    // 课程权限（0表示所有人可选；1表示仅该学校学生可选；2表示课程不可选（封禁状态））
+    // 课程权限（0表示所有人可选；1表示仅该学校学生可选）
     private Integer courseAuthority;
 
     /**
@@ -199,5 +199,29 @@ public class CourseInfoVO {
         this.courseState = courseInfo.getCourseState();
         this.checkState = courseInfo.getCheckState();
         this.courseAuthority = courseInfo.getCourseAuthority();
+    }
+
+    //测试用
+    @Override
+    public String toString() {
+        return "CourseInfoVO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", intro='" + intro + '\'' +
+                ", detail='" + detail + '\'' +
+                ", target='" + target + '\'' +
+                ", reference='" + reference + '\'' +
+                ", photo='" + photo + '\'' +
+                ", teacherId=" + teacherId +
+                ", teacherName='" + teacherName + '\'' +
+                ", openTime=" + openTime +
+                ", closeTime=" + closeTime +
+                ", courseState=" + courseState +
+                ", checkState=" + checkState +
+                ", courseAuthority=" + courseAuthority +
+                ", school='" + school + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

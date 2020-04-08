@@ -14,8 +14,14 @@
     insert into teacher_of_course (course_id, teacher_id)
     values (#{courseId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER})
   </insert>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select course_id, teacher_id
-    from teacher_of_course
+  <select id="selectTeacherOfCourse" resultType="com.mooc.mooc.model.UserInfo">
+    select u.user_id as userId, u.school as school, u.name as name
+    from teacher_of_course t
+    inner join user_info u on t.teacher_id=u.user_id
+    where t.course_id=#{courseId}
+  </select>
+  <select id="count" resultType="java.lang.Integer">
+    select count(0) from teacher_of_course
+    where teacher_id=#{teacherId} and course_id=#{courseId};
   </select>
 </mapper>

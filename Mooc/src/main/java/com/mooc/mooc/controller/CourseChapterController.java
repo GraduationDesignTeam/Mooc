@@ -49,6 +49,7 @@ public class CourseChapterController {
 
     /**
      * 删除章节
+     * 如果删除的章节并非最后一章，那么原本排在该章节之后的章节序号都会发生改动
      * @param chapterId 章节编号
      * @return 是否成功
      */

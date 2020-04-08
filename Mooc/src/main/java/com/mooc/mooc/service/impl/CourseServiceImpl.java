@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.mapper.CourseInfoMapper;
 import com.mooc.mooc.model.CourseInfo;
 import com.mooc.mooc.service.CourseService;
+import com.mooc.mooc.vo.CourseInfoVO;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
      * @author 涂斌砚
      * 为首页提供分页查询课程列表
      * @param currPage 页号
-     * @param queryInfo 检索信息 - 可为空、课程名称、课程类别、开课教师姓名等
+     * @param courseInfo 检索信息 - 可为空、课程名称、课程类别、开课教师姓名等
      * @return List<CourseInfo>
      * 检索结果表，按先后顺序
      */
@@ -74,5 +75,32 @@ public class CourseServiceImpl implements CourseService {
         resultVO.setCode(0);
         resultVO.setMsg("删除成功");
         return resultVO;
+    }
+
+    @Override
+    public ResultVO add(CourseInfo courseInfo) {
+        ResultVO resultVO=new ResultVO();
+        if(courseInfo.getName()==null||courseInfo.getName().trim().length()==0){
+            resultVO.setCode(1);
+            resultVO.setMsg("课程名不可为空");
+        }
+        else{
+            if(courseInfoMapper.insert(courseInfo) > 0){
+                resultVO.setCode(0);
+                resultVO.setMsg("添加成功");
+            }
+        }
+        return resultVO;
+    }
+
+    @Override
+    public CourseInfoVO selectVO(Integer courseId, Integer userId) {
+        CourseInfoVO courseInfoVO =  courseInfoMapper.selectVO(courseId);
+        /**
+         * 尚未完成
+         * 此处需要另从三张表里读取用户在这门课程里扮演的角色
+         */
+        courseInfoVO.setRole(0);
+        return courseInfoVO;
     }
 }

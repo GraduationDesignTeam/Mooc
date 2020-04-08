@@ -10,10 +10,7 @@ import com.mooc.mooc.util.Define;
 import com.mooc.mooc.vo.CourseInfoVO;
 
 import com.mooc.mooc.vo.ResultVO;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -161,7 +158,7 @@ public class CourseController {
      * @return
      */
     @RequestMapping("/list_by_teacher_id")
-    public List<CourseInfo> getByTeacherId(@RequestBody Integer teacherId){
+    public List<CourseInfo> getByTeacherId(@RequestParam Integer teacherId){
         return null;
     }
 
@@ -171,7 +168,7 @@ public class CourseController {
      * @return
      */
     @RequestMapping("/list_by_assistant_id")
-    public List<CourseInfo> getByAssistantId(@RequestBody Integer assistantId){
+    public List<CourseInfo> getByAssistantId(@RequestParam Integer assistantId){
         return null;
     }
 
@@ -198,7 +195,9 @@ public class CourseController {
      * @return courseInfoVO
      */
     @RequestMapping("/sel/{courseId}")
-    public CourseInfoVO selOne(@PathVariable Integer courseId, @RequestBody Integer userId){
-        return null;
+    public CourseInfoVO selOne(@PathVariable Integer courseId, @RequestParam Integer userId){
+        System.out.println("courseId = " + courseId);
+        System.out.println("userId = " + userId);
+        return courseService.selectVO(courseId, userId);
     }
 }

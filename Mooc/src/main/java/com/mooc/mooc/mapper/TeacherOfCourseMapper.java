@@ -2,6 +2,8 @@ package com.mooc.mooc.mapper;
 
 import com.mooc.mooc.model.TeacherOfCourse;
 import java.util.List;
+
+import com.mooc.mooc.model.UserInfo;
 import org.apache.ibatis.annotations.Param;
 
 public interface TeacherOfCourseMapper {
@@ -9,5 +11,7 @@ public interface TeacherOfCourseMapper {
 
     int insert(TeacherOfCourse record);
 
-    List<TeacherOfCourse> selectAll();
+    List<UserInfo> selectTeacherOfCourse(@Param("courseId") Integer courseId);
+
+    Integer count(@Param("courseId") Integer courseId, @Param("teacherId") Integer teacherId);
 }
