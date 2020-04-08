@@ -65,4 +65,21 @@
     open_time, close_time, course_state, check_state, course_authority, picture
     from course_info
   </select>
+  <select id="queryAll" parameterType="com.mooc.mooc.model.CourseInfo" resultMap="BaseResultMap">
+    select id, name, type, intro, detail, target, reference, teacher_id, teacher_name,
+    open_time, close_time, course_state, check_state, course_authority, picture
+    from course_info
+    <where>
+      <if test="name!=null and name!=''">
+        and name like concat('%',#{name},'%')
+      </if>
+      <if test="type!=null and type!=''">
+        and type=#{type}
+      </if>
+      <if test="teacherName!=null and teacherName!=''">
+        and teacher_name=#{teacherName}
+      </if>
+    </where>
+    order by open_time desc
+  </select>
 </mapper>

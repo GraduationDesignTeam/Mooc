@@ -1,6 +1,8 @@
 package com.mooc.mooc.mapper;
 
 import com.mooc.mooc.model.CourseInfo;
+import com.mooc.mooc.model.UserInfo;
+
 import java.util.List;
 
 public interface CourseInfoMapper {
@@ -13,4 +15,6 @@ public interface CourseInfoMapper {
     List<CourseInfo> selectAll();
 
     int updateByPrimaryKey(CourseInfo record);
+
+    List<CourseInfo> queryAll(CourseInfo courseInfo);
 }

@@ -3,7 +3,9 @@ package com.mooc.mooc.controller;
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.CourseInfo;
 import com.mooc.mooc.model.CourseStatistic;
+import com.mooc.mooc.model.UserInfo;
 import com.mooc.mooc.service.CourseService;
+import com.mooc.mooc.util.Define;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -91,7 +93,7 @@ public class CourseController {
      */
     @RequestMapping("/delete/{courseId}")
     public ResultVO  delete(@PathVariable Integer courseId){
-        return new ResultVO(0,"");
+        return courseService.delete(courseId);
     }
 
     /**
@@ -134,7 +136,7 @@ public class CourseController {
      */
     @RequestMapping("/update")
     public ResultVO update(@RequestBody CourseInfo courseInfo){
-        return new ResultVO(0,"");
+        return courseService.update(courseInfo);
     }
 
     /**
@@ -159,8 +161,10 @@ public class CourseController {
      * 检索结果表，按先后顺序
      */
     @RequestMapping("/list/{currPage}")
-    public PageInfo<CourseInfo> list(@PathVariable Integer currPage, @RequestBody String queryInfo){
-        return null;
+    public PageInfo<CourseInfo> list(@PathVariable Integer currPage, @RequestBody CourseInfo queryInfo){
+        PageInfo<CourseInfo> list1=courseService.list(currPage, Define.PAGE_SIZE,queryInfo);
+        //System.out.println(list1.getList().get(0).getProhibitState());
+        return list1;
     }
 
     /**
