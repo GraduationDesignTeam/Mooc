@@ -1,39 +1,47 @@
-package com.mooc.mooc.model;
+package com.mooc.mooc.vo;
 
-import com.mooc.mooc.util.StringFormatUtil;
+import com.mooc.mooc.model.CourseInfo;
 
 import java.util.Date;
 
-public class CourseInfo {
+public class CourseInfoVO {
+    // 课程编号
     private Integer id;
-
+    // 课程名称
     private String name;
-
+    // 课程类型
     private String type;
-
+    // 课程引言
     private String intro;
-
+    // 课程概述
     private String detail;
-
+    // 课程目标
     private String target;
-
+    // 课程参考资料
     private String reference;
-
+    // 课程封面图片
     private String photo;
-
+    // 开设课程的教师
     private Integer teacherId;
-
     private String teacherName;
-
+    // 开课时间
     private Date openTime;
-
+    // 结课时间
     private Date closeTime;
-
+    // 课程状态（0表示未开课；1表示已开课；2表示已结课）
     private Integer courseState;
-
+    // 审核状态（0表示等待审核；1表示已通过；2表示未通过）
     private Integer checkState;
-
+    // 课程权限（0表示所有人可选；1表示仅该学校学生可选；2表示课程不可选（封禁状态））
     private Integer courseAuthority;
+
+    /**
+     * 以下为相对于 CourseInfo类 不同的属性
+     */
+    // 提供本课程的学校
+    private String school;
+    // 当前查询者在本课程中扮演的角色（0表示未知；1表示教师；2表示助教；3表示选课学生）
+    private Integer role;
 
     public Integer getId() {
         return id;
@@ -48,7 +56,7 @@ public class CourseInfo {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getType() {
@@ -56,7 +64,7 @@ public class CourseInfo {
     }
 
     public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+        this.type = type;
     }
 
     public String getIntro() {
@@ -64,7 +72,7 @@ public class CourseInfo {
     }
 
     public void setIntro(String intro) {
-        this.intro = intro == null ? null : intro.trim();
+        this.intro = intro;
     }
 
     public String getDetail() {
@@ -72,7 +80,7 @@ public class CourseInfo {
     }
 
     public void setDetail(String detail) {
-        this.detail = StringFormatUtil.trimEnd(detail);
+        this.detail = detail;
     }
 
     public String getTarget() {
@@ -80,7 +88,7 @@ public class CourseInfo {
     }
 
     public void setTarget(String target) {
-        this.target = StringFormatUtil.trimEnd(target);
+        this.target = target;
     }
 
     public String getReference() {
@@ -88,7 +96,7 @@ public class CourseInfo {
     }
 
     public void setReference(String reference) {
-        this.reference = reference == null ? null : reference.trim();
+        this.reference = reference;
     }
 
     public String getPhoto() {
@@ -96,7 +104,7 @@ public class CourseInfo {
     }
 
     public void setPhoto(String photo) {
-        this.photo = photo == null ? null : photo.trim();
+        this.photo = photo;
     }
 
     public Integer getTeacherId() {
@@ -112,7 +120,7 @@ public class CourseInfo {
     }
 
     public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName == null ? null : teacherName.trim();
+        this.teacherName = teacherName;
     }
 
     public Date getOpenTime() {
@@ -153,5 +161,43 @@ public class CourseInfo {
 
     public void setCourseAuthority(Integer courseAuthority) {
         this.courseAuthority = courseAuthority;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    public CourseInfoVO(){
+
+    }
+
+    public CourseInfoVO(CourseInfo courseInfo){
+        this.id = courseInfo.getId();
+        this.name = courseInfo.getName();
+        this.type = courseInfo.getType();
+        this.intro = courseInfo.getIntro();
+        this.detail = courseInfo.getDetail();
+        this.target = courseInfo.getTarget();
+        this.reference = courseInfo.getReference();
+        this.photo = courseInfo.getPhoto();
+        this.teacherId = courseInfo.getTeacherId();
+        this.teacherName = courseInfo.getTeacherName();
+        this.openTime = courseInfo.getOpenTime();
+        this.closeTime = courseInfo.getCloseTime();
+        this.courseState = courseInfo.getCourseState();
+        this.checkState = courseInfo.getCheckState();
+        this.courseAuthority = courseInfo.getCourseAuthority();
     }
 }
