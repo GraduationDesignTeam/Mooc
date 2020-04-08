@@ -3,13 +3,12 @@ package com.mooc.mooc.controller;
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.CourseInfo;
 import com.mooc.mooc.model.CourseStatistic;
-import com.mooc.mooc.model.UserInfo;
 import com.mooc.mooc.service.CourseService;
-<<<<<<< HEAD
+
 import com.mooc.mooc.util.Define;
-=======
+
 import com.mooc.mooc.vo.CourseInfoVO;
->>>>>>> b7629e1d041468095be5151f2caffdaf479603ce
+
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -185,15 +184,10 @@ public class CourseController {
      * 检索结果表，按先后顺序
      */
     @RequestMapping("/list/{currPage}")
-<<<<<<< HEAD
     public PageInfo<CourseInfo> list(@PathVariable Integer currPage, @RequestBody CourseInfo queryInfo){
         PageInfo<CourseInfo> list1=courseService.list(currPage, Define.PAGE_SIZE,queryInfo);
         //System.out.println(list1.getList().get(0).getProhibitState());
         return list1;
-=======
-    public PageInfo<CourseInfoVO> list(@PathVariable Integer currPage, @RequestBody String queryInfo){
-        return null;
->>>>>>> b7629e1d041468095be5151f2caffdaf479603ce
     }
 
     /**
