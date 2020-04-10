@@ -10,9 +10,9 @@ public class Define {
     //课程尚未开始
     public static final int COURSE_STATE_WAIT=0;
     //课程进行中
-    public static final int COURSE_STATE_OPEN=0;
+    public static final int COURSE_STATE_OPEN=1;
     //课程已结束
-    public static final int COURSE_STATE_CLOSE=0;
+    public static final int COURSE_STATE_CLOSE=2;
     //课程审核状态为未通过
     public static final int CHECK_STATE_NOT_PASS=0;
     //课程审核状态为通过
