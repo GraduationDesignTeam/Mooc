@@ -18,6 +18,9 @@ public interface CourseService {
     // 添加课程
     ResultVO add(CourseInfo courseInfo);
 
+    // 根据id查询某课程
+    CourseInfo sel(Integer courseId);
+
     // 根据课程id和用户id 获取课程VO
     CourseInfoVO selectVO(Integer courseId, Integer userId);
 }

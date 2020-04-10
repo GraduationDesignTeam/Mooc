@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.mapper.CourseInfoMapper;
 import com.mooc.mooc.model.CourseInfo;
 import com.mooc.mooc.service.CourseService;
+import com.mooc.mooc.util.Define;
 import com.mooc.mooc.vo.CourseInfoVO;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,12 +83,19 @@ public class CourseServiceImpl implements CourseService {
             resultVO.setMsg("课程名不可为空");
         }
         else{
+            courseInfo.setCourseState(Define.COURSE_STATE_WAIT);
+            courseInfo.setCheckState(Define.CHECK_STATE_NOT_PASS);
             if(courseInfoMapper.insert(courseInfo) > 0){
                 resultVO.setCode(0);
                 resultVO.setMsg("添加成功");
             }
         }
         return resultVO;
+    }
+
+    @Override
+    public CourseInfo sel(Integer courseId) {
+        return courseInfoMapper.selectByPrimaryKey(courseId);
     }
 
     @Override
@@ -100,4 +108,6 @@ public class CourseServiceImpl implements CourseService {
         courseInfoVO.setRole(0);
         return courseInfoVO;
     }
+
+
 }
