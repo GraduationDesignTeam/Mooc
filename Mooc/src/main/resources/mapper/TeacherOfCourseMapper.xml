@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mooc.mooc.mapper.TeacherOfCourseMapper">
-  <resultMap id="BaseResultMap" type="com.mooc.mooc.model.TeacherOfCourse">
-    <id column="course_id" jdbcType="INTEGER" property="courseId" />
-    <id column="teacher_id" jdbcType="INTEGER" property="teacherId" />
-  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="map">
     delete from teacher_of_course
     where course_id = #{courseId,jdbcType=INTEGER}
       and teacher_id = #{teacherId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mooc.mooc.model.TeacherOfCourse">
+  <insert id="insert">
     insert into teacher_of_course (course_id, teacher_id)
     values (#{courseId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER})
   </insert>
   <select id="selectTeacherOfCourse" resultType="com.mooc.mooc.model.UserInfo">
-    select u.user_id as userId, u.school as school, u.name as name
+    select u.user_id userId, u.user_name userName, u.school school,
+     u.phone phone, u.grade grade, u.major major, u.name name, u.picture picture
     from teacher_of_course t
     inner join user_info u on t.teacher_id=u.user_id
     where t.course_id=#{courseId}

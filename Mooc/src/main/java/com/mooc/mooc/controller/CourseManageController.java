@@ -1,10 +1,14 @@
 package com.mooc.mooc.controller;
 
+import com.mooc.mooc.model.UserInfo;
+import com.mooc.mooc.service.CourseManageService;
 import com.mooc.mooc.vo.ResultVO;
-import com.mooc.mooc.vo.UserInfoVO;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,6 +19,9 @@ import java.util.List;
 @RequestMapping("/course_manage")
 public class CourseManageController {
 
+    @Resource
+    private CourseManageService courseManageService;
+
     /**
      * @author 涂斌砚
      * 教师在后台页面查看某课程的所有任课教师
@@ -22,9 +29,9 @@ public class CourseManageController {
      * @return
      * List<UserInfoVO>
      */
-    @RequestMapping("/get_teacher")
-    public List<UserInfoVO> getTeacherList(Integer courseId){
-        return null;
+    @RequestMapping("/get_teacher/{courseId}")
+    public List<UserInfo> getTeacherList(@PathVariable Integer courseId){
+        return courseManageService.selectTeacherOfCourse(courseId);
     }
 
     /**
@@ -37,8 +44,8 @@ public class CourseManageController {
      * 失败：ResultVO:{code:1;msg:”操作失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/add_teacher")
-    public ResultVO setTeacherOfCourse(Integer courseId, Integer teacherId){
-        return new ResultVO(0,"");
+    public ResultVO setTeacherOfCourse(@RequestParam Integer courseId, @RequestParam Integer teacherId){
+        return courseManageService.addTeacher(courseId, teacherId);
     }
 
     /**
@@ -51,8 +58,8 @@ public class CourseManageController {
      * 失败：ResultVO:{code:1;msg:”操作失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/remove_teacher")
-    public ResultVO removeTeacherOfCourse(Integer courseId, Integer teacherId){
-        return new ResultVO(0,"");
+    public ResultVO removeTeacherOfCourse(@RequestParam Integer courseId, @RequestParam Integer teacherId){
+        return courseManageService.removeTeacher(courseId, teacherId);
     }
 
     /**
@@ -62,9 +69,9 @@ public class CourseManageController {
      * @return
      * List<UserInfoVO>
      */
-    @RequestMapping("/get_assistant")
-    public List<UserInfoVO> getAssistantList(Integer courseId){
-        return null;
+    @RequestMapping("/get_assistant/{courseId}")
+    public List<UserInfo> getAssistantList(@PathVariable Integer courseId){
+        return courseManageService.selectAssistantOfCourse(courseId);
     }
 
     /**
@@ -77,8 +84,8 @@ public class CourseManageController {
      * 失败：ResultVO:{code:1;msg:”操作失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/add_assistant")
-    public ResultVO setAssistantOfCourse(Integer courseId, Integer assistantId){
-        return new ResultVO(0,"");
+    public ResultVO setAssistantOfCourse(@RequestParam Integer courseId, @RequestParam Integer assistantId){
+        return courseManageService.addAssistant(courseId, assistantId);
     }
 
     /**
@@ -91,7 +98,7 @@ public class CourseManageController {
      * 失败：ResultVO:{code:1;msg:”操作失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/remove_assistant")
-    public ResultVO removeAssistantOfCourse(Integer courseId, Integer assistantId){
-        return new ResultVO(0,"");
+    public ResultVO removeAssistantOfCourse(@RequestParam Integer courseId, @RequestParam Integer assistantId){
+        return courseManageService.removeAssistant(courseId, assistantId);
     }
 }
