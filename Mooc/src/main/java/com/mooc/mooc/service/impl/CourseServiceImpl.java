@@ -4,12 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.mapper.CourseInfoMapper;
 import com.mooc.mooc.model.CourseInfo;
+import com.mooc.mooc.service.CourseManageService;
 import com.mooc.mooc.service.CourseService;
 import com.mooc.mooc.util.Define;
 import com.mooc.mooc.vo.CourseInfoVO;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +20,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseInfoMapper courseInfoMapper;
+
+    @Autowired
+    private CourseManageService courseManageService;
 
     /**
      * @author 涂斌砚
@@ -31,8 +36,22 @@ public class CourseServiceImpl implements CourseService {
     public PageInfo<CourseInfo> list(Integer currPage, Integer pageSize, CourseInfo courseInfo) {
         if(currPage==null){currPage=1;}
         PageHelper.startPage(currPage, pageSize);
-        PageInfo<CourseInfo> courseInfoPageInfo=new PageInfo<>(courseInfoMapper.queryAll(courseInfo));
-        return courseInfoPageInfo;
+        return new PageInfo<>(courseInfoMapper.queryAll(courseInfo));
+    }
+
+    /**
+     * @author 涂斌砚
+     * 为首页提供分页查询课程列表
+     * @param currPage 页号
+     * @param pageSize 返回的记录数
+     * @param school 学校名称
+     * @return List<CourseInfo>
+     */
+    @Override
+    public PageInfo<CourseInfo> list(Integer currPage, Integer pageSize, String school) {
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
+        return new PageInfo<>(courseInfoMapper.selectBySchool(school));
     }
 
     /**
@@ -76,6 +95,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public ResultVO add(CourseInfo courseInfo) {
         ResultVO resultVO=new ResultVO();
         if(courseInfo.getName()==null||courseInfo.getName().trim().length()==0){
@@ -86,8 +106,13 @@ public class CourseServiceImpl implements CourseService {
             courseInfo.setCourseState(Define.COURSE_STATE_WAIT);
             courseInfo.setCheckState(Define.CHECK_STATE_NOT_PASS);
             if(courseInfoMapper.insert(courseInfo) > 0){
+                // teacher_of_course 同时也要插入数据
+                courseManageService.addTeacher(courseInfo.getId(), courseInfo.getTeacherId());
                 resultVO.setCode(0);
                 resultVO.setMsg("添加成功");
+            }else{
+                resultVO.setCode(1);
+                resultVO.setMsg("数据添加过程中出错，请稍后重试");
             }
         }
         return resultVO;
@@ -107,6 +132,16 @@ public class CourseServiceImpl implements CourseService {
          */
         courseInfoVO.setRole(0);
         return courseInfoVO;
+    }
+
+    @Override
+    public List<CourseInfo> getByTeacherId(Integer teacherId) {
+        return courseInfoMapper.selectByTeacherId(teacherId);
+    }
+
+    @Override
+    public List<CourseInfo> getByAssistantId(Integer assistantId) {
+        return courseInfoMapper.selectByAssistantId(assistantId);
     }
 
 

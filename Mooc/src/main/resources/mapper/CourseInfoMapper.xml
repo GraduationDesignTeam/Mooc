@@ -69,8 +69,8 @@
     from course_info
   </select>
   <select id="queryAll" parameterType="com.mooc.mooc.model.CourseInfo" resultMap="BaseResultMap">
-    select id, name, type, intro, detail, target, reference, teacher_id, teacher_name,
-    open_time, close_time, course_state, check_state, course_authority, picture
+    select id, name, type, intro, detail, target, reference, photo, teacher_id, teacher_name,
+    open_time, close_time, course_state, check_state, course_authority,
     from course_info
     <where>
       <if test="name!=null and name!=''">
@@ -92,11 +92,25 @@
     inner join user_info as u on c.teacher_id=u.user_id
     where c.id = #{id}
   </select>
-<!--  <select id="selectBySchool" parameterType="java.lang.String" resultMap="BaseResultMap">-->
-<!--    select c.id, c.name, c.type, c.intro, c.photo, c.teacher_id, c.teacher_name,-->
-<!--    c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority-->
-<!--    from course_info as c-->
-<!--    inner join user_info as u on c.teacher_id=u.user_id-->
-<!--    where c.check_state=1 and u.school=#{school}-->
-<!--  </select>-->
+  <select id="selectByTeacherId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select c.id, c.name, c.type, c.intro, c.photo, c.teacher_id, c.teacher_name,
+    c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority
+    from course_info as c
+    inner join teacher_of_course as t on c.id=t.course_id
+    where t.teacher_id={teacherId}
+  </select>
+  <select id="selectByAssistantId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select c.id, c.name, c.type, c.intro, c.photo, c.teacher_id, c.teacher_name,
+    c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority
+    from course_info as c
+    inner join assistant_of_course as a on c.id=a.course_id
+    where a.assistant_id={{assistantId}}
+  </select>
+  <select id="selectBySchool" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select c.id, c.name, c.type, c.intro, c.photo, c.teacher_id, c.teacher_name,
+    c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority
+    from course_info as c
+    inner join user_info as u on c.teacher_id=u.user_id
+    where c.check_state=1 and u.school=#{school}
+  </select>
 </mapper>

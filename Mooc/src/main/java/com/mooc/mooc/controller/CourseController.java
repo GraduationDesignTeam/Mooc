@@ -188,6 +188,16 @@ public class CourseController {
     }
 
     /**
+     * 根据学校查询课程
+     * @param school 学校
+     * @return List<CourseInfo>
+     */
+    @RequestMapping("/list_by_school/{currPage}")
+    public PageInfo<CourseInfo> getBySchool(@RequestParam String school){
+        return null;
+    }
+
+    /**
      * @author 涂斌砚
      * 查询某一门课程
      * @param courseId 课程编号
