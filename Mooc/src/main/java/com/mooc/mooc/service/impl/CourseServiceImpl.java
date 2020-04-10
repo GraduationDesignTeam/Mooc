@@ -45,13 +45,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public ResultVO update(CourseInfo courseInfo) {
         ResultVO resultVO=new ResultVO();
-        List<CourseInfo> list=courseInfoMapper.selectAll();
-        for(int i=0;i<list.size();i++){
-            if(courseInfo.getName().equals("")||courseInfo.getName().equals(null)){
-                resultVO.setCode(1);
-                resultVO.setMsg("课程名不能为空");
-                return resultVO;
-            }
+        if(courseInfo.getName()==null || courseInfo.getName().trim().length()==0){
+            resultVO.setCode(1);
+            resultVO.setMsg("课程名不能为空");
+            return resultVO;
         }
         courseInfoMapper.updateByPrimaryKey(courseInfo);
         resultVO.setCode(0);
