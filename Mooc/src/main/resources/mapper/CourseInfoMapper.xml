@@ -70,7 +70,7 @@
   </select>
   <select id="queryAll" parameterType="com.mooc.mooc.model.CourseInfo" resultMap="BaseResultMap">
     select id, name, type, intro, detail, target, reference, photo, teacher_id, teacher_name,
-    open_time, close_time, course_state, check_state, course_authority,
+    open_time, close_time, course_state, check_state, course_authority
     from course_info
     <where>
       <if test="name!=null and name!=''">
@@ -81,6 +81,9 @@
       </if>
       <if test="teacherName!=null and teacherName!=''">
         and teacher_name=#{teacherName}
+      </if>
+      <if test="checkState!=null">
+        and check_state=#{checkState}
       </if>
     </where>
     order by open_time desc
