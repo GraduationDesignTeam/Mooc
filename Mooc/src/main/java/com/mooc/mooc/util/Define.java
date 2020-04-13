@@ -21,4 +21,17 @@ public class Define {
     public static final int COURSE_AUTHORITY_PUBLIC=0;
     //仅本校学生可选
     public static final int COURSE_AUTHORITY_PRIVATE=1;
+    public static final String MESSAGE_TYPE_SYS = "系统通知";
+
+    public static final String MESSAGE_TYPE_ONLINE = "在线通知";
+
+    public static final String MESSAGE_TYPE_NORMAL = "普通通知";
+
+    public static final String MESSAGE_CODE_SYS = "sys";
+
+    public static final String MESSAGE_CODE_NORMAL = "normal";
+
+    public static final String MESSAGE_CODE_ONLINE = "online";
+
+    public static final String MESSAGE_TYPE_OFFLINE = "offline";
 }

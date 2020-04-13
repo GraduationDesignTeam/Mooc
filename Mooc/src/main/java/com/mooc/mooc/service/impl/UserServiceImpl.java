@@ -150,6 +150,17 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 根据名字返回所查看的用户的信息
+     * @param name
+     * @return
+     */
+    @Override
+    public UserInfo selByUsername(String name) {
+        UserInfo userInfo=userInfoMapper.selectByUsername(name);
+        return userInfo;
+    }
+
+    /**
      * @author 朱翔鹏
      * 用户决定注销账号（删除此账号）时，根据当前用户id删除数据库中对应的用户项
      *1.用户封禁状态验证，若已被封禁则不能注销

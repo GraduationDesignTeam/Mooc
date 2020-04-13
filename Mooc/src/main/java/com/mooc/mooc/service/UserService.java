@@ -22,6 +22,8 @@ public interface UserService {
 
     UserInfo checkOtherInfo(Integer targetId);
 
+    UserInfo selByUsername(String name);
+
     ResultVO delete(Integer userId);
 
     PageInfo<UserInfo> list(Integer currPage, Integer pageSize,UserInfo userInfo);
