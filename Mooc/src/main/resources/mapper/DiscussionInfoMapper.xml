@@ -14,6 +14,17 @@
     <result column="discussion_authority" jdbcType="INTEGER" property="discussionAuthority" />
     <result column="discussion_popularity" jdbcType="INTEGER" property="discussionPopularity" />
   </resultMap>
+  <resultMap id="DetailResultMap" type="com.mooc.mooc.model.DiscussionDetail" extends="BaseResultMap">
+    <!--一对一-->
+    <association property="courseInfo" column="id" javaType="CourseInfo">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+    </association>
+    <association property="teacher" column="user_id" javaType="UserInfo">
+      <id column="user_id" jdbcType="INTEGER" property="userId" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    </association>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from discussion_info
     where discussion_id = #{discussionId,jdbcType=INTEGER}
@@ -54,5 +65,17 @@
     select discussion_id, discussion_name, course_id, teacher_id, assistant_id, discussion_state, 
     discussion_description, open_date, close_date, discussion_authority, discussion_popularity
     from discussion_info
+  </select>
+  <select id="queryAll" parameterType="com.mooc.mooc.model.DiscussionDetail" resultMap="DetailResultMap">
+    select d.discussion_id, d.discussion_name, d.course_id, d.teacher_id, d.assistant_id, d.discussion_state,
+    d.discussion_description, d.open_date, d.close_date, d.discussion_authority, d.discussion_popularity,
+    c.name, u.user_name
+    from (discussion_info d inner join course_info c on d.course_id=c.id) inner join user_info u on d.teacher_id = u.user_id
+    <where>
+      <if test="discussionName!=null and discussionName!=''">
+        and d.discussion_name like concat('%',#{discussionName},'%')
+      </if>
+    </where>
+    order by d.open_date desc
   </select>
 </mapper>
