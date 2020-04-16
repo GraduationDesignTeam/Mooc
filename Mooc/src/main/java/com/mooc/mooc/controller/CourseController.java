@@ -123,7 +123,7 @@ public class CourseController {
      */
     @RequestMapping("/add")
     public ResultVO add(@RequestBody CourseInfo courseInfo){
-        return new ResultVO(0,"");
+        return courseService.add(courseInfo);
     }
 
     /**

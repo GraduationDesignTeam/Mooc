@@ -97,24 +97,41 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public ResultVO add(CourseInfo courseInfo) {
-        ResultVO resultVO=new ResultVO();
+        ResultVO resultVO=new ResultVO(0, "");
+        CourseInfo query = new CourseInfo();
+        query.setName(courseInfo.getName());
+        query.setTeacherName(courseInfo.getTeacherName());
         if(courseInfo.getName()==null||courseInfo.getName().trim().length()==0){
             resultVO.setCode(1);
             resultVO.setMsg("课程名不可为空");
         }
-        else{
-            courseInfo.setCourseState(Define.COURSE_STATE_WAIT);
-            courseInfo.setCheckState(Define.CHECK_STATE_NOT_PASS);
-            if(courseInfoMapper.insert(courseInfo) > 0){
-                // teacher_of_course 同时也要插入数据
-                courseManageService.addTeacher(courseInfo.getId(), courseInfo.getTeacherId());
-                resultVO.setCode(0);
-                resultVO.setMsg("添加成功");
-            }else{
-                resultVO.setCode(1);
-                resultVO.setMsg("数据添加过程中出错，请稍后重试");
+        List<CourseInfo> querylist = courseInfoMapper.queryAll(query);
+
+        // 检查是否为重复开设课程
+        querylist.forEach(course -> {
+            if(course.getTeacherId().equals(courseInfo.getTeacherId()) && course.getCheckState()!=Define.COURSE_STATE_CLOSE) {
+                resultVO.setCode(2);
+                resultVO.setMsg("您已经开设过一门同名课程，而且课程尚未结束！");
             }
+        });
+
+        if(resultVO.getCode() != 0)
+            return resultVO;
+
+        courseInfo.setCourseState(Define.COURSE_STATE_WAIT);
+        courseInfo.setCheckState(Define.CHECK_STATE_NOT_PASS);
+        if(courseInfoMapper.insert(courseInfo) > 0){
+            // teacher_of_course 同时也要插入数据
+            courseManageService.addTeacher(courseInfo.getId(), courseInfo.getTeacherId());
+            // 下面需要调用消息模块，向管理员申请开设课程审核
+
+            resultVO.setCode(0);
+            resultVO.setMsg("添加成功");
+        }else{
+            resultVO.setCode(3);
+            resultVO.setMsg("数据添加过程中出错，请稍后重试");
         }
+
         return resultVO;
     }
 
