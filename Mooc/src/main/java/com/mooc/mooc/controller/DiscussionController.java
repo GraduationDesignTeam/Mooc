@@ -1,8 +1,12 @@
 package com.mooc.mooc.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.mooc.mooc.model.CourseInfo;
+import com.mooc.mooc.model.DiscussionDetail;
 import com.mooc.mooc.model.DiscussionInfo;
 import com.mooc.mooc.model.DiscussionStatistic;
 import com.mooc.mooc.service.DiscussionService;
+import com.mooc.mooc.util.Define;
 import com.mooc.mooc.vo.DiscussionVO;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -101,15 +105,15 @@ public class DiscussionController {
      * 【注意讨论是基于课程存在的，所有的讨论，只能在打开的课程页面进行参与】，
      * 列表显示结果，点击某讨论，则进入该讨论页面
      * @param courseId
-     * @param discussionInfo
-     * courseId当前课程id，自动取，不可变更
-     * DiscussionInfo,讨论区筛选条件表
+     * @param
      * @return
      * List<DiscussionInfo>:返回所有符合条件的讨论；若查询结果为空，则list为null
      */
-    @RequestMapping("/search/{courseId}")
-    public List<DiscussionInfo> search(@PathVariable Integer courseId, @RequestBody DiscussionInfo discussionInfo){
-        return null;
+    @RequestMapping("/search/{currPage}")
+    public PageInfo<DiscussionDetail> search(@PathVariable Integer currPage, @RequestBody DiscussionDetail discussionDetail){
+        PageInfo<DiscussionDetail> list1=discussionService.list(currPage, Define.PAGE_SIZE,discussionDetail);
+        //System.out.println(list1.getList().get(0).getProhibitState());
+        return list1;
     }
 
     /**
