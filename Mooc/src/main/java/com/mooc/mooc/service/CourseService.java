@@ -23,6 +23,9 @@ public interface CourseService {
     // 教师添加课程
     ResultVO add(CourseInfo courseInfo);
 
+    // 教师撤销课程（删除未开始的课程）
+    ResultVO cancel(Integer courseId);
+
     // 根据id查询某课程
     CourseInfo sel(Integer courseId);
 

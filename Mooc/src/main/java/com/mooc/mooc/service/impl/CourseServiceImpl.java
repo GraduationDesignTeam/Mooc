@@ -136,6 +136,22 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public ResultVO cancel(Integer courseId) {
+        ResultVO resultVO=new ResultVO();
+        CourseInfo courseInfo = courseInfoMapper.selectByPrimaryKey(courseId);
+        // 仅允许教师删除未开始的课程
+        if(courseInfo.getCourseState()!=Define.COURSE_STATE_WAIT){
+            resultVO.setCode(1);
+            resultVO.setMsg("课程正在进行中或已结束，无法撤销！");
+        }else {
+            courseInfoMapper.deleteByPrimaryKey(courseId);
+            resultVO.setCode(0);
+            resultVO.setMsg("撤销成功");
+        }
+        return resultVO;
+    }
+
+    @Override
     public CourseInfo sel(Integer courseId) {
         return courseInfoMapper.selectByPrimaryKey(courseId);
     }

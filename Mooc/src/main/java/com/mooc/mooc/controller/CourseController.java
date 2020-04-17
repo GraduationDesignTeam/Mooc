@@ -149,7 +149,7 @@ public class CourseController {
      */
     @RequestMapping("/cancel/{courseId}")
     public ResultVO cancel(@PathVariable Integer courseId){
-        return new ResultVO(0,"");
+        return courseService.cancel(courseId);
     }
 
     /**
@@ -159,7 +159,7 @@ public class CourseController {
      */
     @RequestMapping("/list_by_teacher_id")
     public List<CourseInfo> getByTeacherId(@RequestParam Integer teacherId){
-        return null;
+        return courseService.getByTeacherId(teacherId);
     }
 
     /**
@@ -169,7 +169,7 @@ public class CourseController {
      */
     @RequestMapping("/list_by_assistant_id")
     public List<CourseInfo> getByAssistantId(@RequestParam Integer assistantId){
-        return null;
+        return courseService.getByAssistantId(assistantId);
     }
 
     /**
@@ -193,8 +193,8 @@ public class CourseController {
      * @return List<CourseInfo>
      */
     @RequestMapping("/list_by_school/{currPage}")
-    public PageInfo<CourseInfo> getBySchool(@RequestParam String school){
-        return null;
+    public PageInfo<CourseInfo> getBySchool(@PathVariable Integer currPage, @RequestParam String school){
+        return courseService.list(currPage, Define.PAGE_SIZE, school);
     }
 
     /**
