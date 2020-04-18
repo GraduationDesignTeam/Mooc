@@ -3,7 +3,7 @@ package com.mooc.mooc.model;
 public class ChoiceQuestion {
     private Integer id;
 
-    private Integer couseId;
+    private Integer courseId;
 
     private String content;
 
@@ -29,12 +29,12 @@ public class ChoiceQuestion {
         this.id = id;
     }
 
-    public Integer getCouseId() {
-        return couseId;
+    public Integer getCourseId() {
+        return courseId;
     }
 
-    public void setCouseId(Integer couseId) {
-        this.couseId = couseId;
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
     public String getContent() {

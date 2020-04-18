@@ -3,11 +3,11 @@ package com.mooc.mooc.model;
 public class SubjectiveQuestion {
     private Integer id;
 
-    private Integer couseId;
+    private Integer courseId;
 
     private String content;
 
-    private String ansewer;
+    private String answer;
 
     private String resolution;
 
@@ -21,12 +21,12 @@ public class SubjectiveQuestion {
         this.id = id;
     }
 
-    public Integer getCouseId() {
-        return couseId;
+    public Integer getCourseId() {
+        return courseId;
     }
 
-    public void setCouseId(Integer couseId) {
-        this.couseId = couseId;
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
     public String getContent() {
@@ -37,12 +37,12 @@ public class SubjectiveQuestion {
         this.content = content == null ? null : content.trim();
     }
 
-    public String getAnsewer() {
-        return ansewer;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setAnsewer(String ansewer) {
-        this.ansewer = ansewer == null ? null : ansewer.trim();
+    public void setAnswer(String answer) {
+        this.answer = answer == null ? null : answer.trim();
     }
 
     public String getResolution() {

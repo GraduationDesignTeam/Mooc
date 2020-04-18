@@ -3,9 +3,9 @@
 <mapper namespace="com.mooc.mooc.mapper.SubjectiveQuestionMapper">
   <resultMap id="BaseResultMap" type="com.mooc.mooc.model.SubjectiveQuestion">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="couse_id" jdbcType="INTEGER" property="couseId" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="ansewer" jdbcType="VARCHAR" property="ansewer" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
     <result column="resolution" jdbcType="VARCHAR" property="resolution" />
     <result column="score" jdbcType="DOUBLE" property="score" />
   </resultMap>
@@ -14,29 +14,29 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mooc.mooc.model.SubjectiveQuestion">
-    insert into subjective_question (id, couse_id, content, 
-      ansewer, resolution, score
+    insert into subjective_question (id, course_id, content, 
+      answer, resolution, score
       )
-    values (#{id,jdbcType=INTEGER}, #{couseId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
-      #{ansewer,jdbcType=VARCHAR}, #{resolution,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE}
+    values (#{id,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{resolution,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.SubjectiveQuestion">
     update subjective_question
-    set couse_id = #{couseId,jdbcType=INTEGER},
+    set course_id = #{courseId,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
-      ansewer = #{ansewer,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
       resolution = #{resolution,jdbcType=VARCHAR},
       score = #{score,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, couse_id, content, ansewer, resolution, score
+    select id, course_id, content, answer, resolution, score
     from subjective_question
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, couse_id, content, ansewer, resolution, score
+    select id, course_id, content, answer, resolution, score
     from subjective_question
   </select>
 </mapper>
