@@ -41,21 +41,6 @@ public class CourseServiceImpl implements CourseService {
 
     /**
      * @author 涂斌砚
-     * 为首页提供分页查询课程列表
-     * @param currPage 页号
-     * @param pageSize 返回的记录数
-     * @param school 学校名称
-     * @return List<CourseInfo>
-     */
-    @Override
-    public PageInfo<CourseInfo> list(Integer currPage, Integer pageSize, String school) {
-        if(currPage==null){currPage=1;}
-        PageHelper.startPage(currPage, pageSize);
-        return new PageInfo<>(courseInfoMapper.selectBySchool(school));
-    }
-
-    /**
-     * @author 涂斌砚
      * 教师在后台页面更新课程信息
      * @param courseInfo 课程信息
      * @return
@@ -121,8 +106,10 @@ public class CourseServiceImpl implements CourseService {
         courseInfo.setCourseState(Define.COURSE_STATE_WAIT);
         courseInfo.setCheckState(Define.CHECK_STATE_NOT_PASS);
         if(courseInfoMapper.insert(courseInfo) > 0){
+            System.out.println("课程id: "+courseInfo.getId() + "  教师id："+courseInfo.getTeacherId());
             // teacher_of_course 同时也要插入数据
-            courseManageService.addTeacher(courseInfo.getId(), courseInfo.getTeacherId());
+            System.out.println(courseManageService.addTeacher(courseInfo.getId(), courseInfo.getTeacherId()));
+//            courseManageService.addTeacher(courseInfo.getId(), courseInfo.getTeacherId());
             // 下面需要调用消息模块，向管理员申请开设课程审核
 
             resultVO.setCode(0);
@@ -158,12 +145,17 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseInfoVO selectVO(Integer courseId, Integer userId) {
-        CourseInfoVO courseInfoVO =  courseInfoMapper.selectVO(courseId);
+        CourseInfoVO courseInfoVO =  new CourseInfoVO(courseInfoMapper.selectByPrimaryKey(courseId));
         /**
          * 尚未完成
          * 此处需要另从三张表里读取用户在这门课程里扮演的角色
          */
         courseInfoVO.setRole(0);
+        if(courseManageService.isTeacherOfCourse(courseId, userId))
+            courseInfoVO.setRole(1);
+        else if(courseManageService.isAssistantOfCourse(courseId, userId))
+            courseInfoVO.setRole(2);
+//        else if(){}
         return courseInfoVO;
     }
 

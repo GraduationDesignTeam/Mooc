@@ -11,9 +11,6 @@ public interface CourseService {
     // 查询课程
     PageInfo<CourseInfo> list(Integer currPage, Integer pageSize, CourseInfo courseInfo);
 
-    // 根据学校查询课程
-    PageInfo<CourseInfo> list(Integer currPage, Integer pageSize, String school);
-
     // 更新课程（注：默认输入参数中的课程id存在）
     ResultVO update(CourseInfo courseInfo);
 

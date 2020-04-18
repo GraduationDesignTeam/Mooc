@@ -10,6 +10,7 @@
     <result column="target" jdbcType="VARCHAR" property="target" />
     <result column="reference" jdbcType="VARCHAR" property="reference" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
     <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
     <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
     <result column="open_time" jdbcType="TIMESTAMP" property="openTime" />
@@ -18,26 +19,34 @@
     <result column="check_state" jdbcType="INTEGER" property="checkState" />
     <result column="course_authority" jdbcType="INTEGER" property="courseAuthority" />
   </resultMap>
-  <resultMap id="ExtendedResultMap" type="com.mooc.mooc.vo.CourseInfoVO" extends="BaseResultMap">
-    <result column="school" jdbcType="VARCHAR" property="school" />
+  <resultMap id="relationResultMap" type="com.mooc.mooc.model.CourseInfo" extends="BaseResultMap">
+    <collection property="teacherList" ofType="com.mooc.mooc.model.UserInfo">
+      <id column="uid" property="userId"/>
+      <result column="uschool" property="school"/>
+      <result column="uphone" property="phone"/>
+      <result column="ugrade" property="grade"/>
+      <result column="umajor" property="major"/>
+      <result column="uname" property="name"/>
+      <result column="upicture" property="picture"/>
+    </collection>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from course_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mooc.mooc.model.CourseInfo">
+  <insert id="insert" parameterType="com.mooc.mooc.model.CourseInfo" useGeneratedKeys="true" keyProperty="id">
     insert into course_info (id, name, type, 
       intro, detail, target, 
-      reference, photo, teacher_id, 
-      teacher_name, open_time, close_time, 
-      course_state, check_state, course_authority
-      )
+      reference, photo, school, 
+      teacher_id, teacher_name, open_time, 
+      close_time, course_state, check_state, 
+      course_authority)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{intro,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, 
-      #{reference,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{teacherId,jdbcType=INTEGER}, 
-      #{teacherName,jdbcType=VARCHAR}, #{openTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
-      #{courseState,jdbcType=INTEGER}, #{checkState,jdbcType=INTEGER}, #{courseAuthority,jdbcType=INTEGER}
-      )
+      #{reference,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
+      #{teacherId,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, #{openTime,jdbcType=TIMESTAMP}, 
+      #{closeTime,jdbcType=TIMESTAMP}, #{courseState,jdbcType=INTEGER}, #{checkState,jdbcType=INTEGER}, 
+      #{courseAuthority,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.CourseInfo">
     update course_info
@@ -48,6 +57,7 @@
       target = #{target,jdbcType=VARCHAR},
       reference = #{reference,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
       teacher_id = #{teacherId,jdbcType=INTEGER},
       teacher_name = #{teacherName,jdbcType=VARCHAR},
       open_time = #{openTime,jdbcType=TIMESTAMP},
@@ -58,62 +68,57 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, name, type, intro, detail, target, reference, photo, teacher_id, teacher_name, 
-    open_time, close_time, course_state, check_state, course_authority
+    select id, name, type, intro, detail, target, reference, photo, school, teacher_id, 
+    teacher_name, open_time, close_time, course_state, check_state, course_authority
     from course_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, type, intro, detail, target, reference, photo, teacher_id, teacher_name,
-    open_time, close_time, course_state, check_state, course_authority
-    from course_info
+	select c.id, c.name, c.type, c.intro, c.detail, c.target, c.reference, c.photo, c.school,
+	c.teacher_id, c.teacher_name, c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority,
+	u.user_id uid, u.school uschool, u.phone uphone, u.grade ugrade, u.major umajor, u.name uname, u.picture upicture
+    from course_info as c
+    left join teacher_of_course as t on c.id=t.course_id
+	left join user_info as u on u.user_id=t.teacher_id
   </select>
   <select id="queryAll" parameterType="com.mooc.mooc.model.CourseInfo" resultMap="BaseResultMap">
-    select id, name, type, intro, detail, target, reference, photo, teacher_id, teacher_name,
-    open_time, close_time, course_state, check_state, course_authority
-    from course_info
+    select c.id, c.name, c.type, c.intro, c.detail, c.target, c.reference, c.photo, c.school,
+    c.teacher_id, c.teacher_name, c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority,
+    u.user_id uid, u.school uschool, u.phone uphone, u.grade ugrade, u.major umajor, u.name uname, u.picture upicture
+    from course_info as c
+    left join teacher_of_course as t on c.id=t.course_id
+    left join user_info as u on u.user_id=t.teacher_id
     <where>
       <if test="name!=null and name!=''">
-        and name like concat('%',#{name},'%')
+        and c.name like concat('%',#{name},'%')
       </if>
       <if test="type!=null and type!=''">
-        and type=#{type}
+        and c.type=#{type}
+      </if>
+      <if test="school!=null and school!=''">
+        and c.school=#{school}
       </if>
       <if test="teacherName!=null and teacherName!=''">
-        and teacher_name=#{teacherName}
+        and c.teacher_name=#{teacherName}
       </if>
       <if test="checkState!=null">
-        and check_state=#{checkState}
+        and c.check_state=#{checkState}
       </if>
     </where>
-    order by open_time desc
-  </select>
-  <select id="selectVO" parameterType="java.lang.Integer" resultMap="ExtendedResultMap">
-    select c.id, c.name, c.type, c.intro, c.detail, c.target, c.reference, c.photo, c.teacher_id, c.teacher_name,
-    c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority, u.school
-    from course_info as c
-    inner join user_info as u on c.teacher_id=u.user_id
-    where c.id = #{id}
+    order by c.open_time desc
   </select>
   <select id="selectByTeacherId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select c.id, c.name, c.type, c.intro, c.photo, c.teacher_id, c.teacher_name,
+    select c.id, c.name, c.type, c.intro, c.photo, c.school, c.teacher_id, c.teacher_name,
     c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority
     from course_info as c
     inner join teacher_of_course as t on c.id=t.course_id
     where t.teacher_id={teacherId}
   </select>
   <select id="selectByAssistantId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select c.id, c.name, c.type, c.intro, c.photo, c.teacher_id, c.teacher_name,
+    select c.id, c.name, c.type, c.intro, c.photo, c.school, c.teacher_id, c.teacher_name,
     c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority
     from course_info as c
     inner join assistant_of_course as a on c.id=a.course_id
     where a.assistant_id={{assistantId}}
-  </select>
-  <select id="selectBySchool" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select c.id, c.name, c.type, c.intro, c.photo, c.teacher_id, c.teacher_name,
-    c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority
-    from course_info as c
-    inner join user_info as u on c.teacher_id=u.user_id
-    where c.check_state=1 and u.school=#{school}
   </select>
 </mapper>

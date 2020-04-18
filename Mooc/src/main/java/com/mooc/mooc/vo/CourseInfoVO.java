@@ -21,6 +21,8 @@ public class CourseInfoVO {
     private String reference;
     // 课程封面图片
     private String photo;
+    // 提供本课程的学校
+    private String school;
     // 开设课程的教师
     private Integer teacherId;
     private String teacherName;
@@ -38,8 +40,6 @@ public class CourseInfoVO {
     /**
      * 以下为相对于 CourseInfo类 不同的属性
      */
-    // 提供本课程的学校
-    private String school;
     // 当前查询者在本课程中扮演的角色（0表示未知；1表示教师；2表示助教；3表示选课学生）
     private Integer role;
 
@@ -192,6 +192,7 @@ public class CourseInfoVO {
         this.target = courseInfo.getTarget();
         this.reference = courseInfo.getReference();
         this.photo = courseInfo.getPhoto();
+        this.school = courseInfo.getSchool();
         this.teacherId = courseInfo.getTeacherId();
         this.teacherName = courseInfo.getTeacherName();
         this.openTime = courseInfo.getOpenTime();

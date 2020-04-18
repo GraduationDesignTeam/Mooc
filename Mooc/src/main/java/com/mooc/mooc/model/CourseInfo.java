@@ -3,6 +3,7 @@ package com.mooc.mooc.model;
 import com.mooc.mooc.util.StringFormatUtil;
 
 import java.util.Date;
+import java.util.List;
 
 public class CourseInfo {
     private Integer id;
@@ -21,6 +22,8 @@ public class CourseInfo {
 
     private String photo;
 
+    private String school;
+
     private Integer teacherId;
 
     private String teacherName;
@@ -34,6 +37,9 @@ public class CourseInfo {
     private Integer checkState;
 
     private Integer courseAuthority;
+
+    // 授课教师列表
+    private List<UserInfo> teacherList;
 
     public Integer getId() {
         return id;
@@ -99,6 +105,14 @@ public class CourseInfo {
         this.photo = photo == null ? null : photo.trim();
     }
 
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school == null ? null : school.trim();
+    }
+
     public Integer getTeacherId() {
         return teacherId;
     }
@@ -153,5 +167,16 @@ public class CourseInfo {
 
     public void setCourseAuthority(Integer courseAuthority) {
         this.courseAuthority = courseAuthority;
+    }
+
+    public List<UserInfo> getTeacherList() {
+        return teacherList;
+    }
+
+    public void setTeacherList(List<UserInfo> teacherList) {
+        this.teacherList = teacherList;
+    }
+
+    public CourseInfo() {
     }
 }

@@ -18,11 +18,7 @@ public interface CourseInfoMapper {
 
     List<CourseInfo> queryAll(CourseInfo courseInfo);
 
-    CourseInfoVO selectVO(Integer id);
-
     List<CourseInfo> selectByTeacherId(Integer teacherId);
 
     List<CourseInfo> selectByAssistantId(Integer assistantId);
-
-    List<CourseInfo> selectBySchool(String school);
 }
