@@ -112,13 +112,13 @@
     c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority
     from course_info as c
     inner join teacher_of_course as t on c.id=t.course_id
-    where t.teacher_id={teacherId}
+    where t.teacher_id=#{teacherId}
   </select>
   <select id="selectByAssistantId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select c.id, c.name, c.type, c.intro, c.photo, c.school, c.teacher_id, c.teacher_name,
     c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority
     from course_info as c
     inner join assistant_of_course as a on c.id=a.course_id
-    where a.assistant_id={{assistantId}}
+    where a.assistant_id=#{assistantId}
   </select>
 </mapper>

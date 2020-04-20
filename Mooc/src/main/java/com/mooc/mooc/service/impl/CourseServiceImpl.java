@@ -111,10 +111,8 @@ public class CourseServiceImpl implements CourseService {
         courseInfo.setCourseState(Define.COURSE_STATE_WAIT);
         courseInfo.setCheckState(Define.CHECK_STATE_NOT_PASS);
         if(courseInfoMapper.insert(courseInfo) > 0){
-            System.out.println("课程id: "+courseInfo.getId() + "  教师id："+courseInfo.getTeacherId());
             // teacher_of_course 同时也要插入数据
-            System.out.println(courseManageService.addTeacher(courseInfo.getId(), courseInfo.getTeacherId()));
-//            courseManageService.addTeacher(courseInfo.getId(), courseInfo.getTeacherId());
+            courseManageService.addTeacher(courseInfo.getId(), courseInfo.getTeacherId());
             // 下面需要调用消息模块，向管理员申请开设课程审核
 
             resultVO.setCode(0);
