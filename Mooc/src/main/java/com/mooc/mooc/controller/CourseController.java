@@ -3,6 +3,7 @@ package com.mooc.mooc.controller;
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.CourseInfo;
 import com.mooc.mooc.model.CourseStatistic;
+import com.mooc.mooc.model.UserInfo;
 import com.mooc.mooc.service.CourseService;
 
 import com.mooc.mooc.util.Define;
@@ -199,5 +200,18 @@ public class CourseController {
         System.out.println("courseId = " + courseId);
         System.out.println("userId = " + userId);
         return courseService.selectVO(courseId, userId);
+    }
+
+    /**
+     * @author朱翔鹏
+     * 用户在个人主页查询自己(学生身份)所修课程
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/selfList/{currPage}")
+    public PageInfo<CourseInfoVO> selfList(@PathVariable Integer currPage, @RequestBody UserInfo userInfo){
+        PageInfo<CourseInfoVO> list1=courseService.selfList(currPage, Define.PAGE_SIZE,userInfo.getUserId());
+        //System.out.println(list1.getList().get(0).getProhibitState());
+        return list1;
     }
 }

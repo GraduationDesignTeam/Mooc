@@ -3,7 +3,9 @@ package com.mooc.mooc.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.mapper.CourseInfoMapper;
+import com.mooc.mooc.mapper.StudentOfCourseMapper;
 import com.mooc.mooc.model.CourseInfo;
+import com.mooc.mooc.model.StudentOfCourse;
 import com.mooc.mooc.service.CourseManageService;
 import com.mooc.mooc.service.CourseService;
 import com.mooc.mooc.util.Define;
@@ -13,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -23,6 +25,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseManageService courseManageService;
+
+    @Autowired
+    private StudentOfCourseMapper studentOfCourseMapper;
 
     /**
      * @author 涂斌砚
@@ -169,5 +174,42 @@ public class CourseServiceImpl implements CourseService {
         return courseInfoMapper.selectByAssistantId(assistantId);
     }
 
-
+    /**
+     * @author朱翔鹏
+     * 用户在个人主页查询自己(学生身份)所修课程
+     * @param userId
+     * @return
+     */
+    @Override
+    public PageInfo<CourseInfoVO> selfList(Integer currPage,Integer pageSize,Integer userId) {
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
+        List<StudentOfCourse> list=studentOfCourseMapper.selByUserId(userId);
+        List<CourseInfoVO> list1=new ArrayList<CourseInfoVO>();
+        for(StudentOfCourse s:list){
+            CourseInfoVO courseInfoVO=new CourseInfoVO();
+            CourseInfo courseInfo=this.sel(s.getCourseId());
+            //设置身份为学生
+            courseInfoVO.setRole(3);
+            //装入VO
+            courseInfoVO.setCheckState(courseInfo.getCheckState());
+            courseInfoVO.setCloseTime(courseInfo.getCloseTime());
+            courseInfoVO.setCourseAuthority(courseInfo.getCourseAuthority());
+            courseInfoVO.setCourseState(courseInfo.getCourseState());
+            courseInfoVO.setDetail(courseInfo.getDetail());
+            courseInfoVO.setId(courseInfo.getId());
+            courseInfoVO.setIntro(courseInfo.getIntro());
+            courseInfoVO.setName(courseInfo.getName());
+            courseInfoVO.setOpenTime(courseInfo.getOpenTime());
+            courseInfoVO.setPhoto(courseInfo.getPhoto());
+            courseInfoVO.setReference(courseInfo.getReference());
+            courseInfoVO.setSchool(courseInfo.getSchool());
+            courseInfoVO.setTarget(courseInfo.getTarget());
+            courseInfoVO.setTeacherId(courseInfo.getTeacherId());
+            courseInfoVO.setTeacherName(courseInfo.getTeacherName());
+            courseInfoVO.setType(courseInfo.getType());
+            list1.add(courseInfoVO);
+        }
+        return new PageInfo<>(list1);
+    }
 }

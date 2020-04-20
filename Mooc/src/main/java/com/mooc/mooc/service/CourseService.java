@@ -34,4 +34,7 @@ public interface CourseService {
 
     //根据助教id查询课程
     List<CourseInfo> getByAssistantId(Integer assistantId);
+
+    //根据当前登录用户id取选课信息
+    PageInfo<CourseInfoVO> selfList(Integer currPage,Integer pageSize,Integer userId);
 }
