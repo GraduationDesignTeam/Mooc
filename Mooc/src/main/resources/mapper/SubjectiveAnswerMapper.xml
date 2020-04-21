@@ -3,6 +3,7 @@
 <mapper namespace="com.mooc.mooc.mapper.SubjectiveAnswerMapper">
   <resultMap id="BaseResultMap" type="com.mooc.mooc.model.SubjectiveAnswer">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="task_id" jdbcType="INTEGER" property="taskId" />
     <id column="question_id" jdbcType="INTEGER" property="questionId" />
     <id column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="course_id" jdbcType="INTEGER" property="courseId" />
@@ -14,16 +15,17 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mooc.mooc.model.SubjectiveAnswer">
-    insert into subjective_answer (id, question_id,student_id,course_id,
+    insert into subjective_answer (id,task_id, question_id,student_id,course_id,
       answer, score
       )
-    values (#{id,jdbcType=INTEGER},#{question_id,jdbcType=INTEGER},#{studentId,jdbcType=INTEGER},  #{courseId,jdbcType=INTEGER},
+    values (#{id,jdbcType=INTEGER},#{taskId,jdbcType=INTEGER},#{questionId,jdbcType=INTEGER},#{studentId,jdbcType=INTEGER},  #{courseId,jdbcType=INTEGER},
       #{answer,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.SubjectiveAnswer">
     update subjective_answer
     set course_id = #{courseId,jdbcType=INTEGER},
+      tasl_id = #{taskId,jdbcType=INTEGER},
       student_id = #{studentId,jdbcType=INTEGER},
       question_id=#{questionId,jdbcType=INTEGER},
       answer = #{answer,jdbcType=VARCHAR},
@@ -31,12 +33,12 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, quesetion_id,student_id, course_id,  answer,  score
+    select id, task_id,quesetion_id,student_id, course_id,  answer,  score
     from subjective_answer
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id,question_id, student_id, course_id, answer, score
+    select id,task_id,question_id, student_id, course_id, answer, score
     from subjective_answer
   </select>
 </mapper>

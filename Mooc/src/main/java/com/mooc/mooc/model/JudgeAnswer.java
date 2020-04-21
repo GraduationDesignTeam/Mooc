@@ -3,6 +3,8 @@ package com.mooc.mooc.model;
 public class JudgeAnswer {
     private Integer id;
 
+    private Integer taskId;
+
     private Integer questionId;
 
     private Integer courseId;
@@ -12,6 +14,14 @@ public class JudgeAnswer {
     private Integer answer;
 
     private Double score;
+
+    public Integer getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
+    }
 
     public Integer getQuestionId() {
         return questionId;
