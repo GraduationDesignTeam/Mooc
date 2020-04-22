@@ -2,7 +2,7 @@ package com.mooc.mooc.model;
 
 import java.util.Date;
 
-public class CourseTaskaccomplish {
+public class CourseTaskAccomplish {
     private Integer id;
 
     private Integer taskId;

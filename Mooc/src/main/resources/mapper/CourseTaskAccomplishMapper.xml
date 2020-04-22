@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mooc.mooc.mapper.CourseTaskaccomplishMapperMapper">
-  <resultMap id="BaseResultMap" type="com.mooc.mooc.model.CourseTaskaccomplish">
+  <resultMap id="BaseResultMap" type="com.mooc.mooc.model.CourseTaskAccomplish">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="course_id" jdbcType="INTEGER" property="courseId" />
     <result column="task_id" jdbcType="INTEGER" property="taskId" />
@@ -16,7 +16,7 @@
     delete from course_task_accomplish
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mooc.mooc.model.CourseTaskaccomplish">
+  <insert id="insert" parameterType="com.mooc.mooc.model.CourseTaskAccomplish">
     insert into course_task_accomplish (id, student_id, task_id,
       course_id, score, finish_time,
      start_time, end_time,
@@ -26,7 +26,7 @@
        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
        #{answerNumber,jdbcType=INTEGER})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.CourseTask">
+  <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.CourseTaskAccomplish">
     update course_task_accomplish
     set course_id = #{courseId,jdbcType=INTEGER},
       student_id = #{studentId,jdbcType=INTEGER},

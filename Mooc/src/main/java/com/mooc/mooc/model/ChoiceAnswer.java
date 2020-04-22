@@ -5,7 +5,7 @@ public class ChoiceAnswer {
 
     private Integer taskId;
 
-    private Integer quesetionId;
+    private Integer questionId;
 
     private Integer courseId;
 
@@ -23,12 +23,12 @@ public class ChoiceAnswer {
         this.taskId = taskId;
     }
 
-    public Integer getQuesetionId() {
-        return quesetionId;
+    public Integer getQuestionId() {
+        return questionId;
     }
 
-    public void setQuesetionId(Integer quesetionId) {
-        this.quesetionId = quesetionId;
+    public void setQuestionId(Integer quesetionId) {
+        this.questionId = quesetionId;
     }
 
     public Integer getId() {
