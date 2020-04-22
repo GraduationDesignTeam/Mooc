@@ -109,10 +109,18 @@ public class DiscussionController {
      * @return
      * List<DiscussionInfo>:返回所有符合条件的讨论；若查询结果为空，则list为null
      */
-    @RequestMapping("/search/{currPage}")
-    public PageInfo<DiscussionDetail> search(@PathVariable Integer currPage, @RequestBody DiscussionDetail discussionDetail){
-        PageInfo<DiscussionDetail> list1=discussionService.list(currPage, Define.PAGE_SIZE,discussionDetail);
-        //System.out.println(list1.getList().get(0).getProhibitState());
+    @RequestMapping("/searchNew/{currPage}")
+    public PageInfo<DiscussionDetail> searchNew(@PathVariable Integer currPage, @RequestBody DiscussionDetail discussionDetail){
+        //最新
+        PageInfo<DiscussionDetail> list1=discussionService.listNew(currPage, Define.PAGE_SIZE,discussionDetail);
+        //System.out.println(discussionDetail.getDiscussionName());
+        return list1;
+    }
+    @RequestMapping("/searchHot/{currPage}")
+    public PageInfo<DiscussionDetail> searchHot(@PathVariable Integer currPage, @RequestBody DiscussionDetail discussionDetail){
+        //最热
+        PageInfo<DiscussionDetail> list1=discussionService.listHot(currPage, Define.PAGE_SIZE,discussionDetail);
+        //System.out.println(discussionDetail.getDiscussionName());
         return list1;
     }
 

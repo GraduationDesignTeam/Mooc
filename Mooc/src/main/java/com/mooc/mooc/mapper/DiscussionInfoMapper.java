@@ -15,5 +15,7 @@ public interface DiscussionInfoMapper {
 
     int updateByPrimaryKey(DiscussionInfo record);
 
-    List<DiscussionDetail> queryAll(DiscussionDetail discussionDetail);
+    List<DiscussionDetail> queryAllNew(DiscussionDetail discussionDetail);
+
+    List<DiscussionDetail> queryAllHot(DiscussionDetail discussionDetail);
 }
