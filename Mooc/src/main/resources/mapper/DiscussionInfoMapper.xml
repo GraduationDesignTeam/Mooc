@@ -19,6 +19,8 @@
     <association property="courseInfo" column="id" javaType="CourseInfo">
       <id column="id" jdbcType="INTEGER" property="id" />
       <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="type" jdbcType="VARCHAR" property="type" />
+      <result column="school" jdbcType="VARCHAR" property="school" />
     </association>
     <association property="teacher" column="user_id" javaType="UserInfo">
       <id column="user_id" jdbcType="INTEGER" property="userId" />
@@ -69,7 +71,7 @@
   <select id="queryAllHot" parameterType="com.mooc.mooc.model.DiscussionDetail" resultMap="DetailResultMap">
     select d.discussion_id, d.discussion_name, d.course_id, d.teacher_id, d.assistant_id, d.discussion_state,
     d.discussion_description, d.open_date, d.close_date, d.discussion_authority, d.discussion_popularity,
-    c.name, u.user_name
+    c.name, c.type, c.school, u.user_name
     from (discussion_info d inner join course_info c on d.course_id=c.id) inner join user_info u on d.teacher_id = u.user_id
     <where>
       <if test="discussionName!=null and discussionName!=''">
@@ -77,6 +79,12 @@
       </if>
       <if test="courseInfo.name!=null and courseInfo.name!=''">
         and c.name like concat('%',#{courseInfo.name},'%')
+      </if>
+      <if test="courseInfo.type!=null and courseInfo.type!=''">
+        and c.type = #{courseInfo.type}
+      </if>
+      <if test="courseInfo.school!=null and courseInfo.school!=''">
+        and c.school = #{courseInfo.school}
       </if>
     </where>
     order by d.discussion_popularity desc
@@ -84,7 +92,7 @@
   <select id="queryAllNew" parameterType="com.mooc.mooc.model.DiscussionDetail" resultMap="DetailResultMap">
     select d.discussion_id, d.discussion_name, d.course_id, d.teacher_id, d.assistant_id, d.discussion_state,
     d.discussion_description, d.open_date, d.close_date, d.discussion_authority, d.discussion_popularity,
-    c.name, u.user_name
+    c.name, c.type, c.school, u.user_name
     from (discussion_info d inner join course_info c on d.course_id=c.id) inner join user_info u on d.teacher_id = u.user_id
     <where>
       <if test="discussionName!=null and discussionName!=''">
@@ -92,6 +100,12 @@
       </if>
       <if test="courseInfo.name!=null and courseInfo.name!=''">
         and c.name like concat('%',#{courseInfo.name},'%')
+      </if>
+      <if test="courseInfo.type!=null and courseInfo.type!=''">
+        and c.type = #{courseInfo.type}
+      </if>
+      <if test="courseInfo.school!=null and courseInfo.school!=''">
+        and c.school = #{courseInfo.school}
       </if>
     </where>
     order by d.open_date desc
