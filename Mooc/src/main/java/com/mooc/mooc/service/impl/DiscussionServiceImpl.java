@@ -23,9 +23,17 @@ public class DiscussionServiceImpl implements DiscussionService {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public PageInfo<DiscussionDetail> list(Integer currPage, Integer pageSize, DiscussionDetail discussionDetail) {
+    public PageInfo<DiscussionDetail> listNew(Integer currPage, Integer pageSize, DiscussionDetail discussionDetail) {
+        //最新讨论排序
         if(currPage==null){currPage=1;}
         PageHelper.startPage(currPage, pageSize);
-        return new PageInfo<>(discussionInfoMapper.queryAll(discussionDetail));
+        return new PageInfo<>(discussionInfoMapper.queryAllNew(discussionDetail));
+    }
+    @Override
+    public PageInfo<DiscussionDetail> listHot(Integer currPage, Integer pageSize, DiscussionDetail discussionDetail) {
+        //最热讨论排序
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
+        return new PageInfo<>(discussionInfoMapper.queryAllHot(discussionDetail));
     }
 }

@@ -35,4 +35,10 @@
     select id, course_id, user_id, content, create_time
     from course_notice
   </select>
+  <select id="selectByCourseId" resultMap="BaseResultMap">
+    select id, course_id, user_id, content, create_time
+    from course_notice
+    where course_id = #{courseId}
+    order by create_time desc
+  </select>
 </mapper>

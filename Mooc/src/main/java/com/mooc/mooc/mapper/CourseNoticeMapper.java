@@ -13,4 +13,6 @@ public interface CourseNoticeMapper {
     List<CourseNotice> selectAll();
 
     int updateByPrimaryKey(CourseNotice record);
+
+    List<CourseNotice> selectByCourseId(Integer courseId);
 }

@@ -32,7 +32,7 @@
       student_id = #{studentId,jdbcType=INTEGER},
       task_id = #{taskId,jdbcType=INTEGER},
       score = #{score,jdbcType=DOUBLE},
-      finish_time = #{finishTime,jdbcType=STRING},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       answer_number = #{answerNumber,jdbcType=INTEGER}
