@@ -11,7 +11,7 @@ public class StudentOfCourse {
 
     private Double courseGrade;
 
-    private Date courseTime;
+    private Double courseTime;
 
     private String courseEvaluate;
 
@@ -47,11 +47,11 @@ public class StudentOfCourse {
         this.courseGrade = courseGrade;
     }
 
-    public Date getCourseTime() {
+    public Double getCourseTime() {
         return courseTime;
     }
 
-    public void setCourseTime(Date courseTime) {
+    public void setCourseTime(Double courseTime) {
         this.courseTime = courseTime;
     }
 

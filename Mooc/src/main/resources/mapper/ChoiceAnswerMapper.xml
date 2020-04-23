@@ -3,7 +3,7 @@
 <mapper namespace="com.mooc.mooc.mapper.ChoiceAnswerMapper">
   <resultMap id="BaseResultMap" type="com.mooc.mooc.model.ChoiceAnswer">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <id column="task_id" jdbcType="INTEGER" property="taskid" />
+    <id column="task_id" jdbcType="INTEGER" property="taskId" />
     <id column="question_id" jdbcType="INTEGER" property="questionId" />
     <id column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="course_id" jdbcType="INTEGER" property="courseId" />

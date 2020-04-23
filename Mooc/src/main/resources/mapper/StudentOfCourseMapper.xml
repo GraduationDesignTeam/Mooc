@@ -6,7 +6,7 @@
     <result column="course_id" jdbcType="INTEGER" property="courseId" />
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
     <result column="course_grade" jdbcType="DOUBLE" property="courseGrade" />
-    <result column="course_time" jdbcType="TIMESTAMP" property="courseTime" />
+    <result column="course_time" jdbcType="DOUBLE" property="courseTime" />
     <result column="course_evaluate" jdbcType="VARCHAR" property="courseEvaluate" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -18,7 +18,7 @@
       course_grade, course_time, course_evaluate
       )
     values (#{courseUserId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, 
-      #{courseGrade,jdbcType=DOUBLE}, #{courseTime,jdbcType=TIMESTAMP}, #{courseEvaluate,jdbcType=VARCHAR}
+      #{courseGrade,jdbcType=DOUBLE}, #{courseTime,jdbcType=DOUBLE}, #{courseEvaluate,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.StudentOfCourse">
@@ -26,7 +26,7 @@
     set course_id = #{courseId,jdbcType=INTEGER},
       student_id = #{studentId,jdbcType=INTEGER},
       course_grade = #{courseGrade,jdbcType=DOUBLE},
-      course_time = #{courseTime,jdbcType=TIMESTAMP},
+      course_time = #{courseTime,jdbcType=DOUBLE},
       course_evaluate = #{courseEvaluate,jdbcType=VARCHAR}
     where course_user_id = #{courseUserId,jdbcType=INTEGER}
   </update>
