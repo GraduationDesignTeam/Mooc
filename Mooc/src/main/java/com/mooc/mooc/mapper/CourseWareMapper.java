@@ -10,7 +10,11 @@ public interface CourseWareMapper {
 
     CourseWare selectByPrimaryKey(Integer id);
 
-    List<CourseWare> selectAll();
+    List<CourseWare> selectBySectionId(Integer sectionId);
+
+    List<CourseWare> selectByCourseId(Integer courseId);
+
+    List<CourseWare> selectUnassociatedByCourseId(Integer courseId);
 
     int updateByPrimaryKey(CourseWare record);
 }

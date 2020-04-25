@@ -5,6 +5,8 @@ import java.util.Date;
 public class CourseWare {
     private Integer id;
 
+    private Integer courseId;
+
     private Integer sectionId;
 
     private Integer userId;
@@ -17,8 +19,10 @@ public class CourseWare {
 
     private String size;
 
+    // 0表示未发布，1表示已发布
     private Integer state;
 
+    // 0表示不允许，1表示允许下载
     private Integer downloadFlag;
 
     private Date uploadTime;
@@ -29,6 +33,14 @@ public class CourseWare {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
     public Integer getSectionId() {
