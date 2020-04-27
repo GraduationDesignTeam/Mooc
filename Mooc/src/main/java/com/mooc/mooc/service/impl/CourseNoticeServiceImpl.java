@@ -7,9 +7,11 @@ import com.mooc.mooc.model.CourseNotice;
 import com.mooc.mooc.service.CourseNoticeService;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Service
 public class CourseNoticeServiceImpl implements CourseNoticeService {
     @Autowired
     CourseNoticeMapper courseNoticeMapper;
