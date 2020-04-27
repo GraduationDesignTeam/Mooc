@@ -5,7 +5,7 @@ import java.util.Date;
 public class DiscussRecord {
     private Integer discussRecordId;
 
-    private Integer studentId;
+    private Integer userId;
 
     private Integer discussionId;
 
@@ -21,6 +21,8 @@ public class DiscussRecord {
 
     private Integer replyRecordId;
 
+    private String userName;
+
     public Integer getDiscussRecordId() {
         return discussRecordId;
     }
@@ -29,12 +31,12 @@ public class DiscussRecord {
         this.discussRecordId = discussRecordId;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getDiscussionId() {
@@ -91,5 +93,13 @@ public class DiscussRecord {
 
     public void setReplyRecordId(Integer replyRecordId) {
         this.replyRecordId = replyRecordId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 }

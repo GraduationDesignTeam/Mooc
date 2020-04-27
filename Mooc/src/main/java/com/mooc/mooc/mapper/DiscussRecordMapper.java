@@ -13,4 +13,6 @@ public interface DiscussRecordMapper {
     List<DiscussRecord> selectAll();
 
     int updateByPrimaryKey(DiscussRecord record);
+
+    List<DiscussRecord> selByDiscussionId(Integer discussionId);
 }

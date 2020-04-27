@@ -1,6 +1,7 @@
 package com.mooc.mooc.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 朱翔鹏
@@ -68,6 +69,17 @@ public class DiscussionDetail {
 
     //回帖条数
     private Integer recordNum;
+
+    //回帖清单
+    private List<DiscussRecord> recordList;
+
+    public List<DiscussRecord> getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(List<DiscussRecord> recordList) {
+        this.recordList = recordList;
+    }
 
     public Integer getDiscussionId() {
         return discussionId;

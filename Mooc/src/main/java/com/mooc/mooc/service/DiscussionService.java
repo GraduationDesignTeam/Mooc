@@ -11,4 +11,7 @@ public interface DiscussionService {
 
     // 查询讨论，排序按热度从高到底
     PageInfo<DiscussionDetail> listHot(Integer currPage, Integer pageSize, DiscussionDetail discussionDetail);
+
+    //打开某个讨论
+    DiscussionDetail open(Integer discussionId);
 }

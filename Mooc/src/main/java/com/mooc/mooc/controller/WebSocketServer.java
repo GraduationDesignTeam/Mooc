@@ -20,9 +20,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *   websocket发送消息服务器端
- * @author TianTian
- * @create 2019/01/06 16:33:37
- * ws://localhost:8082/server/12
+ * @author 田冠宇
+ * @create 2020/04/14
+ * ws://localhost:8082/
  *
  */
 @ServerEndpoint("/server/{username}")
