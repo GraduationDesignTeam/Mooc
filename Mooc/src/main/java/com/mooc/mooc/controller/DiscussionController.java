@@ -134,8 +134,9 @@ public class DiscussionController {
      * List<DiscussRecord>:返回所有该讨论下所发的帖子；若查询结果为空，则list为null
      */
     @RequestMapping("/open/{discussionId}")
-    public DiscussionVO open(@PathVariable Integer discussionId){
-        return new DiscussionVO();
+    public DiscussionDetail open(@PathVariable Integer discussionId){
+        DiscussionDetail discussionDetail=discussionService.open(discussionId);
+        return discussionDetail;
     }
 
     /**
