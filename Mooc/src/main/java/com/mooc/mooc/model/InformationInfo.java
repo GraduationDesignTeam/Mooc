@@ -7,7 +7,7 @@ public class InformationInfo {
 
     private Integer senderId;
 
-    private Integer addresseeId;
+    private Integer addresserId;
 
     private Date sendTime;
 
@@ -37,12 +37,12 @@ public class InformationInfo {
         this.senderId = senderId;
     }
 
-    public Integer getAddresseeId() {
-        return addresseeId;
+    public Integer getAddresserId() {
+        return addresserId;
     }
 
-    public void setAddresseeId(Integer addresseeId) {
-        this.addresseeId = addresseeId;
+    public void setAddresserId(Integer addresserId) {
+        this.addresserId = addresserId;
     }
 
     public Date getSendTime() {
