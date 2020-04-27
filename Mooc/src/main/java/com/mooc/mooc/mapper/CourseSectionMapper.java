@@ -6,6 +6,8 @@ import java.util.List;
 public interface CourseSectionMapper {
     int deleteByPrimaryKey(Integer id);
 
+    int decreaseNumber(Integer chapterId, Integer number);
+
     int insert(CourseSection record);
 
     CourseSection selectByPrimaryKey(Integer id);

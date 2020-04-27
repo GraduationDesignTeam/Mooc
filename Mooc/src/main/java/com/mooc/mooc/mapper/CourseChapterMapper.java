@@ -6,11 +6,13 @@ import java.util.List;
 public interface CourseChapterMapper {
     int deleteByPrimaryKey(Integer id);
 
+    int decreaseNumber(Integer courseId, Integer number);
+
     int insert(CourseChapter record);
 
     CourseChapter selectByPrimaryKey(Integer id);
 
-    List<CourseChapter> selectAll();
+    List<CourseChapter> selectByCourseId(Integer courseId);
 
     int updateByPrimaryKey(CourseChapter record);
 }

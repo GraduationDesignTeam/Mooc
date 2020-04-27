@@ -3,12 +3,14 @@ package com.mooc.mooc.controller;
 import com.mooc.mooc.model.CourseChapter;
 import com.mooc.mooc.model.CourseSection;
 import com.mooc.mooc.model.CourseWare;
+import com.mooc.mooc.service.CourseSectionService;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,14 +19,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/section")
 public class CourseSectionController {
+    @Resource
+    private CourseSectionService sectionService;
+
     /**
-     * 添加章节
+     * 添加小节
      * @param section 小节
      * @return 是否成功
      */
     @RequestMapping("/add")
-    ResultVO<CourseChapter> add(@RequestBody CourseSection section){
-        return null;
+    ResultVO add(@RequestBody CourseSection section){
+        return sectionService.add(section);
     }
 
     /**
@@ -33,8 +38,8 @@ public class CourseSectionController {
      * @return 是否成功
      */
     @RequestMapping("/update")
-    ResultVO<CourseChapter> update(@RequestBody CourseSection section){
-        return null;
+    ResultVO update(@RequestBody CourseSection section){
+        return sectionService.update(section);
     }
 
     /**
@@ -44,7 +49,7 @@ public class CourseSectionController {
      */
     @RequestMapping("/del/{sectionId}")
     ResultVO del(@PathVariable Integer sectionId){
-        return null;
+        return sectionService.delete(sectionId);
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.mooc.mooc.model;
 
+import java.util.List;
+
 public class CourseChapter {
     private Integer id;
 
@@ -8,6 +10,8 @@ public class CourseChapter {
     private Integer number;
 
     private String name;
+
+    private List<CourseSection> sectionList;
 
     public Integer getId() {
         return id;
@@ -39,5 +43,13 @@ public class CourseChapter {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public List<CourseSection> getSectionList() {
+        return sectionList;
+    }
+
+    public void setSectionList(List<CourseSection> sectionList) {
+        this.sectionList = sectionList;
     }
 }
