@@ -9,7 +9,7 @@ public interface DiscussionInfoMapper {
 
     int insert(DiscussionInfo record);
 
-    DiscussionInfo selectByPrimaryKey(Integer discussionId);
+    DiscussionDetail selectByPrimaryKey(Integer discussionId);
 
     List<DiscussionInfo> selectAll();
 

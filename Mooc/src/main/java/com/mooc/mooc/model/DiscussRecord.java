@@ -5,7 +5,7 @@ import java.util.Date;
 public class DiscussRecord {
     private Integer discussRecordId;
 
-    private Integer studentId;
+    private Integer userId;
 
     private Integer discussionId;
 
@@ -17,9 +17,13 @@ public class DiscussRecord {
 
     private Date deleteTime;
 
-    private String discussContent;
-
     private Integer replyRecordId;
+
+    private String userName;
+
+    private Integer storeyId;
+
+    private String discussContent;
 
     public Integer getDiscussRecordId() {
         return discussRecordId;
@@ -29,12 +33,12 @@ public class DiscussRecord {
         this.discussRecordId = discussRecordId;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getDiscussionId() {
@@ -77,19 +81,35 @@ public class DiscussRecord {
         this.deleteTime = deleteTime;
     }
 
-    public String getDiscussContent() {
-        return discussContent;
-    }
-
-    public void setDiscussContent(String discussContent) {
-        this.discussContent = discussContent == null ? null : discussContent.trim();
-    }
-
     public Integer getReplyRecordId() {
         return replyRecordId;
     }
 
     public void setReplyRecordId(Integer replyRecordId) {
         this.replyRecordId = replyRecordId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
+
+    public Integer getStoreyId() {
+        return storeyId;
+    }
+
+    public void setStoreyId(Integer storeyId) {
+        this.storeyId = storeyId;
+    }
+
+    public String getDiscussContent() {
+        return discussContent;
+    }
+
+    public void setDiscussContent(String discussContent) {
+        this.discussContent = discussContent == null ? null : discussContent.trim();
     }
 }

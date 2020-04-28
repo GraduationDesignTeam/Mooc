@@ -1,12 +1,14 @@
 package com.mooc.mooc.controller;
 
 import com.mooc.mooc.model.CourseChapter;
+import com.mooc.mooc.service.CourseChapterService;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,6 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/chapter")
 public class CourseChapterController {
+    @Resource
+    private CourseChapterService courseChapterService;
 
     /**
      * 查看某课程的所有章节
@@ -24,7 +28,7 @@ public class CourseChapterController {
      */
     @RequestMapping("/list/{courseId}")
     List<CourseChapter> selAll(@PathVariable Integer courseId){
-        return null;
+        return courseChapterService.selectByCourseId(courseId);
     }
 
     /**
@@ -34,7 +38,7 @@ public class CourseChapterController {
      */
     @RequestMapping("/add")
     ResultVO<CourseChapter> add(@RequestBody CourseChapter chapter){
-        return null;
+        return courseChapterService.add(chapter);
     }
 
     /**
@@ -43,8 +47,8 @@ public class CourseChapterController {
      * @return 是否成功
      */
     @RequestMapping("/update")
-    ResultVO<CourseChapter> update(@RequestBody CourseChapter chapter){
-        return null;
+    ResultVO update(@RequestBody CourseChapter chapter){
+        return courseChapterService.update(chapter);
     }
 
     /**
@@ -55,6 +59,6 @@ public class CourseChapterController {
      */
     @RequestMapping("/del/{chapterId}")
     ResultVO del(@PathVariable Integer chapterId){
-        return null;
+        return courseChapterService.delete(chapterId);
     }
 }

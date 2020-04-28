@@ -21,6 +21,7 @@
       <result column="name" jdbcType="VARCHAR" property="name" />
       <result column="type" jdbcType="VARCHAR" property="type" />
       <result column="school" jdbcType="VARCHAR" property="school" />
+      <result column="photo" jdbcType="VARCHAR" property="photo" />
     </association>
     <association property="teacher" column="user_id" javaType="UserInfo">
       <id column="user_id" jdbcType="INTEGER" property="userId" />
@@ -57,10 +58,11 @@
       discussion_popularity = #{discussionPopularity,jdbcType=INTEGER}
     where discussion_id = #{discussionId,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select discussion_id, discussion_name, course_id, teacher_id, assistant_id, discussion_state, 
-    discussion_description, open_date, close_date, discussion_authority, discussion_popularity
-    from discussion_info
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="DetailResultMap">
+    select d.discussion_id, d.discussion_name, d.course_id, d.teacher_id, d.assistant_id, d.discussion_state,
+    d.discussion_description, d.open_date, d.close_date, d.discussion_authority, d.discussion_popularity,
+    c.name, c.type, c.school, c.photo, u.user_name
+    from (discussion_info d inner join course_info c on d.course_id=c.id) inner join user_info u on d.teacher_id = u.user_id
     where discussion_id = #{discussionId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
@@ -71,7 +73,7 @@
   <select id="queryAllHot" parameterType="com.mooc.mooc.model.DiscussionDetail" resultMap="DetailResultMap">
     select d.discussion_id, d.discussion_name, d.course_id, d.teacher_id, d.assistant_id, d.discussion_state,
     d.discussion_description, d.open_date, d.close_date, d.discussion_authority, d.discussion_popularity,
-    c.name, c.type, c.school, u.user_name
+    c.name, c.type, c.school, c.photo, u.user_name
     from (discussion_info d inner join course_info c on d.course_id=c.id) inner join user_info u on d.teacher_id = u.user_id
     <where>
       <if test="discussionName!=null and discussionName!=''">
@@ -92,7 +94,7 @@
   <select id="queryAllNew" parameterType="com.mooc.mooc.model.DiscussionDetail" resultMap="DetailResultMap">
     select d.discussion_id, d.discussion_name, d.course_id, d.teacher_id, d.assistant_id, d.discussion_state,
     d.discussion_description, d.open_date, d.close_date, d.discussion_authority, d.discussion_popularity,
-    c.name, c.type, c.school, u.user_name
+    c.name, c.type, c.school, c.photo, u.user_name
     from (discussion_info d inner join course_info c on d.course_id=c.id) inner join user_info u on d.teacher_id = u.user_id
     <where>
       <if test="discussionName!=null and discussionName!=''">

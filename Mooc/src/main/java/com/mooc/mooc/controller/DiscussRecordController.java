@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * 讨论记录（发帖相关）控制模块
@@ -31,7 +32,10 @@ public class DiscussRecordController {
      */
     @RequestMapping("/addRecord")
     public ResultVO addRecord(@RequestBody DiscussRecord discussRecord){
-        return new ResultVO(0,"");
+        discussRecord.setDiscussState(1);
+        discussRecord.setSendTime(new Date());
+        discussRecord.setLastUpdateTime(new Date());
+        return discussRecordService.addRecord(discussRecord);
     }
 
     /**
