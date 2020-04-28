@@ -13,5 +13,5 @@ public interface DiscussionService {
     PageInfo<DiscussionDetail> listHot(Integer currPage, Integer pageSize, DiscussionDetail discussionDetail);
 
     //打开某个讨论
-    DiscussionDetail open(Integer discussionId);
+    DiscussionDetail open(Integer discussionId, Integer currPage, Integer pageSize);
 }

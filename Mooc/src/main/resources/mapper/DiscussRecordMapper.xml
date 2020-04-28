@@ -9,9 +9,10 @@
     <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
     <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
     <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
-    <result column="discuss_content" jdbcType="VARCHAR" property="discussContent" />
     <result column="reply_record_id" jdbcType="INTEGER" property="replyRecordId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="storey_id" jdbcType="INTEGER" property="storeyId" />
+    <result column="discuss_content" jdbcType="LONGVARCHAR" property="discussContent" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from discuss_record
@@ -20,12 +21,12 @@
   <insert id="insert" parameterType="com.mooc.mooc.model.DiscussRecord">
     insert into discuss_record (discuss_record_id, user_id, discussion_id, 
       discuss_state, send_time, last_update_time, 
-      delete_time, discuss_content, reply_record_id, 
-      user_name)
+      delete_time, reply_record_id, user_name, 
+      storey_id, discuss_content)
     values (#{discussRecordId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{discussionId,jdbcType=INTEGER}, 
       #{discussState,jdbcType=INTEGER}, #{sendTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
-      #{deleteTime,jdbcType=TIMESTAMP}, #{discussContent,jdbcType=VARCHAR}, #{replyRecordId,jdbcType=INTEGER}, 
-      #{userName,jdbcType=VARCHAR})
+      #{deleteTime,jdbcType=TIMESTAMP}, #{replyRecordId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{storeyId,jdbcType=INTEGER}, #{discussContent,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.DiscussRecord">
     update discuss_record
@@ -35,26 +36,28 @@
       send_time = #{sendTime,jdbcType=TIMESTAMP},
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
       delete_time = #{deleteTime,jdbcType=TIMESTAMP},
-      discuss_content = #{discussContent,jdbcType=VARCHAR},
       reply_record_id = #{replyRecordId,jdbcType=INTEGER},
-      user_name = #{userName,jdbcType=VARCHAR}
+      user_name = #{userName,jdbcType=VARCHAR},
+      storey_id = #{storeyId,jdbcType=INTEGER},
+      discuss_content = #{discussContent,jdbcType=LONGVARCHAR}
     where discuss_record_id = #{discussRecordId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select discuss_record_id, user_id, discussion_id, discuss_state, send_time, last_update_time, 
-    delete_time, discuss_content, reply_record_id, user_name
+    delete_time, reply_record_id, user_name, storey_id, discuss_content
     from discuss_record
     where discuss_record_id = #{discussRecordId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select discuss_record_id, user_id, discussion_id, discuss_state, send_time, last_update_time, 
-    delete_time, discuss_content, reply_record_id, user_name
+    delete_time, reply_record_id, user_name, storey_id, discuss_content
     from discuss_record
   </select>
   <select id="selByDiscussionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select discuss_record_id, user_id, discussion_id, discuss_state, send_time, last_update_time,
-    delete_time, discuss_content, reply_record_id, user_name
+    delete_time, reply_record_id, user_name, storey_id, discuss_content
     from discuss_record
     where discussion_id = #{discussionId}
+    order by storey_id asc
   </select>
 </mapper>

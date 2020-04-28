@@ -17,11 +17,13 @@ public class DiscussRecord {
 
     private Date deleteTime;
 
-    private String discussContent;
-
     private Integer replyRecordId;
 
     private String userName;
+
+    private Integer storeyId;
+
+    private String discussContent;
 
     public Integer getDiscussRecordId() {
         return discussRecordId;
@@ -79,14 +81,6 @@ public class DiscussRecord {
         this.deleteTime = deleteTime;
     }
 
-    public String getDiscussContent() {
-        return discussContent;
-    }
-
-    public void setDiscussContent(String discussContent) {
-        this.discussContent = discussContent == null ? null : discussContent.trim();
-    }
-
     public Integer getReplyRecordId() {
         return replyRecordId;
     }
@@ -101,5 +95,21 @@ public class DiscussRecord {
 
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
+    }
+
+    public Integer getStoreyId() {
+        return storeyId;
+    }
+
+    public void setStoreyId(Integer storeyId) {
+        this.storeyId = storeyId;
+    }
+
+    public String getDiscussContent() {
+        return discussContent;
+    }
+
+    public void setDiscussContent(String discussContent) {
+        this.discussContent = discussContent == null ? null : discussContent.trim();
     }
 }

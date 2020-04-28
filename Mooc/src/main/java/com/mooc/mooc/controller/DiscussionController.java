@@ -1,18 +1,12 @@
 package com.mooc.mooc.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.mooc.mooc.model.CourseInfo;
-import com.mooc.mooc.model.DiscussionDetail;
-import com.mooc.mooc.model.DiscussionInfo;
-import com.mooc.mooc.model.DiscussionStatistic;
+import com.mooc.mooc.model.*;
 import com.mooc.mooc.service.DiscussionService;
 import com.mooc.mooc.util.Define;
 import com.mooc.mooc.vo.DiscussionVO;
 import com.mooc.mooc.vo.ResultVO;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -134,8 +128,8 @@ public class DiscussionController {
      * List<DiscussRecord>:返回所有该讨论下所发的帖子；若查询结果为空，则list为null
      */
     @RequestMapping("/open/{discussionId}")
-    public DiscussionDetail open(@PathVariable Integer discussionId){
-        DiscussionDetail discussionDetail=discussionService.open(discussionId);
+    public DiscussionDetail open(@PathVariable Integer discussionId, @RequestBody CurrPageObject currPageObject){
+        DiscussionDetail discussionDetail=discussionService.open(discussionId,currPageObject.getCurrPage(),Define.DISCUSSRECORD_PAGE_SIZE);
         return discussionDetail;
     }
 
