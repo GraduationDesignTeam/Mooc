@@ -52,4 +52,6 @@ public class DiscussionServiceImpl implements DiscussionService {
         discussionDetail.setRecordNum(discussRecordMapper.selByDiscussionId(discussionId).size());
         return discussionDetail;
     }
+
+
 }
