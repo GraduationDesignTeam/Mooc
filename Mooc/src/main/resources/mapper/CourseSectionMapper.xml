@@ -11,6 +11,11 @@
     delete from course_section
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <update id="decreaseNumber" parameterType="com.mooc.mooc.model.CourseChapter">
+    update course_section
+    set number = number-1
+    where chapter_id = #{chapterId} and number > #{number}
+  </update>
   <insert id="insert" parameterType="com.mooc.mooc.model.CourseSection">
     insert into course_section (id, chapter_id, number, 
       name)
@@ -28,9 +33,5 @@
     select id, chapter_id, number, name
     from course_section
     where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, chapter_id, number, name
-    from course_section
   </select>
 </mapper>
