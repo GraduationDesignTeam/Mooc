@@ -148,6 +148,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseInfoVO selectVO(Integer courseId, Integer userId) {
+        if(courseInfoMapper.selectByPrimaryKey(courseId) == null)
+            return new CourseInfoVO();
         CourseInfoVO courseInfoVO =  new CourseInfoVO(courseInfoMapper.selectByPrimaryKey(courseId));
         /**
          * 尚未完成

@@ -1,9 +1,13 @@
 package com.mooc.mooc.vo;
 
 import com.mooc.mooc.model.CourseInfo;
+import com.mooc.mooc.model.UserInfo;
+import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
+@ToString
 public class CourseInfoVO {
     // 课程编号
     private Integer id;
@@ -36,6 +40,8 @@ public class CourseInfoVO {
     private Integer checkState;
     // 课程权限（0表示所有人可选；1表示仅该学校学生可选）
     private Integer courseAuthority;
+    // 授课教师列表
+    private List<UserInfo> teacherList;
 
     /**
      * 以下为相对于 CourseInfo类 不同的属性
@@ -171,6 +177,14 @@ public class CourseInfoVO {
         this.school = school;
     }
 
+    public List<UserInfo> getTeacherList() {
+        return teacherList;
+    }
+
+    public void setTeacherList(List<UserInfo> teacherList) {
+        this.teacherList = teacherList;
+    }
+
     public Integer getRole() {
         return role;
     }
@@ -200,29 +214,6 @@ public class CourseInfoVO {
         this.courseState = courseInfo.getCourseState();
         this.checkState = courseInfo.getCheckState();
         this.courseAuthority = courseInfo.getCourseAuthority();
-    }
-
-    //测试用
-    @Override
-    public String toString() {
-        return "CourseInfoVO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", intro='" + intro + '\'' +
-                ", detail='" + detail + '\'' +
-                ", target='" + target + '\'' +
-                ", reference='" + reference + '\'' +
-                ", photo='" + photo + '\'' +
-                ", teacherId=" + teacherId +
-                ", teacherName='" + teacherName + '\'' +
-                ", openTime=" + openTime +
-                ", closeTime=" + closeTime +
-                ", courseState=" + courseState +
-                ", checkState=" + checkState +
-                ", courseAuthority=" + courseAuthority +
-                ", school='" + school + '\'' +
-                ", role=" + role +
-                '}';
+        this.teacherList = courseInfo.getTeacherList();
     }
 }
