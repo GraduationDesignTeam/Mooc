@@ -1,5 +1,7 @@
 package com.mooc.mooc.model;
 
+import com.github.pagehelper.PageInfo;
+
 import java.util.Date;
 import java.util.List;
 
@@ -71,13 +73,13 @@ public class DiscussionDetail {
     private Integer recordNum;
 
     //回帖清单
-    private List<DiscussRecord> recordList;
+    private PageInfo<DiscussRecord> recordList;
 
-    public List<DiscussRecord> getRecordList() {
+    public PageInfo<DiscussRecord> getRecordList() {
         return recordList;
     }
 
-    public void setRecordList(List<DiscussRecord> recordList) {
+    public void setRecordList(PageInfo<DiscussRecord> recordList) {
         this.recordList = recordList;
     }
 

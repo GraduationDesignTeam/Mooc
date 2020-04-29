@@ -13,5 +13,8 @@ public interface DiscussionService {
     PageInfo<DiscussionDetail> listHot(Integer currPage, Integer pageSize, DiscussionDetail discussionDetail);
 
     //打开某个讨论
-    DiscussionDetail open(Integer discussionId);
+    DiscussionDetail open(Integer discussionId, Integer currPage, Integer pageSize);
+
+    // 查询个人所参与的讨论，排序按热度从高到底
+    PageInfo<DiscussionDetail> listSelf(Integer currPage, Integer pageSize, Integer userId);
 }

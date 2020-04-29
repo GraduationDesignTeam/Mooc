@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * 讨论记录（发帖相关）控制模块
@@ -31,7 +32,10 @@ public class DiscussRecordController {
      */
     @RequestMapping("/addRecord")
     public ResultVO addRecord(@RequestBody DiscussRecord discussRecord){
-        return new ResultVO(0,"");
+        discussRecord.setDiscussState(1);
+        discussRecord.setSendTime(new Date());
+        discussRecord.setLastUpdateTime(new Date());
+        return discussRecordService.addRecord(discussRecord);
     }
 
     /**
@@ -39,12 +43,12 @@ public class DiscussRecordController {
      * 学生进入某个讨论，点击某个自己发的帖，可以编辑帖子内容，点击确认
      * @param discussRecord
      * @return
-     * 成功发帖：ResultVO:{code:0;msg:”修改成功” }
-     * 发帖失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
+     * 成功改帖：ResultVO:{code:0;msg:”修改成功” }
+     * 改帖失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/updateRecord")
     public ResultVO  updateRecord(@RequestBody DiscussRecord discussRecord){
-        return new ResultVO(0,"");
+        return discussRecordService.updateRecord(discussRecord);
     }
 
     /**
@@ -55,12 +59,12 @@ public class DiscussRecordController {
      * 管理员进入某个讨论，点击某帖，可以删除该贴
      * @param discussRecordId
      * @return
-     * 成功发帖：ResultVO:{code:0;msg:”删帖成功” }
-     * 发帖失败：ResultVO:{code:1;msg:”删帖失败” }【msg中应包含详细错误信息】
+     * 成功删帖：ResultVO:{code:0;msg:”删帖成功” }
+     * 删帖失败：ResultVO:{code:1;msg:”删帖失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/deleteRecord/{discussRecordId}")
     public ResultVO  deleteRecord(@PathVariable Integer discussRecordId){
-        return new ResultVO(0,"");
+        return discussRecordService.deleteRecord(discussRecordId);
     }
 
 

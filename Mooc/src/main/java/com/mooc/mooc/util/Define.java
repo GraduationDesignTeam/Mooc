@@ -5,6 +5,11 @@ public class Define {
 
     public static final int PAGE_SIZE=6;
 
+    //讨论记录页面size
+    public static final int DISCUSSRECORD_PAGE_SIZE=10;
+
+    public static final int DISCUSSION_PAGE_SIZE=20;
+
     public static final int PRE_PAGE_SIZE=8;
 
     //课程尚未开始
