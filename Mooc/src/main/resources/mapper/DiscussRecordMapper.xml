@@ -48,6 +48,12 @@
     from discuss_record
     where discuss_record_id = #{discussRecordId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select discuss_record_id, user_id, discussion_id, discuss_state, send_time, last_update_time,
+    delete_time, reply_record_id, user_name, storey_id, discuss_content
+    from discuss_record
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select discuss_record_id, user_id, discussion_id, discuss_state, send_time, last_update_time, 
     delete_time, reply_record_id, user_name, storey_id, discuss_content

@@ -12,6 +12,8 @@ import com.mooc.mooc.service.DiscussionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 public class DiscussionServiceImpl implements DiscussionService {
 
@@ -53,5 +55,27 @@ public class DiscussionServiceImpl implements DiscussionService {
         return discussionDetail;
     }
 
-
+    @Override
+    public PageInfo<DiscussionDetail> listSelf(Integer currPage, Integer pageSize, Integer userId) {
+        List<DiscussRecord> list=discussRecordMapper.selectByUserId(userId);
+        ArrayList<DiscussionDetail> list1=new ArrayList<DiscussionDetail>();
+        for(DiscussRecord discussRecord: list){
+            //是否已有该讨论
+            Boolean isExist=false;
+            for(DiscussionDetail discussionDetail: list1){
+                if(discussionDetail.getDiscussionId().equals(discussRecord.getDiscussionId())){
+                    isExist=true;
+                    break;
+                }
+            }
+            if(!isExist){
+                list1.add(discussionInfoMapper.selectByPrimaryKey(discussRecord.getDiscussionId()));
+            }
+        }
+        //分页
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
+        PageInfo<DiscussionDetail> pageInfo=new PageInfo<>(list1);
+        return pageInfo;
+    }
 }
