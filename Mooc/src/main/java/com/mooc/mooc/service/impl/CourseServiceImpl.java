@@ -158,7 +158,7 @@ public class CourseServiceImpl implements CourseService {
             courseInfoVO.setRole(1);
         else if(courseManageService.isAssistantOfCourse(courseId, userId))
             courseInfoVO.setRole(2);
-        else if(courseManageService.isStudentOfCourse(courseId, userId))
+        else if(studentOfCourseMapper.count(courseId, userId)>0)
             courseInfoVO.setRole(3);
         return courseInfoVO;
     }
