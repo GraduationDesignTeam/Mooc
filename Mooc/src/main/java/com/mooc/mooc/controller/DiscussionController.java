@@ -31,7 +31,7 @@ public class DiscussionController {
      */
     @RequestMapping("/create")
     public ResultVO create(@RequestBody DiscussionInfo discussionInfo){
-        return new ResultVO(0,"");
+        return discussionService.create(discussionInfo);
     }
 
     /**
