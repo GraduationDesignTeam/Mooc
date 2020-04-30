@@ -1,6 +1,7 @@
 package com.mooc.mooc.mapper;
 
 import com.mooc.mooc.model.StudentOfCourse;
+
 import java.util.List;
 
 public interface StudentOfCourseMapper {
@@ -15,4 +16,6 @@ public interface StudentOfCourseMapper {
     int updateByPrimaryKey(StudentOfCourse record);
 
     List<StudentOfCourse> selByUserId(Integer userId);
+
+    Integer count(Integer courseId, Integer studentId);
 }
