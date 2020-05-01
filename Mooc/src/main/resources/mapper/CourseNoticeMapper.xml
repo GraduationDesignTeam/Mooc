@@ -8,6 +8,10 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
+  <resultMap id="ExtendedResultMap" type="com.mooc.mooc.vo.CourseNoticeVO" extends="BaseResultMap">
+    <result column="user_name" jdbcType="VARCHAR" property="username" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from course_notice
     where id = #{id,jdbcType=INTEGER}
@@ -26,19 +30,19 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, course_id, user_id, content, create_time
-    from course_notice
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ExtendedResultMap">
+    select c.id, c.course_id, c.user_id, c.content, c.create_time, u.user_name, u.name
+    from course_notice c
+    left join user_info u
+    on c.user_id = u.user_id
+    where c.id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, course_id, user_id, content, create_time
-    from course_notice
-  </select>
-  <select id="selectByCourseId" resultMap="BaseResultMap">
-    select id, course_id, user_id, content, create_time
-    from course_notice
-    where course_id = #{courseId}
+  <select id="selectByCourseId" resultMap="ExtendedResultMap">
+    select c.id, c.course_id, c.user_id, c.content, c.create_time, u.user_name, u.name
+    from course_notice c
+    left join user_info u
+    on c.user_id = u.user_id
+    where c.course_id = #{courseId}
     order by create_time desc
   </select>
 </mapper>

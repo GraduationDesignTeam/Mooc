@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.mapper.CourseNoticeMapper;
 import com.mooc.mooc.model.CourseNotice;
 import com.mooc.mooc.service.CourseNoticeService;
+import com.mooc.mooc.vo.CourseNoticeVO;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class CourseNoticeServiceImpl implements CourseNoticeService {
     }
 
     @Override
-    public PageInfo<CourseNotice> list(Integer currPage, Integer pageSize, Integer courseId) {
+    public PageInfo<CourseNoticeVO> list(Integer currPage, Integer pageSize, Integer courseId) {
         if(currPage==null){currPage=1;}
         PageHelper.startPage(currPage, pageSize);
         return new PageInfo<>(courseNoticeMapper.selectByCourseId(courseId));
