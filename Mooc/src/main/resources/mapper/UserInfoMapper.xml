@@ -87,6 +87,9 @@
       <if test="teacherState!=null">
         and teacher_state=#{teacherState}
       </if>
+      <if test="name!=null">
+        and name like concat('%',#{name},'%')
+      </if>
     </where>
     order by register_time desc
   </select>
