@@ -40,12 +40,12 @@ public class DiscussionController {
      * 可以选择某个讨论，编辑其详细信息
      * @param discussionInfo
      * @return
-     * 成功创建：ResultVO:{code:0;msg:”修改成功” }
-     * 创建失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
+     * 成功修改：ResultVO:{code:0;msg:”修改成功” }
+     * 修改失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/update")
     public ResultVO  update(@RequestBody DiscussionInfo discussionInfo){
-        return new ResultVO(0,"");
+        return discussionService.update(discussionInfo);
     }
 
     /**
@@ -155,5 +155,10 @@ public class DiscussionController {
     public PageInfo<DiscussionDetail> searchSelf(@PathVariable Integer currPage, @RequestBody UserInfo userInfo){
         PageInfo<DiscussionDetail> list1=discussionService.listSelf(currPage, Define.DISCUSSION_PAGE_SIZE,userInfo.getUserId());
         return list1;
+    }
+
+    @RequestMapping("/openOne/{discussionId}")
+    public DiscussionDetail openOne(@PathVariable Integer discussionId){
+        return discussionService.openOne(discussionId);
     }
 }

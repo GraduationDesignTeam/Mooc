@@ -117,4 +117,27 @@ public class DiscussionServiceImpl implements DiscussionService {
         resultVO.setMsg("创建成功");
         return resultVO;
     }
+
+    @Override
+    public DiscussionDetail openOne(Integer discussionId) {
+        return discussionInfoMapper.selectByPrimaryKey(discussionId);
+    }
+
+    /**
+     * @author 朱翔鹏
+     * 教师在所教课程页面下，讨论区功能中，进入讨论区管理页面（列表形式展示所有该教师创建的讨论），
+     * 可以选择某个讨论，编辑其详细信息
+     * @param discussionInfo
+     * @return
+     * 成功修改：ResultVO:{code:0;msg:”修改成功” }
+     * 修改失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
+     */
+    @Override
+    public ResultVO update(DiscussionInfo discussionInfo) {
+        discussionInfoMapper.updateByPrimaryKey(discussionInfo);
+        ResultVO resultVO=new ResultVO();
+        resultVO.setCode(0);
+        resultVO.setMsg("修改成功");
+        return resultVO;
+    }
 }

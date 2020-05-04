@@ -21,4 +21,8 @@ public interface DiscussionService {
     PageInfo<DiscussionDetail> listSelf(Integer currPage, Integer pageSize, Integer userId);
 
     ResultVO create(DiscussionInfo discussionInfo);
+
+    DiscussionDetail openOne(Integer discussionId);
+
+    ResultVO update(DiscussionInfo discussionInfo);
 }
