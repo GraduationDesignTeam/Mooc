@@ -13,13 +13,19 @@ public class InformationInfo {
 
     private String informationContent;
 
-    private Integer informationState;
+    private Integer informationState;//0表示未读，1表示已读读
 
     private Integer discussionId;
 
     private Integer discussRecordId;
 
     private Integer personMessageId;
+
+    private String senderName;
+
+    private String addresserName;
+
+    private String remarks;//0表示私人消息，1表示讨论区消息，2表示系统消息
 
     public Integer getInformationId() {
         return informationId;
@@ -91,5 +97,29 @@ public class InformationInfo {
 
     public void setPersonMessageId(Integer personMessageId) {
         this.personMessageId = personMessageId;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName == null ? null : senderName.trim();
+    }
+
+    public String getAddresserName() {
+        return addresserName;
+    }
+
+    public void setAddresserName(String addresserName) {
+        this.addresserName = addresserName == null ? null : addresserName.trim();
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 }

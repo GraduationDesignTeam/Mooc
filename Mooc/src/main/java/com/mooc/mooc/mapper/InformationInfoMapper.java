@@ -12,9 +12,13 @@ public interface InformationInfoMapper {
 
     List<InformationInfo> selectAll();
 
-    List<InformationInfo> selectBysenderid(Integer senderid);
+    int updateByPrimaryKey(InformationInfo record);
+    List<InformationInfo> selectBySenderid(Integer senderid);
 
     List<InformationInfo> selectByAddresserid(Integer addresserid);
+    List<InformationInfo> selectDiscussion(Integer addresserid);
 
-    int updateByPrimaryKey(InformationInfo record);
+    List<InformationInfo> selectSystem(Integer addresserid);
+
+    List<InformationInfo> selectUnread();
 }

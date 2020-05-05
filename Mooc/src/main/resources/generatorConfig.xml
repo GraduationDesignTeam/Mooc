@@ -39,8 +39,6 @@
          </javaClientGenerator>
          
 		 <!-- 生成对应的表及类名 -->
-         <table tableName="choice_question" domainObjectName="ChoiceOfQuestion" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-         <table tableName="judge_question" domainObjectName="JudgeOfQuestion" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-         <table tableName="subjective_question" domainObjectName="SubjectiveOfQuestion" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="information_info" domainObjectName="InformationInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
      </context>
  </generatorConfiguration>
