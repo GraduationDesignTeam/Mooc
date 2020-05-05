@@ -3,19 +3,26 @@ package com.mooc.mooc.service.impl;
 import com.mooc.mooc.mapper.CourseWareMapper;
 import com.mooc.mooc.model.CourseWare;
 import com.mooc.mooc.service.CourseWareService;
+import com.mooc.mooc.util.FileHelper;
+import com.mooc.mooc.vo.CourseWareVO;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class CourseWareServiceImpl implements CourseWareService {
     @Autowired
     private CourseWareMapper courseWareMapper;
+    @Value("${web.course-ware-upload-path}")
+    private String courseWarePath;
 
     @Override
     public ResultVO add(CourseWare courseWare) {
+        courseWare.setUploadTime(new Date());
         if(courseWareMapper.insert(courseWare) > 0)
             return new ResultVO(0, "课件创建成功");
         return new ResultVO(1, "课件添加过程中出错，请稍后重试！");
@@ -23,6 +30,7 @@ public class CourseWareServiceImpl implements CourseWareService {
 
     @Override
     public ResultVO update(CourseWare courseWare) {
+        courseWare.setUploadTime(new Date());
         if(courseWareMapper.updateByPrimaryKey(courseWare) > 0)
             return new ResultVO(0, "课件信息更新成功");
         return new ResultVO(1, "课件更新过程中出错，请稍后重试！");
@@ -30,22 +38,24 @@ public class CourseWareServiceImpl implements CourseWareService {
 
     @Override
     public ResultVO delete(Integer courseWareId) {
+        CourseWareVO courseWare = courseWareMapper.selectByPrimaryKey(courseWareId);
+        FileHelper.delete(courseWarePath, courseWare.getName());
         courseWareMapper.deleteByPrimaryKey(courseWareId);
         return new ResultVO(0, "课件删除成功");
     }
 
     @Override
-    public List<CourseWare> selectBySectionId(Integer sectionId) {
+    public List<CourseWareVO> selectBySectionId(Integer sectionId) {
         return courseWareMapper.selectBySectionId(sectionId);
     }
 
     @Override
-    public List<CourseWare> selectByCourseId(Integer courseId) {
+    public List<CourseWareVO> selectByCourseId(Integer courseId) {
         return courseWareMapper.selectByCourseId(courseId);
     }
 
     @Override
-    public List<CourseWare> selectUnassociatedByCourseId(Integer courseId) {
+    public List<CourseWareVO> selectUnassociatedByCourseId(Integer courseId) {
         return courseWareMapper.selectUnassociatedByCourseId(courseId);
     }
 }

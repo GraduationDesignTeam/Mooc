@@ -1,6 +1,8 @@
 package com.mooc.mooc.mapper;
 
 import com.mooc.mooc.model.CourseWare;
+import com.mooc.mooc.vo.CourseWareVO;
+
 import java.util.List;
 
 public interface CourseWareMapper {
@@ -8,13 +10,13 @@ public interface CourseWareMapper {
 
     int insert(CourseWare record);
 
-    CourseWare selectByPrimaryKey(Integer id);
+    CourseWareVO selectByPrimaryKey(Integer id);
 
-    List<CourseWare> selectBySectionId(Integer sectionId);
+    List<CourseWareVO> selectBySectionId(Integer sectionId);
 
-    List<CourseWare> selectByCourseId(Integer courseId);
+    List<CourseWareVO> selectByCourseId(Integer courseId);
 
-    List<CourseWare> selectUnassociatedByCourseId(Integer courseId);
+    List<CourseWareVO> selectUnassociatedByCourseId(Integer courseId);
 
     int updateByPrimaryKey(CourseWare record);
 }

@@ -197,8 +197,8 @@ public class CourseController {
      */
     @RequestMapping("/sel/{courseId}")
     public CourseInfoVO selOne(@PathVariable Integer courseId, @RequestParam Integer userId){
-        System.out.println("courseId = " + courseId);
-        System.out.println("userId = " + userId);
+//        System.out.println("courseId = " + courseId);
+//        System.out.println("userId = " + userId);
         return courseService.selectVO(courseId, userId);
     }
 
