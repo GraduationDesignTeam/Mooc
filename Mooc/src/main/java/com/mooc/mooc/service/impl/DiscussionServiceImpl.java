@@ -6,9 +6,7 @@ import com.mooc.mooc.mapper.CourseInfoMapper;
 import com.mooc.mooc.mapper.DiscussRecordMapper;
 import com.mooc.mooc.mapper.DiscussionInfoMapper;
 import com.mooc.mooc.mapper.UserInfoMapper;
-import com.mooc.mooc.model.DiscussRecord;
-import com.mooc.mooc.model.DiscussionDetail;
-import com.mooc.mooc.model.DiscussionInfo;
+import com.mooc.mooc.model.*;
 import com.mooc.mooc.service.DiscussionService;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,5 +137,15 @@ public class DiscussionServiceImpl implements DiscussionService {
         resultVO.setCode(0);
         resultVO.setMsg("修改成功");
         return resultVO;
+    }
+
+    @Override
+    public List<MajorStatistic> majorRank(Integer year) {
+        return discussionInfoMapper.queryMajorSum(year);
+    }
+
+    @Override
+    public List<DiscussionStatistic> discussionRank(Integer year) {
+        return discussionInfoMapper.queryDiscussionSum(year);
     }
 }

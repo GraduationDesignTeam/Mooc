@@ -1,10 +1,10 @@
 package com.mooc.mooc.service;
 
 import com.github.pagehelper.PageInfo;
-import com.mooc.mooc.model.CourseInfo;
-import com.mooc.mooc.model.DiscussionDetail;
-import com.mooc.mooc.model.DiscussionInfo;
+import com.mooc.mooc.model.*;
 import com.mooc.mooc.vo.ResultVO;
+
+import java.util.List;
 
 public interface DiscussionService {
 
@@ -25,4 +25,8 @@ public interface DiscussionService {
     DiscussionDetail openOne(Integer discussionId);
 
     ResultVO update(DiscussionInfo discussionInfo);
+
+    List<MajorStatistic> majorRank(Integer year);
+
+    List<DiscussionStatistic> discussionRank(Integer year);
 }

@@ -15,7 +15,7 @@ public class StatisticVO {
     private List<UserStatistic> list;
 
     //平均月度增长率
-    private Integer increaseRate;
+    private Double increaseRate;
 
     public List<UserStatistic> getList() {
         return list;
@@ -25,11 +25,11 @@ public class StatisticVO {
         this.list = list;
     }
 
-    public Integer getIncreaseRate() {
+    public Double getIncreaseRate() {
         return increaseRate;
     }
 
-    public void setIncreaseRate(Integer increaseRate) {
+    public void setIncreaseRate(Double increaseRate) {
         this.increaseRate = increaseRate;
     }
 }

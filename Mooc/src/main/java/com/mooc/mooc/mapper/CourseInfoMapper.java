@@ -1,6 +1,8 @@
 package com.mooc.mooc.mapper;
 
 import com.mooc.mooc.model.CourseInfo;
+import com.mooc.mooc.model.CourseStatistic;
+import com.mooc.mooc.model.MajorStatistic;
 import com.mooc.mooc.vo.CourseInfoVO;
 
 import java.util.List;
@@ -21,4 +23,8 @@ public interface CourseInfoMapper {
     List<CourseInfo> selectByTeacherId(Integer teacherId);
 
     List<CourseInfo> selectByAssistantId(Integer assistantId);
+
+    List<MajorStatistic> queryMajorSum(Integer year);
+
+    List<CourseStatistic> queryCourseSum(Integer year);
 }

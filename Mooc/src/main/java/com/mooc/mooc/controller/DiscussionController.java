@@ -134,12 +134,18 @@ public class DiscussionController {
      * @author 朱翔鹏
      * 在数据统计功能下，管理员可以查看系统内讨论区的热度实时排行榜
      * （后续开发考虑使用某种形象的echart来展现）；并选择是否将其发布在门户网站中
-     * @param discussionInfo
+     * @param year
      * @return
      */
-    @RequestMapping("/discussionPopularity")
-    public List<DiscussionStatistic>  discussionPopularity(@RequestBody DiscussionInfo discussionInfo){
-        return null;
+    @RequestMapping("/majorRank/{year}")
+    public List<MajorStatistic> majorRank(@PathVariable Integer year){
+
+        return discussionService.majorRank(year);
+    }
+    @RequestMapping("/discussionRank/{year}")
+    public List<DiscussionStatistic> discussionRank(@PathVariable Integer year){
+
+        return discussionService.discussionRank(year);
     }
 
     /**

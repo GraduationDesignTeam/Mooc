@@ -155,20 +155,21 @@ public class UserController {
      */
     @RequestMapping("/increaseRate/{year}")
     public StatisticVO increaseRate(@PathVariable Integer year){
-        return new StatisticVO();
+        return userService.increaseRate(year);
     }
 
     /**
      * @author 朱翔鹏
-     * 在数据统计功能下，管理员可以查看系统内所有用户的专业分布，以饼状图的形式显示
+     * 在数据统计功能下，管理员可以查看系统内所有用户的专业分布排行榜
      * @return
      * List<MajorStatistic>
      * List:用于echarts图表的数据list
      * 每个list项是一个MajorStatistic对象:{major,num}
      */
-    @RequestMapping("/majorRate")
-    public List<MajorStatistic> majorRate(){
-        return null;
+    @RequestMapping("/majorRank/{year}")
+    public List<MajorStatistic> majorRank(@PathVariable Integer year){
+
+        return userService.majorRank(year);
     }
 
     /**
