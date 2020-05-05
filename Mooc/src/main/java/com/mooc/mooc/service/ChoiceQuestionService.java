@@ -26,4 +26,6 @@ public interface ChoiceQuestionService {
     ChoiceOfQuestion sel(Integer choiceId);
     // 查询草稿
     List<ChoiceOfQuestion> listdraft();
+
+    List<ChoiceOfQuestion> listtask(Integer taskId);
 }

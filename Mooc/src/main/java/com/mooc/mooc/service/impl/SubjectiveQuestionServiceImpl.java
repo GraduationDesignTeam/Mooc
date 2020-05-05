@@ -51,4 +51,9 @@ public class SubjectiveQuestionServiceImpl implements SubjectiveQuestionService 
     public List<SubjectiveOfQuestion> listdraft() {
         return subjectiveOfQuestionMapper.selectAllByType(0);
     }
+
+    @Override
+    public List<SubjectiveOfQuestion> listtask(Integer taskId) {
+        return subjectiveOfQuestionMapper.selectAllByTask(taskId);
+    }
 }

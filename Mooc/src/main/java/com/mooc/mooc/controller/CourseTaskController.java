@@ -88,4 +88,16 @@ public class CourseTaskController {
         return list;
     }
 
+    /**
+     * @author 田冠宇
+     * 为首页提供分页查询任务列表
+     * @return List<CourseInfo>
+     * 检索结果表，按先后顺序
+     */
+    @RequestMapping("/seltask")
+    public CourseTask selByTaskId( @RequestBody CourseTask courseTask){
+
+        return courseTaskService.sel(courseTask.getId());
+    }
+
 }

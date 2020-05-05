@@ -15,4 +15,6 @@ public interface JudgeOfQuestionMapper {
     int updateByPrimaryKey(JudgeOfQuestion record);
 
     List<JudgeOfQuestion> selectAllByType(Integer type);
+
+    List<JudgeOfQuestion> selectAllByTask(Integer taskId);
 }

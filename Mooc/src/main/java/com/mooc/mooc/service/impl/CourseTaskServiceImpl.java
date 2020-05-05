@@ -86,7 +86,8 @@ public class CourseTaskServiceImpl implements CourseTaskService {
 
     @Override
     public CourseTask sel(Integer taskId) {
-        return null;
+
+        return courseTaskMapper.selectByPrimaryKey(taskId);
     }
 
     @Override

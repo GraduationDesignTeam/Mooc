@@ -50,4 +50,11 @@
     from subjective_question
     where type = #{type,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAllByTask" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, task_id, course_id, content, answer, resolution, score, type
+    from subjective_question
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+
 </mapper>

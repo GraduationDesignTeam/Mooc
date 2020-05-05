@@ -26,4 +26,6 @@ public interface JudgeQuestionService {
 
     // 查询草稿
     List<JudgeOfQuestion> listdraft();
+    // 查询草稿
+    List<JudgeOfQuestion> listtask(Integer taskId);
 }

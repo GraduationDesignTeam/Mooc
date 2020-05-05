@@ -59,4 +59,16 @@ public class ChoiceQuestionController {
         return choiceQuestionService.update(choiceOfQuestion);
     }
 
+    /**
+     * @author 田冠宇
+     * 为首页提供分页查询任务列表
+     * @return List<CourseInfo>
+     * 检索结果表，按先后顺序
+     */
+    @RequestMapping("/listtask")
+    public List<ChoiceOfQuestion> listtask(@RequestBody CourseTask coursetask){
+        System.out.println(coursetask.getId());
+        return choiceQuestionService.listtask(coursetask.getId());
+    }
+
 }

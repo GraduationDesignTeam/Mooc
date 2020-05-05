@@ -33,6 +33,12 @@ public class JudgeQuestionServiceImpl implements JudgeQuestionService {
     public ResultVO add(JudgeOfQuestion judgeOfQuestion) {
         ResultVO resultVO=new ResultVO(0, "");
         judgeOfQuestion.setType(0);
+        if(judgeOfQuestion.getAnswer()==0){
+            judgeOfQuestion.setResolution("正确");
+        }
+        else if(judgeOfQuestion.getAnswer()==1){
+            judgeOfQuestion.setResolution("错误");
+        }
         judgeOfQuestionMapper.insert(judgeOfQuestion);
         return resultVO;
     }
@@ -50,5 +56,10 @@ public class JudgeQuestionServiceImpl implements JudgeQuestionService {
     @Override
     public List<JudgeOfQuestion> listdraft() {
         return judgeOfQuestionMapper.selectAllByType(0);
+    }
+
+    @Override
+    public List<JudgeOfQuestion> listtask(Integer taskId) {
+        return judgeOfQuestionMapper.selectAllByTask(taskId);
     }
 }

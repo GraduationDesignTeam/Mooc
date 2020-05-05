@@ -26,4 +26,7 @@ public interface SubjectiveQuestionService {
     SubjectiveOfQuestion sel(Integer choiceId);
     // 查询草稿
     List<SubjectiveOfQuestion> listdraft();
+
+    // 查询草稿
+    List<SubjectiveOfQuestion> listtask(Integer taskId);
 }

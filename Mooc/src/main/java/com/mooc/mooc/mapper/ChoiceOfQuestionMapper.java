@@ -15,4 +15,6 @@ public interface ChoiceOfQuestionMapper {
     int updateByPrimaryKey(ChoiceOfQuestion record);
 
     List<ChoiceOfQuestion> selectAllByType(Integer type);
+
+    List<ChoiceOfQuestion> selectAllByTask(Integer taskId);
 }
