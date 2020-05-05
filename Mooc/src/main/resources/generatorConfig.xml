@@ -39,6 +39,6 @@
          </javaClientGenerator>
          
 		 <!-- 生成对应的表及类名 -->
-         <table tableName="discuss_record" domainObjectName="DiscussRecord" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="course_task" domainObjectName="CourseTask" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
      </context>
  </generatorConfiguration>

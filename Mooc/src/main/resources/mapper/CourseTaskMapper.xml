@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="course_id" jdbcType="INTEGER" property="courseId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="score" jdbcType="DOUBLE" property="score" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -20,11 +21,11 @@
   </delete>
   <insert id="insert" parameterType="com.mooc.mooc.model.CourseTask">
     insert into course_task (id, course_id, user_id, 
-      type, score, create_time, 
+      name, type, score, create_time, 
       update_time, start_time, end_time, 
       limit_time, limit_number)
     values (#{id,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{type,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{limitTime,jdbcType=INTEGER}, #{limitNumber,jdbcType=INTEGER})
   </insert>
@@ -32,6 +33,7 @@
     update course_task
     set course_id = #{courseId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       score = #{score,jdbcType=DOUBLE},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -43,13 +45,13 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, course_id, user_id, type, score, create_time, update_time, start_time, 
+    select id, course_id, user_id, name, type, score, create_time, update_time, start_time, 
     end_time, limit_time, limit_number
     from course_task
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, course_id, user_id, type, score, create_time, update_time, start_time, 
+    select id, course_id, user_id, name, type, score, create_time, update_time, start_time, 
     end_time, limit_time, limit_number
     from course_task
   </select>

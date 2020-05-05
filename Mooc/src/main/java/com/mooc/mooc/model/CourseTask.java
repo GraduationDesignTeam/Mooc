@@ -9,6 +9,8 @@ public class CourseTask {
 
     private Integer userId;
 
+    private String name;
+
     private Integer type;
 
     private Double score;
@@ -47,6 +49,14 @@ public class CourseTask {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public Integer getType() {

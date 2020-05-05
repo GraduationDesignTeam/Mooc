@@ -1,6 +1,7 @@
 package com.mooc.mooc.mapper;
 
 import com.mooc.mooc.model.JudgeQuestion;
+
 import java.util.List;
 
 public interface JudgeQuestionMapper {
