@@ -1,16 +1,17 @@
 package com.mooc.mooc.mapper;
 
-import com.mooc.mooc.model.SubjectiveQuestion;
+import com.mooc.mooc.model.SubjectiveOfQuestion;
+
 import java.util.List;
 
 public interface SubjectiveQuestionMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(SubjectiveQuestion record);
+    int insert(SubjectiveOfQuestion record);
 
-    SubjectiveQuestion selectByPrimaryKey(Integer id);
+    SubjectiveOfQuestion selectByPrimaryKey(Integer id);
 
-    List<SubjectiveQuestion> selectAll();
+    List<SubjectiveOfQuestion> selectAll();
 
-    int updateByPrimaryKey(SubjectiveQuestion record);
+    int updateByPrimaryKey(SubjectiveOfQuestion record);
 }

@@ -1,16 +1,17 @@
 package com.mooc.mooc.mapper;
 
-import com.mooc.mooc.model.JudgeQuestion;
+import com.mooc.mooc.model.JudgeOfQuestion;
+
 import java.util.List;
 
 public interface JudgeQuestionMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(JudgeQuestion record);
+    int insert(JudgeOfQuestion record);
 
-    JudgeQuestion selectByPrimaryKey(Integer id);
+    JudgeOfQuestion selectByPrimaryKey(Integer id);
 
-    List<JudgeQuestion> selectAll();
+    List<JudgeOfQuestion> selectAll();
 
-    int updateByPrimaryKey(JudgeQuestion record);
+    int updateByPrimaryKey(JudgeOfQuestion record);
 }

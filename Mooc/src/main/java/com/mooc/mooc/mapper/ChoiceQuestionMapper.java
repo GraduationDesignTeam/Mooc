@@ -1,16 +1,18 @@
 package com.mooc.mooc.mapper;
 
-import com.mooc.mooc.model.ChoiceQuestion;
+
+import com.mooc.mooc.model.ChoiceOfQuestion;
+
 import java.util.List;
 
 public interface ChoiceQuestionMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(ChoiceQuestion record);
+    int insert(ChoiceOfQuestion record);
 
-    ChoiceQuestion selectByPrimaryKey(Integer id);
+    ChoiceOfQuestion selectByPrimaryKey(Integer id);
 
-    List<ChoiceQuestion> selectAll();
+    List<ChoiceOfQuestion> selectAll();
 
-    int updateByPrimaryKey(ChoiceQuestion record);
+    int updateByPrimaryKey(ChoiceOfQuestion record);
 }
