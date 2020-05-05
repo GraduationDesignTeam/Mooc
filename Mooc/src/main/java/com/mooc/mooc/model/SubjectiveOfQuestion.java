@@ -1,7 +1,9 @@
 package com.mooc.mooc.model;
 
-public class SubjectiveQuestion {
+public class SubjectiveOfQuestion {
     private Integer id;
+
+    private Integer taskId;
 
     private Integer courseId;
 
@@ -19,6 +21,14 @@ public class SubjectiveQuestion {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
     }
 
     public Integer getCourseId() {
