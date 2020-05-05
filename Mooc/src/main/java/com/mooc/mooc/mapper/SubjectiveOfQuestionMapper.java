@@ -15,4 +15,6 @@ public interface SubjectiveOfQuestionMapper {
     int updateByPrimaryKey(SubjectiveOfQuestion record);
 
     List<SubjectiveOfQuestion> selectAllByType(Integer type);
+
+    List<SubjectiveOfQuestion> selectAllByTask(Integer taskId);
 }

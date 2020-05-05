@@ -11,8 +11,28 @@ public class UserStatistic {
 
     private Integer month;
 
+    private String grade;
+
+    private String major;
+
     //增长数量
     private Integer num;
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
     public Integer getYear() {
         return year;

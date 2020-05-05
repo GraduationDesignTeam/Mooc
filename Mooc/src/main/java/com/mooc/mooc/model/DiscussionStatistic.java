@@ -6,18 +6,18 @@ package com.mooc.mooc.model;
  */
 public class DiscussionStatistic {
 
-    //讨论对象
-    private DiscussionInfo discussionInfo;
+    //讨论名
+    private String discussionName;
 
     //热度值
     private Integer popularity;
 
-    public DiscussionInfo getDiscussionInfo() {
-        return discussionInfo;
+    public String getDiscussionName() {
+        return discussionName;
     }
 
-    public void setDiscussionInfo(DiscussionInfo discussionInfo) {
-        this.discussionInfo = discussionInfo;
+    public void setDiscussionName(String discussionName) {
+        this.discussionName = discussionName;
     }
 
     public Integer getPopularity() {

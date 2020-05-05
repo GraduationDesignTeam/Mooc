@@ -32,6 +32,18 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     public ResultVO add(ChoiceOfQuestion choiceOfQuestion) {
         ResultVO resultVO=new ResultVO(0, "");
         choiceOfQuestion.setType(0);
+        if(choiceOfQuestion.getAnswer()==1){
+            choiceOfQuestion.setResolution("A");
+        }
+        else if(choiceOfQuestion.getAnswer()==2){
+            choiceOfQuestion.setResolution("B");
+        }
+        else if(choiceOfQuestion.getAnswer()==3){
+            choiceOfQuestion.setResolution("C");
+        }
+        else if(choiceOfQuestion.getAnswer()==4){
+            choiceOfQuestion.setResolution("D");
+        }
         choiceOfQuestionMapper.insert(choiceOfQuestion);
         return resultVO;
     }
@@ -44,5 +56,16 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     @Override
     public ChoiceOfQuestion sel(Integer choiceId) {
         return null;
+    }
+
+    @Override
+    public List<ChoiceOfQuestion> listdraft() {
+        return choiceOfQuestionMapper.selectAllByType(0);
+    }
+
+    @Override
+    public List<ChoiceOfQuestion> listtask(Integer taskId) {
+        List<ChoiceOfQuestion> list=choiceOfQuestionMapper.selectAllByTask(taskId);
+        return list;
     }
 }

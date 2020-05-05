@@ -23,4 +23,9 @@ public interface JudgeQuestionService {
 
     // 根据id查询某课程
     JudgeOfQuestion sel(Integer choiceId);
+
+    // 查询草稿
+    List<JudgeOfQuestion> listdraft();
+    // 查询草稿
+    List<JudgeOfQuestion> listtask(Integer taskId);
 }

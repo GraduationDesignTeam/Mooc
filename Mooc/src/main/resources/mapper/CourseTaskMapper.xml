@@ -69,4 +69,18 @@
     from course_task
     where name = #{name}
   </select>
+
+  <select id="selectTaskAllByCourse" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, course_id, user_id, name, type, score, create_time, update_time, start_time,
+    end_time, limit_time, limit_number
+    from course_task
+    where course_id = #{courseId} and type=0
+  </select>
+
+  <select id="selectExamAllByCourse" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, course_id, user_id, name, type, score, create_time, update_time, start_time,
+    end_time, limit_time, limit_number
+    from course_task
+    where course_id = #{courseId} and type=1
+  </select>
 </mapper>

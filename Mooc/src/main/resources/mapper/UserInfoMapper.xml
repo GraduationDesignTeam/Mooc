@@ -17,6 +17,17 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
   </resultMap>
+  <resultMap id="StatisticMap" type="UserStatistic">
+    <result property="month" column="user_month"></result>
+    <result property="year" column="user_year"></result>
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result property="num" column="user_count"></result>
+  </resultMap>
+  <resultMap id="MajorStatisticMap" type="MajorStatistic">
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result property="num" column="user_count"></result>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_info
     where user_id = #{userId,jdbcType=INTEGER}
@@ -92,5 +103,16 @@
       </if>
     </where>
     order by register_time desc
+  </select>
+  <select id="queryMonthSum" parameterType="java.lang.Integer" resultMap="StatisticMap">
+    select month(register_time) user_month,count(user_id) user_count from `user_info`
+    where year(register_time)=#{year}
+    group by month(register_time)
+  </select>
+  <select id="queryMajorSum" parameterType="java.lang.Integer" resultMap="MajorStatisticMap">
+    select major,count(user_id) user_count from `user_info`
+    where year(register_time)=#{year}
+    group by major
+    order by count(user_id) desc
   </select>
 </mapper>

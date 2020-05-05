@@ -3,6 +3,7 @@ package com.mooc.mooc.controller;
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.CourseInfo;
 import com.mooc.mooc.model.CourseStatistic;
+import com.mooc.mooc.model.MajorStatistic;
 import com.mooc.mooc.model.UserInfo;
 import com.mooc.mooc.service.CourseService;
 
@@ -40,6 +41,25 @@ public class CourseController {
     @RequestMapping("/coursePopularity")
     public List<CourseStatistic> coursePopularity(@RequestBody CourseInfo courseInfo){
         return null;
+    }
+
+    /**
+     * @author 朱翔鹏
+     * 在数据统计功能下，管理员可以查看系统内所有课程的专业分布统计
+     * @return
+     * List<MajorStatistic>
+     * List:用于echarts图表的数据list
+     * 每个list项是一个MajorStatistic对象:{major,num}
+     */
+    @RequestMapping("/majorRank/{year}")
+    public List<MajorStatistic> majorRank(@PathVariable Integer year){
+
+        return courseService.majorRank(year);
+    }
+    @RequestMapping("/courseRank/{year}")
+    public List<CourseStatistic> courseRank(@PathVariable Integer year){
+
+        return courseService.courseRank(year);
     }
 
     /**

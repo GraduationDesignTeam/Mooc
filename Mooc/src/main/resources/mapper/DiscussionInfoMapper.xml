@@ -28,6 +28,14 @@
       <result column="user_name" jdbcType="VARCHAR" property="userName" />
     </association>
   </resultMap>
+  <resultMap id="MajorStatisticMap" type="MajorStatistic">
+    <result column="type" jdbcType="VARCHAR" property="major" />
+    <result property="num" column="discussion_count"></result>
+  </resultMap>
+  <resultMap id="DiscussionStatisticMap" type="DiscussionStatistic">
+    <result column="name" jdbcType="VARCHAR" property="discussionName" />
+    <result property="popularity" column="popularity"></result>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from discussion_info
     where discussion_id = #{discussionId,jdbcType=INTEGER}
@@ -117,5 +125,18 @@
       </if>
     </where>
     order by d.open_date desc
+  </select>
+  <select id="queryMajorSum" parameterType="java.lang.Integer" resultMap="MajorStatisticMap">
+    select type,count(discussion_id) discussion_count from `discussion_info` d
+    inner join course_info c on d.course_id=c.id
+    where year(open_date)=#{year}
+    group by type
+    order by count(discussion_id) desc
+  </select>
+  <select id="queryDiscussionSum" parameterType="java.lang.Integer" resultMap="DiscussionStatisticMap">
+    select discussion_name name,discussion_popularity popularity from `discussion_info`
+    where year(open_date)=#{year}
+    group by discussion_name
+    order by discussion_popularity desc
   </select>
 </mapper>

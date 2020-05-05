@@ -30,6 +30,14 @@
       <result column="upicture" property="picture"/>
     </collection>
   </resultMap>
+  <resultMap id="MajorStatisticMap" type="MajorStatistic">
+    <result column="type" jdbcType="VARCHAR" property="major" />
+    <result property="num" column="course_count"></result>
+  </resultMap>
+  <resultMap id="CourseStatisticMap" type="CourseStatistic">
+    <result column="cname" jdbcType="VARCHAR" property="courseName" />
+    <result property="popularity" column="course_count"></result>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from course_info
     where id = #{id,jdbcType=INTEGER}
@@ -123,5 +131,18 @@
     from course_info as c
     inner join assistant_of_course as a on c.id=a.course_id
     where a.assistant_id=#{assistantId}
+  </select>
+  <select id="queryMajorSum" parameterType="java.lang.Integer" resultMap="MajorStatisticMap">
+    select type,count(id) course_count from `course_info`
+    where year(open_time)=#{year}
+    group by type
+    order by count(id) desc
+  </select>
+  <select id="queryCourseSum" parameterType="java.lang.Integer" resultMap="CourseStatisticMap">
+    select course_info.name cname,count(course_user_id) course_count from `student_of_course`
+    inner join course_info on course_id=course_info.id
+    where year(open_time)=#{year}
+    group by cname
+    order by count(course_user_id) desc
   </select>
 </mapper>

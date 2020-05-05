@@ -2,6 +2,8 @@ package com.mooc.mooc.service;
 
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.CourseInfo;
+import com.mooc.mooc.model.CourseStatistic;
+import com.mooc.mooc.model.MajorStatistic;
 import com.mooc.mooc.vo.CourseInfoVO;
 import com.mooc.mooc.vo.ResultVO;
 
@@ -37,4 +39,8 @@ public interface CourseService {
 
     //根据当前登录用户id取选课信息
     PageInfo<CourseInfoVO> selfList(Integer currPage,Integer pageSize,Integer userId);
+
+    List<MajorStatistic> majorRank(Integer year);
+
+    List<CourseStatistic> courseRank(Integer year);
 }

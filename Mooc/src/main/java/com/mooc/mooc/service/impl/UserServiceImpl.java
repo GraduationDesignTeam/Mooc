@@ -4,10 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.mapper.UserDiscussionMapper;
 import com.mooc.mooc.mapper.UserInfoMapper;
+import com.mooc.mooc.model.MajorStatistic;
 import com.mooc.mooc.model.UserDiscussion;
 import com.mooc.mooc.model.UserInfo;
+import com.mooc.mooc.model.UserStatistic;
 import com.mooc.mooc.service.UserService;
 import com.mooc.mooc.vo.ResultVO;
+import com.mooc.mooc.vo.StatisticVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -198,5 +201,42 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(currPage, pageSize);
         PageInfo<UserInfo> userInfoPageInfo=new PageInfo<>(userInfoMapper.queryAll(userInfo));
         return userInfoPageInfo;
+    }
+
+    /**
+     * @author 朱翔鹏
+     *  在数据统计功能下，管理员可以查看年度用户增长趋势（以月为单位）的可视化图表数据，
+     *  此处为折线图，另付平均月度增长率
+     * @param year
+     * @return
+     * StatisticVO:{List<UserStatistic>,increaseRate}
+     * List:用于echarts图表的数据list
+     * 每个list项是一个UserStatistic对象:{year; month; num}
+     * 		increaseRate:在后端计算好的平均月度增长率
+     */
+    @Override
+    public StatisticVO increaseRate(Integer year) {
+        StatisticVO statisticVO=new StatisticVO();
+        statisticVO.setList(userInfoMapper.queryMonthSum(year));
+        Double increaseRate=0.0;
+        for(int i=1;i<statisticVO.getList().size();i++){
+            increaseRate=increaseRate+(statisticVO.getList().get(i).getNum()-statisticVO.getList().get(i-1).getNum())/statisticVO.getList().get(i-1).getNum();
+        }
+        increaseRate=increaseRate/(statisticVO.getList().size()-1);
+        statisticVO.setIncreaseRate(increaseRate);
+        return statisticVO;
+    }
+
+    /**
+     * @author 朱翔鹏
+     * 在数据统计功能下，管理员可以查看系统内所有用户的专业分布排行榜
+     * @return
+     * List<MajorStatistic>
+     * List:用于echarts图表的数据list
+     * 每个list项是一个MajorStatistic对象:{major,num}
+     */
+    @Override
+    public List<MajorStatistic> majorRank(Integer year) {
+        return userInfoMapper.queryMajorSum(year);
     }
 }

@@ -2,6 +2,7 @@ package com.mooc.mooc.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.CourseTask;
+import com.mooc.mooc.model.JudgeOfQuestion;
 import com.mooc.mooc.model.SubjectiveOfQuestion;
 import com.mooc.mooc.service.SubjectiveQuestionService;
 import com.mooc.mooc.vo.ResultVO;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 课程控制器模块
@@ -24,14 +26,13 @@ public class SubjectiveQuestionController {
     /**
      * @author 田冠宇
      * 为首页提供分页查询任务列表
-     * @param currPage 页号
-     * @param coursetask 检索信息等
+
      * @return List<CourseInfo>
      * 检索结果表，按先后顺序
      */
-    @RequestMapping("/list/{currPage}")
-    public PageInfo<CourseTask> list(@PathVariable Integer currPage, @RequestBody CourseTask coursetask){
-        return null;
+    @RequestMapping("/listdraft")
+    public List<SubjectiveOfQuestion> list(@RequestBody CourseTask coursetask){
+        return subjectiveQuestionService.listdraft();
     }
     /**
      * @author 田冠宇
@@ -59,4 +60,15 @@ public class SubjectiveQuestionController {
         return subjectiveQuestionService.update(subjectiveOfQuestion);
     }
 
+    /**
+     * @author 田冠宇
+     * 为首页提供分页查询任务列表
+
+     * @return List<CourseInfo>
+     * 检索结果表，按先后顺序
+     */
+    @RequestMapping("/listtask")
+    public List<SubjectiveOfQuestion> listtask(@RequestBody CourseTask coursetask){
+        return subjectiveQuestionService.listtask(coursetask.getId());
+    }
 }

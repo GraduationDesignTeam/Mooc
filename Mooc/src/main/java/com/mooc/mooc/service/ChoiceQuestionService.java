@@ -1,6 +1,7 @@
 package com.mooc.mooc.service;
 
 import com.mooc.mooc.model.ChoiceOfQuestion;
+import com.mooc.mooc.model.JudgeOfQuestion;
 import com.mooc.mooc.vo.ResultVO;
 
 import java.util.List;
@@ -23,4 +24,8 @@ public interface ChoiceQuestionService {
 
     // 根据id查询某课程
     ChoiceOfQuestion sel(Integer choiceId);
+    // 查询草稿
+    List<ChoiceOfQuestion> listdraft();
+
+    List<ChoiceOfQuestion> listtask(Integer taskId);
 }

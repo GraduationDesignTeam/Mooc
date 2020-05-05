@@ -5,6 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.mapper.CourseInfoMapper;
 import com.mooc.mooc.mapper.StudentOfCourseMapper;
 import com.mooc.mooc.model.CourseInfo;
+import com.mooc.mooc.model.CourseStatistic;
+import com.mooc.mooc.model.MajorStatistic;
 import com.mooc.mooc.model.StudentOfCourse;
 import com.mooc.mooc.service.CourseManageService;
 import com.mooc.mooc.service.CourseService;
@@ -210,5 +212,23 @@ public class CourseServiceImpl implements CourseService {
             list1.add(courseInfoVO);
         }
         return new PageInfo<>(list1);
+    }
+
+    /**
+     * @author 朱翔鹏
+     * 在数据统计功能下，管理员可以查看系统内所有课程的专业分布统计
+     * @return
+     * List<MajorStatistic>
+     * List:用于echarts图表的数据list
+     * 每个list项是一个MajorStatistic对象:{major,num}
+     */
+    @Override
+    public List<MajorStatistic> majorRank(Integer year) {
+        return courseInfoMapper.queryMajorSum(year);
+    }
+
+    @Override
+    public List<CourseStatistic> courseRank(Integer year) {
+        return courseInfoMapper.queryCourseSum(year);
     }
 }

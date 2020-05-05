@@ -1,9 +1,11 @@
 package com.mooc.mooc.service;
 
 import com.github.pagehelper.PageInfo;
+import com.mooc.mooc.model.MajorStatistic;
 import com.mooc.mooc.model.UserDiscussion;
 import com.mooc.mooc.model.UserInfo;
 import com.mooc.mooc.vo.ResultVO;
+import com.mooc.mooc.vo.StatisticVO;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +29,8 @@ public interface UserService {
     ResultVO delete(Integer userId);
 
     PageInfo<UserInfo> list(Integer currPage, Integer pageSize,UserInfo userInfo);
+
+    StatisticVO increaseRate(Integer year);
+
+    List<MajorStatistic> majorRank(Integer year);
 }

@@ -6,10 +6,7 @@ import com.mooc.mooc.model.CourseTask;
 import com.mooc.mooc.service.CourseTaskService;
 import com.mooc.mooc.util.Define;
 import com.mooc.mooc.vo.ResultVO;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -25,16 +22,15 @@ public class CourseTaskController {
     /**
      * @author 田冠宇
      * 为首页提供分页查询任务列表
-     * @param currPage 页号
-     * @param coursetask 检索信息等
      * @return List<CourseInfo>
      * 检索结果表，按先后顺序
      */
-    @RequestMapping("/list/{currPage}")
-    public PageInfo<CourseTask> list(@PathVariable Integer currPage, @RequestBody CourseTask coursetask){
-        PageInfo<CourseTask> list1=courseTaskService.list(currPage, Define.PAGE_SIZE,coursetask);
+    @RequestMapping("/listTaskAll/{currPage}")
+    public PageInfo<CourseTask> listTaskAll(@PathVariable Integer currPage, @RequestBody CourseInfo course){
+        PageInfo<CourseTask> list=courseTaskService.listTaskAll(currPage, Define.PAGE_SIZE,course.getId());
         //System.out.println(list1.getList().get(0).getProhibitState());
-        return list1;
+
+        return list;
     }
     /**
      * @author 田冠宇
@@ -60,6 +56,48 @@ public class CourseTaskController {
     @RequestMapping("/update")
     public ResultVO update(@RequestBody CourseTask courseTask){
         return courseTaskService.update(courseTask);
+    }
+
+    /**
+     * @author 田冠宇
+     * 为首页提供分页查询任务列表
+     * @return List<CourseInfo>
+     * 检索结果表，按先后顺序
+     */
+    @RequestMapping("/listExamAll/{currPage}")
+    public PageInfo<CourseTask> listExamAll(@PathVariable Integer currPage, @RequestBody CourseInfo course){
+
+        PageInfo<CourseTask> list=courseTaskService.listExamAll(currPage, Define.PAGE_SIZE,course.getId());
+        //System.out.println(list1.getList().get(0).getProhibitState());
+
+        return list;
+    }
+
+    /**
+     * @author 田冠宇
+     * 为首页提供分页查询任务列表
+     * @return List<CourseInfo>
+     * 检索结果表，按先后顺序
+     */
+    @RequestMapping("/listAll/{currPage}")
+    public PageInfo<CourseTask> listAll(@PathVariable Integer currPage, @RequestBody CourseInfo course){
+
+        PageInfo<CourseTask> list=courseTaskService.listAll(currPage, Define.PAGE_SIZE,course.getId());
+        //System.out.println(list1.getList().get(0).getProhibitState());
+
+        return list;
+    }
+
+    /**
+     * @author 田冠宇
+     * 为首页提供分页查询任务列表
+     * @return List<CourseInfo>
+     * 检索结果表，按先后顺序
+     */
+    @RequestMapping("/seltask")
+    public CourseTask selByTaskId( @RequestBody CourseTask courseTask){
+
+        return courseTaskService.sel(courseTask.getId());
     }
 
 }

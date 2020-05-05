@@ -6,8 +6,24 @@ package com.mooc.mooc.model;
  */
 public class CourseStatistic {
 
-    private CourseInfo courseInfo;
+    private String courseName;
 
     //热度值
     private Integer popularity;
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public Integer getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
+    }
 }

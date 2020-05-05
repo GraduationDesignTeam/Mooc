@@ -1,7 +1,7 @@
 package com.mooc.mooc.mapper;
 
-import com.mooc.mooc.model.DiscussionDetail;
-import com.mooc.mooc.model.DiscussionInfo;
+import com.mooc.mooc.model.*;
+
 import java.util.List;
 
 public interface DiscussionInfoMapper {
@@ -18,4 +18,8 @@ public interface DiscussionInfoMapper {
     List<DiscussionDetail> queryAllNew(DiscussionDetail discussionDetail);
 
     List<DiscussionDetail> queryAllHot(DiscussionDetail discussionDetail);
+
+    List<MajorStatistic> queryMajorSum(Integer year);
+
+    List<DiscussionStatistic> queryDiscussionSum(Integer year);
 }
