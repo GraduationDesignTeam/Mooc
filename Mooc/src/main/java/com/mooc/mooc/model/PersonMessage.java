@@ -15,6 +15,10 @@ public class PersonMessage {
 
     private String msgContent;
 
+    private String msgPostname;
+
+    private String msgGetname;
+
     public Integer getMsgId() {
         return msgId;
     }
@@ -61,5 +65,21 @@ public class PersonMessage {
 
     public void setMsgContent(String msgContent) {
         this.msgContent = msgContent == null ? null : msgContent.trim();
+    }
+
+    public String getMsgPostname() {
+        return msgPostname;
+    }
+
+    public void setMsgPostname(String msgPostname) {
+        this.msgPostname = msgPostname == null ? null : msgPostname.trim();
+    }
+
+    public String getMsgGetname() {
+        return msgGetname;
+    }
+
+    public void setMsgGetname(String msgGetname) {
+        this.msgGetname = msgGetname == null ? null : msgGetname.trim();
     }
 }

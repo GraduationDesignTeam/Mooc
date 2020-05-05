@@ -1,6 +1,8 @@
 package com.mooc.mooc.mapper;
 
 import com.mooc.mooc.model.PersonMessage;
+
+import java.sql.Date;
 import java.util.List;
 
 public interface PersonMessageMapper {
@@ -13,4 +15,8 @@ public interface PersonMessageMapper {
     List<PersonMessage> selectAll();
 
     int updateByPrimaryKey(PersonMessage record);
+    List<PersonMessage> selectTwo(Integer postId,Integer getId);
+
+    PersonMessage selectOne(PersonMessage record);
+
 }
