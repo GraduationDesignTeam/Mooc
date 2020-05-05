@@ -13,4 +13,6 @@ public interface ChoiceOfQuestionMapper {
     List<ChoiceOfQuestion> selectAll();
 
     int updateByPrimaryKey(ChoiceOfQuestion record);
+
+    List<ChoiceOfQuestion> selectAllByType(Integer type);
 }

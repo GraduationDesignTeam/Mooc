@@ -13,4 +13,6 @@ public interface SubjectiveOfQuestionMapper {
     List<SubjectiveOfQuestion> selectAll();
 
     int updateByPrimaryKey(SubjectiveOfQuestion record);
+
+    List<SubjectiveOfQuestion> selectAllByType(Integer type);
 }

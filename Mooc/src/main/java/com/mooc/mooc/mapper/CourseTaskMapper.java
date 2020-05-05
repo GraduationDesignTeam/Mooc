@@ -10,7 +10,11 @@ public interface CourseTaskMapper {
 
     CourseTask selectByPrimaryKey(Integer id);
 
+    CourseTask selectByName(String name);
+
     List<CourseTask> selectAll();
+
+    List<CourseTask> selectAllByCourse(Integer courseId);
 
     int updateByPrimaryKey(CourseTask record);
 }

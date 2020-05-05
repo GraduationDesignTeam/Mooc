@@ -15,6 +15,8 @@ public class JudgeOfQuestion {
 
     private Double score;
 
+    private Integer type;
+
     public Integer getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class JudgeOfQuestion {
 
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

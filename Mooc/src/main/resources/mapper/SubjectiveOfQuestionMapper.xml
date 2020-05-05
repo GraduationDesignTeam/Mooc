@@ -9,6 +9,7 @@
     <result column="answer" jdbcType="VARCHAR" property="answer" />
     <result column="resolution" jdbcType="VARCHAR" property="resolution" />
     <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="type" jdbcType="INTEGER" property="type" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from subjective_question
@@ -17,10 +18,10 @@
   <insert id="insert" parameterType="com.mooc.mooc.model.SubjectiveOfQuestion">
     insert into subjective_question (id, task_id, course_id, 
       content, answer, resolution, 
-      score)
+      score, type)
     values (#{id,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, 
       #{content,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{resolution,jdbcType=VARCHAR}, 
-      #{score,jdbcType=DOUBLE})
+      #{score,jdbcType=DOUBLE}, #{type,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mooc.mooc.model.SubjectiveOfQuestion">
     update subjective_question
@@ -29,16 +30,24 @@
       content = #{content,jdbcType=VARCHAR},
       answer = #{answer,jdbcType=VARCHAR},
       resolution = #{resolution,jdbcType=VARCHAR},
-      score = #{score,jdbcType=DOUBLE}
+      score = #{score,jdbcType=DOUBLE},
+      type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, task_id, course_id, content, answer, resolution, score
+    select id, task_id, course_id, content, answer, resolution, score, type
     from subjective_question
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, task_id, course_id, content, answer, resolution, score
+    select id, task_id, course_id, content, answer, resolution, score, type
     from subjective_question
+  </select>
+
+
+  <select id="selectAllByType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, task_id, course_id, content, answer, resolution, score, type
+    from subjective_question
+    where type = #{type,jdbcType=INTEGER}
   </select>
 </mapper>

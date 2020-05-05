@@ -23,6 +23,9 @@ public class ChoiceOfQuestion {
 
     private Double score;
 
+    //0表示未添加，1表示添加
+    private Integer type;
+
     public Integer getId() {
         return id;
     }
@@ -109,5 +112,13 @@ public class ChoiceOfQuestion {
 
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
