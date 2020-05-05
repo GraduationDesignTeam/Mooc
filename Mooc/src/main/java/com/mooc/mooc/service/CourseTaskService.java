@@ -22,4 +22,13 @@ public interface CourseTaskService {
 
     // 根据id查询某课程
     CourseTask sel(Integer taskId);
+
+    // 查询任务
+    PageInfo<CourseTask> listAll(Integer currPage, Integer pageSize, Integer courseId);
+
+    // 查询任务
+    PageInfo<CourseTask> listExamAll(Integer currPage, Integer pageSize, Integer courseId);
+
+    // 查询任务
+    PageInfo<CourseTask> listTaskAll(Integer currPage, Integer pageSize, Integer courseId);
 }

@@ -16,5 +16,9 @@ public interface CourseTaskMapper {
 
     List<CourseTask> selectAllByCourse(Integer courseId);
 
+    List<CourseTask> selectTaskAllByCourse(Integer courseId);
+
+    List<CourseTask> selectExamAllByCourse(Integer courseId);
+
     int updateByPrimaryKey(CourseTask record);
 }

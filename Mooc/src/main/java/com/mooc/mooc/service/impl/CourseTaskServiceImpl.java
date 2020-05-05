@@ -88,4 +88,25 @@ public class CourseTaskServiceImpl implements CourseTaskService {
     public CourseTask sel(Integer taskId) {
         return null;
     }
+
+    @Override
+    public PageInfo<CourseTask> listAll(Integer currPage, Integer pageSize, Integer courseId) {
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
+        return new PageInfo<>(courseTaskMapper.selectAllByCourse(courseId));
+    }
+
+    @Override
+    public PageInfo<CourseTask> listExamAll(Integer currPage, Integer pageSize, Integer courseId) {
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
+        return new PageInfo<>(courseTaskMapper.selectExamAllByCourse(courseId));
+    }
+
+    @Override
+    public PageInfo<CourseTask> listTaskAll(Integer currPage, Integer pageSize, Integer courseId) {
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
+        return new PageInfo<>(courseTaskMapper.selectTaskAllByCourse(courseId));
+    }
 }
