@@ -52,24 +52,26 @@ public class CourseTaskServiceImpl implements CourseTaskService {
 
         ResultVO resultVO=new ResultVO(0, "");
         courseTaskMapper.insert(courseTask);
+        CourseTask courseTask1=courseTaskMapper.selectByName(courseTask.getName().toString());
+        System.out.println(courseTask1.getId());
         List<ChoiceOfQuestion> list_choice=choiceOfQuestionMapper.selectAllByType(0);
         List<JudgeOfQuestion> list_judge=judgeOfQuestionMapper.selectAllByType(0);
         List<SubjectiveOfQuestion> list_subjective=subjectiveOfQuestionMapper.selectAllByType(0);
         for(int i=0;i<list_choice.size();i++){
-            list_choice.get(i).setCourseId(courseTask.getCourseId());
-            list_choice.get(i).setTaskId(courseTask.getId());
+            list_choice.get(i).setCourseId(courseTask1.getCourseId());
+            list_choice.get(i).setTaskId(courseTask1.getId());
             list_choice.get(i).setType(1);
             choiceOfQuestionMapper.updateByPrimaryKey(list_choice.get(i));
         }
         for(int i=0;i<list_judge.size();i++){
-            list_judge.get(i).setCourseId(courseTask.getCourseId());
-            list_judge.get(i).setTaskId(courseTask.getId());
+            list_judge.get(i).setCourseId(courseTask1.getCourseId());
+            list_judge.get(i).setTaskId(courseTask1.getId());
             list_judge.get(i).setType(1);
             judgeOfQuestionMapper.updateByPrimaryKey(list_judge.get(i));
         }
         for(int i=0;i<list_subjective.size();i++){
-            list_subjective.get(i).setCourseId(courseTask.getCourseId());
-            list_subjective.get(i).setTaskId(courseTask.getId());
+            list_subjective.get(i).setCourseId(courseTask1.getCourseId());
+            list_subjective.get(i).setTaskId(courseTask1.getId());
             list_subjective.get(i).setType(1);
             subjectiveOfQuestionMapper.updateByPrimaryKey(list_subjective.get(i));
         }

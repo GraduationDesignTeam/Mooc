@@ -63,7 +63,7 @@
     where course_id = #{courseId}
   </select>
 
-  <select id="selectByName" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select id, course_id, user_id, name, type, score, create_time, update_time, start_time,
     end_time, limit_time, limit_number
     from course_task
