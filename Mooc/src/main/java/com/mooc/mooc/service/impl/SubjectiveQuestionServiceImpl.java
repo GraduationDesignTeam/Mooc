@@ -46,4 +46,9 @@ public class SubjectiveQuestionServiceImpl implements SubjectiveQuestionService 
     public SubjectiveOfQuestion sel(Integer choiceId) {
         return null;
     }
+
+    @Override
+    public List<SubjectiveOfQuestion> listdraft() {
+        return subjectiveOfQuestionMapper.selectAllByType(0);
+    }
 }

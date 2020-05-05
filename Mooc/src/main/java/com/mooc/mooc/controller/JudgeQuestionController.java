@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 课程控制器模块
@@ -24,14 +25,12 @@ public class JudgeQuestionController {
     /**
      * @author 田冠宇
      * 为首页提供分页查询任务列表
-     * @param currPage 页号
-     * @param coursetask 检索信息等
      * @return List<CourseInfo>
      * 检索结果表，按先后顺序
      */
-    @RequestMapping("/list/{currPage}")
-    public PageInfo<CourseTask> list(@PathVariable Integer currPage, @RequestBody CourseTask coursetask){
-        return null;
+    @RequestMapping("/listdraft")
+    public List<JudgeOfQuestion> list(@RequestBody CourseTask coursetask){
+        return judgeQuestionService.listdraft();
     }
     /**
      * @author 田冠宇

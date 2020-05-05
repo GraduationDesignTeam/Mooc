@@ -1,5 +1,6 @@
 package com.mooc.mooc.service;
 
+import com.mooc.mooc.model.JudgeOfQuestion;
 import com.mooc.mooc.model.SubjectiveOfQuestion;
 import com.mooc.mooc.vo.ResultVO;
 
@@ -23,4 +24,6 @@ public interface SubjectiveQuestionService {
 
     // 根据id查询某课程
     SubjectiveOfQuestion sel(Integer choiceId);
+    // 查询草稿
+    List<SubjectiveOfQuestion> listdraft();
 }

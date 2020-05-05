@@ -45,4 +45,9 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     public ChoiceOfQuestion sel(Integer choiceId) {
         return null;
     }
+
+    @Override
+    public List<ChoiceOfQuestion> listdraft() {
+        return choiceOfQuestionMapper.selectAllByType(0);
+    }
 }

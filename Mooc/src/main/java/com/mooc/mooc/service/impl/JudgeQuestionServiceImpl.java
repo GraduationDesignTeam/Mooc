@@ -46,4 +46,9 @@ public class JudgeQuestionServiceImpl implements JudgeQuestionService {
     public JudgeOfQuestion sel(Integer choiceId) {
         return null;
     }
+
+    @Override
+    public List<JudgeOfQuestion> listdraft() {
+        return judgeOfQuestionMapper.selectAllByType(0);
+    }
 }
