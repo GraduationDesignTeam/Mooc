@@ -212,7 +212,7 @@ public class UserController {
     /**
      * @author 朱翔鹏
      * 根据条件查询用户 v1.0
-     * @param userInfo用户条件
+     * @param userInfo 查询条件
      * @return
      * List<UserInfo>用户信息对象集合list
      */

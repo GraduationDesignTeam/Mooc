@@ -3,6 +3,8 @@ package com.mooc.mooc.service;
 import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.CourseInfo;
 import com.mooc.mooc.model.DiscussionDetail;
+import com.mooc.mooc.model.DiscussionInfo;
+import com.mooc.mooc.vo.ResultVO;
 
 public interface DiscussionService {
 
@@ -14,4 +16,13 @@ public interface DiscussionService {
 
     //打开某个讨论
     DiscussionDetail open(Integer discussionId, Integer currPage, Integer pageSize);
+
+    // 查询个人所参与的讨论，排序按热度从高到底
+    PageInfo<DiscussionDetail> listSelf(Integer currPage, Integer pageSize, Integer userId);
+
+    ResultVO create(DiscussionInfo discussionInfo);
+
+    DiscussionDetail openOne(Integer discussionId);
+
+    ResultVO update(DiscussionInfo discussionInfo);
 }

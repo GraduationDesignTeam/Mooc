@@ -31,7 +31,7 @@ public class DiscussionController {
      */
     @RequestMapping("/create")
     public ResultVO create(@RequestBody DiscussionInfo discussionInfo){
-        return new ResultVO(0,"");
+        return discussionService.create(discussionInfo);
     }
 
     /**
@@ -40,12 +40,12 @@ public class DiscussionController {
      * 可以选择某个讨论，编辑其详细信息
      * @param discussionInfo
      * @return
-     * 成功创建：ResultVO:{code:0;msg:”修改成功” }
-     * 创建失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
+     * 成功修改：ResultVO:{code:0;msg:”修改成功” }
+     * 修改失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/update")
     public ResultVO  update(@RequestBody DiscussionInfo discussionInfo){
-        return new ResultVO(0,"");
+        return discussionService.update(discussionInfo);
     }
 
     /**
@@ -95,8 +95,6 @@ public class DiscussionController {
     /**
      * @author 朱翔鹏
      * 用户可以设置查询条件，检索所有开设中的讨论，
-     * （只显示所参与的该课程下的讨论)
-     * 【注意讨论是基于课程存在的，所有的讨论，只能在打开的课程页面进行参与】，
      * 列表显示结果，点击某讨论，则进入该讨论页面
      * @param courseId
      * @param
@@ -106,14 +104,13 @@ public class DiscussionController {
     @RequestMapping("/searchNew/{currPage}")
     public PageInfo<DiscussionDetail> searchNew(@PathVariable Integer currPage, @RequestBody DiscussionDetail discussionDetail){
         //最新
-        PageInfo<DiscussionDetail> list1=discussionService.listNew(currPage, Define.PAGE_SIZE,discussionDetail);
-        //System.out.println(discussionDetail.getDiscussionName());
+        PageInfo<DiscussionDetail> list1=discussionService.listNew(currPage, Define.DISCUSSION_PAGE_SIZE,discussionDetail);
         return list1;
     }
     @RequestMapping("/searchHot/{currPage}")
     public PageInfo<DiscussionDetail> searchHot(@PathVariable Integer currPage, @RequestBody DiscussionDetail discussionDetail){
         //最热
-        PageInfo<DiscussionDetail> list1=discussionService.listHot(currPage, Define.PAGE_SIZE,discussionDetail);
+        PageInfo<DiscussionDetail> list1=discussionService.listHot(currPage, Define.DISCUSSION_PAGE_SIZE,discussionDetail);
         //System.out.println(discussionDetail.getDiscussionName());
         return list1;
     }
@@ -145,5 +142,23 @@ public class DiscussionController {
         return null;
     }
 
+    /**
+     * @author 朱翔鹏
+     * 用户查看自己所参与的讨论（有发帖记录）
+     * 列表显示结果，点击某讨论，则进入该讨论页面
+     * @param courseId
+     * @param
+     * @return
+     * List<DiscussionInfo>:返回所有符合条件的讨论；若查询结果为空，则list为null
+     */
+    @RequestMapping("/searchSelf/{currPage}")
+    public PageInfo<DiscussionDetail> searchSelf(@PathVariable Integer currPage, @RequestBody UserInfo userInfo){
+        PageInfo<DiscussionDetail> list1=discussionService.listSelf(currPage, Define.DISCUSSION_PAGE_SIZE,userInfo.getUserId());
+        return list1;
+    }
 
+    @RequestMapping("/openOne/{discussionId}")
+    public DiscussionDetail openOne(@PathVariable Integer discussionId){
+        return discussionService.openOne(discussionId);
+    }
 }

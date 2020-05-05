@@ -8,7 +8,6 @@ import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Service
@@ -31,6 +30,8 @@ public class CourseManageServiceImpl implements CourseManageService {
 
     @Override
     public ResultVO addTeacher(Integer courseId, Integer teacherId) {
+        if(assistantOfCourseMapper.count(courseId, teacherId) > 0)
+            return new ResultVO(2, "该用户已经是本课程的助教了，无法再次添加为教师！");
         try{
             teacherOfCourseMapper.insert(courseId, teacherId);
         } catch (Exception e){
@@ -41,6 +42,8 @@ public class CourseManageServiceImpl implements CourseManageService {
 
     @Override
     public ResultVO addAssistant(Integer courseId, Integer assistantId) {
+        if(teacherOfCourseMapper.count(courseId, assistantId) > 0)
+            return new ResultVO(2, "该用户已经是本课程的教师了，无法再次添加为助教！");
         try{
             assistantOfCourseMapper.insert(courseId, assistantId);
         } catch (Exception e){

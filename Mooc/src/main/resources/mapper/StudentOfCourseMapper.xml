@@ -44,4 +44,8 @@
     from student_of_course
     where student_id = #{userId,jdbcType=INTEGER}
   </select>
+  <select id="count" resultType="java.lang.Integer">
+    select count(0) as num from student_of_course
+    where course_id=#{courseId} and student_id=#{studentId};
+  </select>
 </mapper>

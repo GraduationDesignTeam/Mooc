@@ -148,17 +148,18 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseInfoVO selectVO(Integer courseId, Integer userId) {
-        CourseInfoVO courseInfoVO =  new CourseInfoVO(courseInfoMapper.selectByPrimaryKey(courseId));
-        /**
-         * 尚未完成
-         * 此处需要另从三张表里读取用户在这门课程里扮演的角色
-         */
+        CourseInfo course = courseInfoMapper.selectByPrimaryKey(courseId);
+        if(course == null)
+            return new CourseInfoVO();
+        CourseInfoVO courseInfoVO =  new CourseInfoVO(course);
         courseInfoVO.setRole(0);
+        // 下面依次判断该用户是否为这门课的教师、助教、学生
         if(courseManageService.isTeacherOfCourse(courseId, userId))
             courseInfoVO.setRole(1);
         else if(courseManageService.isAssistantOfCourse(courseId, userId))
             courseInfoVO.setRole(2);
-//        else if(){}
+        else if(studentOfCourseMapper.count(courseId, userId)>0)
+            courseInfoVO.setRole(3);
         return courseInfoVO;
     }
 
