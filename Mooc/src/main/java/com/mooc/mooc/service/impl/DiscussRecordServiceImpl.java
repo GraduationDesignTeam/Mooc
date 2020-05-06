@@ -1,7 +1,9 @@
 package com.mooc.mooc.service.impl;
 
 import com.mooc.mooc.mapper.DiscussRecordMapper;
+import com.mooc.mooc.mapper.InformationInfoMapper;
 import com.mooc.mooc.model.DiscussRecord;
+import com.mooc.mooc.model.InformationInfo;
 import com.mooc.mooc.service.DiscussRecordService;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class DiscussRecordServiceImpl implements DiscussRecordService {
 
     @Autowired
     private DiscussRecordMapper discussRecordMapper;
+
+    @Autowired
+    private InformationInfoMapper informationInfoMapper;
 
     /**
      * @author 朱翔鹏
@@ -28,6 +33,20 @@ public class DiscussRecordServiceImpl implements DiscussRecordService {
     public ResultVO addRecord(DiscussRecord discussRecord) {
         ResultVO resultVO=new ResultVO();
         discussRecordMapper.insert(discussRecord);
+        if(discussRecord.getReplyRecordId()!=null&&discussRecord.getReplyRecordId()!=0){
+            InformationInfo informationInfo=new InformationInfo();
+            informationInfo.setSenderId(discussRecord.getUserId());
+            informationInfo.setSenderName(discussRecord.getUserName());
+            informationInfo.setAddresserId(discussRecord.getReplyRecordId());
+            informationInfo.setAddresserName(discussRecordMapper.selectByPrimaryKey(discussRecord.getReplyRecordId()).getUserName());
+            informationInfo.setSendTime(new Date());
+            informationInfo.setInformationContent(discussRecord.getDiscussContent());
+            informationInfo.setDiscussionId(discussRecord.getDiscussionId());
+            informationInfo.setDiscussRecordId(discussRecord.getDiscussRecordId());
+            informationInfo.setInformationState(0);
+            informationInfo.setRemarks("1");
+            informationInfoMapper.insert(informationInfo);
+        }
         resultVO.setCode(0);
         resultVO.setMsg("发帖成功");
         return resultVO;

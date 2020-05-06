@@ -44,7 +44,7 @@ public class DiscussionController {
      * 修改失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/update")
-    public ResultVO  update(@RequestBody DiscussionInfo discussionInfo){
+    public DiscussionDetail  update(@RequestBody DiscussionInfo discussionInfo){
         return discussionService.update(discussionInfo);
     }
 
@@ -59,7 +59,8 @@ public class DiscussionController {
      */
     @RequestMapping("/delete/{discussionId}")
     public ResultVO  delete(@PathVariable Integer discussionId){
-        return new ResultVO(0,"");
+
+        return discussionService.delete(discussionId);
     }
 
     /**

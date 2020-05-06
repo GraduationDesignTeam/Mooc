@@ -24,9 +24,11 @@ public interface DiscussionService {
 
     DiscussionDetail openOne(Integer discussionId);
 
-    ResultVO update(DiscussionInfo discussionInfo);
+    DiscussionDetail update(DiscussionInfo discussionInfo);
 
     List<MajorStatistic> majorRank(Integer year);
 
     List<DiscussionStatistic> discussionRank(Integer year);
+
+    ResultVO delete(Integer discussionId);
 }
