@@ -71,4 +71,16 @@ public class ChoiceQuestionController {
         return choiceQuestionService.listtask(coursetask.getId());
     }
 
+    /**
+     * @author 田冠宇
+     * 教师在后台页面新建任务
+     * @return
+     * 成功添加：ResultVO:{code:0;msg:”添加成功” }
+     * 添加失败：ResultVO:{code:1;msg:”添加失败” }【msg中应包含详细错误信息】
+     */
+    @RequestMapping("/delete")
+    public ResultVO delete(@RequestBody ChoiceOfQuestion choiceOfQuestion){
+        return choiceQuestionService.delete(choiceOfQuestion.getId());
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.mooc.mooc.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.mooc.mooc.model.ChoiceOfQuestion;
 import com.mooc.mooc.model.CourseTask;
 import com.mooc.mooc.model.JudgeOfQuestion;
 import com.mooc.mooc.service.JudgeQuestionService;
@@ -67,6 +68,18 @@ public class JudgeQuestionController {
     @RequestMapping("/listtask")
     public List<JudgeOfQuestion> listtask(@RequestBody CourseTask coursetask){
         return judgeQuestionService.listtask(coursetask.getId());
+    }
+
+    /**
+     * @author 田冠宇
+     * 教师在后台页面新建任务
+     * @return
+     * 成功添加：ResultVO:{code:0;msg:”添加成功” }
+     * 添加失败：ResultVO:{code:1;msg:”添加失败” }【msg中应包含详细错误信息】
+     */
+    @RequestMapping("/delete")
+    public ResultVO delete(@RequestBody JudgeOfQuestion judgeOfQuestion){
+        return judgeQuestionService.delete(judgeOfQuestion.getId());
     }
 
 }

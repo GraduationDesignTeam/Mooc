@@ -26,6 +26,7 @@ public class SubjectiveQuestionServiceImpl implements SubjectiveQuestionService 
 
     @Override
     public ResultVO delete(Integer taskId) {
+        subjectiveOfQuestionMapper.deleteByPrimaryKey(taskId);
         return null;
     }
 

@@ -25,6 +25,7 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
 
     @Override
     public ResultVO delete(Integer taskId) {
+        choiceOfQuestionMapper.deleteByPrimaryKey(taskId);
         return null;
     }
 

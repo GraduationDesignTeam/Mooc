@@ -26,6 +26,7 @@ public class JudgeQuestionServiceImpl implements JudgeQuestionService {
 
     @Override
     public ResultVO delete(Integer taskId) {
+        judgeOfQuestionMapper.deleteByPrimaryKey(taskId);
         return null;
     }
 
