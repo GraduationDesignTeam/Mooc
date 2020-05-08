@@ -10,9 +10,13 @@ import com.mooc.mooc.vo.CourseWareVO;
 import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * 课件控制器
@@ -99,5 +103,44 @@ public class CourseWareController {
         if(currPage==null){currPage=1;}
         PageHelper.startPage(currPage, Define.PAGE_SIZE);
         return new PageInfo<>(courseWareService.selectUnassociatedByCourseId(courseId));
+    }
+
+    @GetMapping("/download/{originName:.+}")
+    public void downloadFile(@PathVariable String originName, @RequestParam String newName, HttpServletResponse response) {
+        InputStream inputStream = null;
+        OutputStream out = null;
+        response.setContentType("application/x-msdownload");
+        try {
+            Resource resource = FileHelper.loadFileAsResource(courseWarePath, originName);
+            if(resource == null)
+                return;
+            inputStream = resource.getInputStream();
+            //1.设置文件ContentType类型
+            response.setContentType("application/octet-stream;charset=UTF-8");
+            out = response.getOutputStream();
+            //2.转码
+            String convertName = new String(newName.getBytes("UTF-8"), "ISO-8859-1");
+            //3.设置Content-Disposition
+            response.setHeader("Content-Disposition", "attachment; filename=" + convertName);
+            int b = 0;
+            byte[] buffer = new byte[2048];
+            while (b != -1) {
+                b = inputStream.read(buffer);
+                if (b != -1) {
+                    out.write(buffer, 0, b);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+                out.close();
+                out.flush();
+            } catch (IOException e) {
+
+            }
+        }
     }
 }
