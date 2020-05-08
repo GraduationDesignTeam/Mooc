@@ -231,4 +231,14 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseStatistic> courseRank(Integer year) {
         return courseInfoMapper.queryCourseSum(year);
     }
+
+    @Override
+    public List<CourseInfo> selectByCreateTime(Integer limit) {
+        return courseInfoMapper.selectByCreateTime(limit);
+    }
+
+    @Override
+    public List<CourseInfo> selectByMostStudentNumber(Integer limit) {
+        return courseInfoMapper.selectByMostStudentNumber(limit);
+    }
 }

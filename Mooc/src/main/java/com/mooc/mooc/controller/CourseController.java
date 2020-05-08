@@ -217,21 +217,39 @@ public class CourseController {
      */
     @RequestMapping("/sel/{courseId}")
     public CourseInfoVO selOne(@PathVariable Integer courseId, @RequestParam Integer userId){
-//        System.out.println("courseId = " + courseId);
-//        System.out.println("userId = " + userId);
         return courseService.selectVO(courseId, userId);
+    }
+
+    /**
+     * @author 涂斌砚
+     * 用于首页下方推荐课程
+     * 按照课程创建顺序（越新的排在前面）拉取推荐课程列表 (最多8个）
+     * @return 课程列表
+     */
+    @RequestMapping("/list_by_create_time")
+    List<CourseInfo> selectByCreateTime(){
+        return courseService.selectByCreateTime(8);
+    }
+
+    /**
+     * @author 涂斌砚
+     * 用于首页轮播图
+     * 按照选课人数（越多的排在前面）拉取推荐课程列表 (最多5个）
+     * @return 课程列表
+     */
+    @RequestMapping("/list_by_student_number")
+    List<CourseInfo> selectByMostStudentNumber(){
+        return courseService.selectByMostStudentNumber(5);
     }
 
     /**
      * @author朱翔鹏
      * 用户在个人主页查询自己(学生身份)所修课程
-     * @param userId
+     * @param userInfo
      * @return
      */
     @RequestMapping("/selfList/{currPage}")
     public PageInfo<CourseInfoVO> selfList(@PathVariable Integer currPage, @RequestBody UserInfo userInfo){
-        PageInfo<CourseInfoVO> list1=courseService.selfList(currPage, Define.PAGE_SIZE,userInfo.getUserId());
-        //System.out.println(list1.getList().get(0).getProhibitState());
-        return list1;
+        return courseService.selfList(currPage, Define.PAGE_SIZE,userInfo.getUserId());
     }
 }

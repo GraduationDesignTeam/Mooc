@@ -145,4 +145,15 @@
     group by cname
     order by count(course_user_id) desc
   </select>
+  <select id="selectByCreateTime" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from course_info where check_state=1 order by id desc limit #{limit};
+  </select>
+  <select id="selectByMostStudentNumber" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select c.id, c.name, c.type, c.intro, c.detail, c.target, c.reference, c.photo, c.school,
+        c.teacher_id, c.teacher_name, c.open_time, c.close_time, c.course_state, c.check_state, c.course_authority from course_info c
+    left join (select course_id cid, count(*) count from student_of_course GROUP BY course_id ORDER BY count desc LIMIT #{limit}) t
+    on c.id = t.cid
+    and c.check_state = 1
+    limit #{limit};
+  </select>
 </mapper>

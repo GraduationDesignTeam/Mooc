@@ -43,4 +43,10 @@ public interface CourseService {
     List<MajorStatistic> majorRank(Integer year);
 
     List<CourseStatistic> courseRank(Integer year);
+
+    // 按照课程创建顺序（越新的排在前面）拉取推荐课程列表
+    List<CourseInfo> selectByCreateTime(Integer limit);
+
+    // 按照选课人数（越多的排在前面）拉取推荐课程列表
+    List<CourseInfo> selectByMostStudentNumber(Integer limit);
 }

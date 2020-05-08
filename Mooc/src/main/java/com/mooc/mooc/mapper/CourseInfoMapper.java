@@ -27,4 +27,8 @@ public interface CourseInfoMapper {
     List<MajorStatistic> queryMajorSum(Integer year);
 
     List<CourseStatistic> queryCourseSum(Integer year);
+
+    List<CourseInfo> selectByCreateTime(Integer limit);
+
+    List<CourseInfo> selectByMostStudentNumber(Integer limit);
 }
