@@ -3,12 +3,15 @@ package com.mooc.mooc.service.impl;
 import com.mooc.mooc.mapper.DiscussRecordMapper;
 import com.mooc.mooc.mapper.InformationInfoMapper;
 import com.mooc.mooc.model.DiscussRecord;
+import com.mooc.mooc.model.DiscussionDetail;
 import com.mooc.mooc.model.InformationInfo;
 import com.mooc.mooc.service.DiscussRecordService;
-import com.mooc.mooc.vo.ResultVO;
+import com.mooc.mooc.service.DiscussionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 @Service
@@ -20,6 +23,9 @@ public class DiscussRecordServiceImpl implements DiscussRecordService {
     @Autowired
     private InformationInfoMapper informationInfoMapper;
 
+    @Resource
+    private DiscussionService discussionService;
+
     /**
      * @author 朱翔鹏
      * 学生进入某个讨论，点击发帖，编辑帖子内容，点击发布
@@ -30,8 +36,8 @@ public class DiscussRecordServiceImpl implements DiscussRecordService {
      * 发帖失败：ResultVO:{code:1;msg:”发帖失败” }【msg中应包含详细错误信息】
      */
     @Override
-    public ResultVO addRecord(DiscussRecord discussRecord) {
-        ResultVO resultVO=new ResultVO();
+    @CachePut(value="DiscussionDetail",key="#discussRecord.discussionId")
+    public DiscussionDetail addRecord(DiscussRecord discussRecord) {
         discussRecordMapper.insert(discussRecord);
         if(discussRecord.getReplyRecordId()!=null&&discussRecord.getReplyRecordId()!=0){
             InformationInfo informationInfo=new InformationInfo();
@@ -47,9 +53,7 @@ public class DiscussRecordServiceImpl implements DiscussRecordService {
             informationInfo.setRemarks("1");
             informationInfoMapper.insert(informationInfo);
         }
-        resultVO.setCode(0);
-        resultVO.setMsg("发帖成功");
-        return resultVO;
+        return discussionService.openOne(discussRecord.getDiscussionId());
     }
 
     /**
@@ -61,14 +65,12 @@ public class DiscussRecordServiceImpl implements DiscussRecordService {
      * 改帖失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
      */
     @Override
-    public ResultVO updateRecord(DiscussRecord discussRecord) {
+    @CachePut(value="DiscussionDetail",key="#discussRecord.discussionId")
+    public DiscussionDetail updateRecord(DiscussRecord discussRecord) {
         discussRecord.setLastUpdateTime(new Date());
         discussRecord.setDeleteTime(null);
         discussRecordMapper.updateByPrimaryKey(discussRecord);
-        ResultVO resultVO=new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("修改成功");
-        return resultVO;
+        return discussionService.openOne(discussRecord.getDiscussionId());
     }
 
     /**
@@ -83,15 +85,12 @@ public class DiscussRecordServiceImpl implements DiscussRecordService {
      * 删帖失败：ResultVO:{code:1;msg:”删帖失败” }【msg中应包含详细错误信息】
      */
     @Override
-    public ResultVO deleteRecord(Integer discussRecordId) {
-        DiscussRecord discussRecord=discussRecordMapper.selectByPrimaryKey(discussRecordId);
+    @CachePut(value="DiscussionDetail",key="#discussRecord.discussionId")
+    public DiscussionDetail deleteRecord(DiscussRecord discussRecord) {
         discussRecord.setDiscussContent("");
         discussRecord.setLastUpdateTime(new Date());
         discussRecord.setDeleteTime(new Date());
-        ResultVO resultVO=new ResultVO();
         discussRecordMapper.updateByPrimaryKey(discussRecord);
-        resultVO.setCode(0);
-        resultVO.setMsg("删帖成功");
-        return resultVO;
+        return discussionService.openOne(discussRecord.getDiscussionId());
     }
 }

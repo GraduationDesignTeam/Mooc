@@ -4,9 +4,11 @@ import com.github.pagehelper.PageInfo;
 import com.mooc.mooc.model.*;
 import com.mooc.mooc.service.DiscussionService;
 import com.mooc.mooc.util.Define;
-import com.mooc.mooc.vo.DiscussionVO;
 import com.mooc.mooc.vo.ResultVO;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -44,7 +46,7 @@ public class DiscussionController {
      * 修改失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/update")
-    public DiscussionDetail  update(@RequestBody DiscussionInfo discussionInfo){
+    public DiscussionDetail update(@RequestBody DiscussionInfo discussionInfo){
         return discussionService.update(discussionInfo);
     }
 
@@ -58,7 +60,7 @@ public class DiscussionController {
      * 删除失败：ResultVO:{code:1;msg:”删除失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/delete/{discussionId}")
-    public ResultVO  delete(@PathVariable Integer discussionId){
+    public ResultVO delete(@PathVariable Integer discussionId){
 
         return discussionService.delete(discussionId);
     }
@@ -74,7 +76,7 @@ public class DiscussionController {
      * 创建封禁：ResultVO:{code:1;msg:”封禁失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/prohibit/{discussionId}")
-    public ResultVO  prohibit(@PathVariable Integer discussionId){
+    public ResultVO prohibit(@PathVariable Integer discussionId){
         return new ResultVO(0,"");
     }
 
@@ -89,7 +91,7 @@ public class DiscussionController {
      * 解禁失败：ResultVO:{code:1;msg:”解禁失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/relieve/{discussionId}")
-    public ResultVO  relieve(@PathVariable Integer discussionId){
+    public ResultVO relieve(@PathVariable Integer discussionId){
         return new ResultVO(0,"");
     }
 
@@ -127,7 +129,7 @@ public class DiscussionController {
      */
     @RequestMapping("/open/{discussionId}")
     public DiscussionDetail open(@PathVariable Integer discussionId, @RequestBody CurrPageObject currPageObject){
-        DiscussionDetail discussionDetail=discussionService.open(discussionId,currPageObject.getCurrPage(),Define.DISCUSSRECORD_PAGE_SIZE);
+        DiscussionDetail discussionDetail=discussionService.open(discussionId,currPageObject.getCurrPage(), Define.DISCUSSRECORD_PAGE_SIZE);
         return discussionDetail;
     }
 

@@ -1,7 +1,10 @@
 package com.mooc.mooc.service;
 
 import com.github.pagehelper.PageInfo;
-import com.mooc.mooc.model.*;
+import com.mooc.mooc.model.DiscussionDetail;
+import com.mooc.mooc.model.DiscussionInfo;
+import com.mooc.mooc.model.DiscussionStatistic;
+import com.mooc.mooc.model.MajorStatistic;
 import com.mooc.mooc.vo.ResultVO;
 
 import java.util.List;

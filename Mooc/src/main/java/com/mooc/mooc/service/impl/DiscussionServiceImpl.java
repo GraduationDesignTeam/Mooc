@@ -12,10 +12,10 @@ import com.mooc.mooc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DiscussionServiceImpl implements DiscussionService {
@@ -66,7 +66,7 @@ public class DiscussionServiceImpl implements DiscussionService {
     }
 
     @Override
-    @Cacheable(value="DiscussionDetail",key="#discussionId",unless="#result == null")
+    //@Cacheable(value="DiscussionDetail",key="#discussionId",unless="#result == null")
     public DiscussionDetail open(Integer discussionId, Integer currPage, Integer pageSize) {
         DiscussionDetail discussionDetail=discussionInfoMapper.selectByPrimaryKey(discussionId);
         if(currPage==null){currPage=1;}
@@ -130,7 +130,6 @@ public class DiscussionServiceImpl implements DiscussionService {
      * @return
      */
     @Override
-    @Cacheable(value="DiscussionDetail",key="#discussionId",unless="#result == null")
     public DiscussionDetail openOne(Integer discussionId) {
         return discussionInfoMapper.selectByPrimaryKey(discussionId);
     }

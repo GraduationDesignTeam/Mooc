@@ -1,13 +1,13 @@
 package com.mooc.mooc.service;
 
 import com.mooc.mooc.model.DiscussRecord;
-import com.mooc.mooc.vo.ResultVO;
+import com.mooc.mooc.model.DiscussionDetail;
 
 public interface DiscussRecordService {
 
-    ResultVO addRecord(DiscussRecord discussRecord);
+    DiscussionDetail addRecord(DiscussRecord discussRecord);
 
-    ResultVO updateRecord(DiscussRecord discussRecord);
+    DiscussionDetail updateRecord(DiscussRecord discussRecord);
 
-    ResultVO deleteRecord(Integer discussRecordId);
+    DiscussionDetail deleteRecord(DiscussRecord discussRecord);
 }

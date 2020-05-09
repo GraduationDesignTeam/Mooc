@@ -1,8 +1,10 @@
 package com.mooc.mooc.controller;
 
+import com.mooc.mooc.mapper.DiscussRecordMapper;
 import com.mooc.mooc.model.DiscussRecord;
+import com.mooc.mooc.model.DiscussionDetail;
 import com.mooc.mooc.service.DiscussRecordService;
-import com.mooc.mooc.vo.ResultVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,9 @@ public class DiscussRecordController {
     @Resource
     private DiscussRecordService discussRecordService;
 
+    @Autowired
+    private DiscussRecordMapper discussRecordMapper;
+
     /**
      * @author 朱翔鹏
      * 学生进入某个讨论，点击发帖，编辑帖子内容，点击发布
@@ -31,7 +36,7 @@ public class DiscussRecordController {
      * 发帖失败：ResultVO:{code:1;msg:”发帖失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/addRecord")
-    public ResultVO addRecord(@RequestBody DiscussRecord discussRecord){
+    public DiscussionDetail addRecord(@RequestBody DiscussRecord discussRecord){
         discussRecord.setDiscussState(1);
         discussRecord.setSendTime(new Date());
         discussRecord.setLastUpdateTime(new Date());
@@ -47,7 +52,7 @@ public class DiscussRecordController {
      * 改帖失败：ResultVO:{code:1;msg:”修改失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/updateRecord")
-    public ResultVO  updateRecord(@RequestBody DiscussRecord discussRecord){
+    public DiscussionDetail updateRecord(@RequestBody DiscussRecord discussRecord){
         return discussRecordService.updateRecord(discussRecord);
     }
 
@@ -63,8 +68,9 @@ public class DiscussRecordController {
      * 删帖失败：ResultVO:{code:1;msg:”删帖失败” }【msg中应包含详细错误信息】
      */
     @RequestMapping("/deleteRecord/{discussRecordId}")
-    public ResultVO  deleteRecord(@PathVariable Integer discussRecordId){
-        return discussRecordService.deleteRecord(discussRecordId);
+    public DiscussionDetail deleteRecord(@PathVariable Integer discussRecordId){
+        DiscussRecord discussRecord=discussRecordMapper.selectByPrimaryKey(discussRecordId);
+        return discussRecordService.deleteRecord(discussRecord);
     }
 
 
