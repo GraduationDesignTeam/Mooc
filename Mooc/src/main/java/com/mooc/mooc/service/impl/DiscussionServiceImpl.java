@@ -34,17 +34,19 @@ public class DiscussionServiceImpl implements DiscussionService {
 
     @Override
     public PageInfo<DiscussionDetail> listNew(Integer currPage, Integer pageSize, DiscussionDetail discussionDetail) {
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
         //最新讨论排序
         List<DiscussionDetail> list=discussionInfoMapper.queryAllNew(discussionDetail);
         for(DiscussionDetail discussionDetail1: list){
             discussionDetail1.setRecordNum(discussRecordMapper.selByDiscussionId(discussionDetail1.getDiscussionId()).size());
         }
-        if(currPage==null){currPage=1;}
-        PageHelper.startPage(currPage, pageSize);
         return new PageInfo<>(list);
     }
     @Override
     public PageInfo<DiscussionDetail> listHot(Integer currPage, Integer pageSize, DiscussionDetail discussionDetail) {
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
         //最热讨论排序
         List<DiscussionDetail> list=discussionInfoMapper.queryAllHot(discussionDetail);
         for(DiscussionDetail discussionDetail1: list){
@@ -60,8 +62,6 @@ public class DiscussionServiceImpl implements DiscussionService {
                 }
             }
         }
-        if(currPage==null){currPage=1;}
-        PageHelper.startPage(currPage, pageSize);
         return new PageInfo<>(list);
     }
 
@@ -79,6 +79,9 @@ public class DiscussionServiceImpl implements DiscussionService {
 
     @Override
     public PageInfo<DiscussionDetail> listSelf(Integer currPage, Integer pageSize, Integer userId) {
+        //分页
+        if(currPage==null){currPage=1;}
+        PageHelper.startPage(currPage, pageSize);
         List<DiscussRecord> list=discussRecordMapper.selectByUserId(userId);
         ArrayList<DiscussionDetail> list1=new ArrayList<DiscussionDetail>();
         for(DiscussRecord discussRecord: list){
@@ -94,9 +97,6 @@ public class DiscussionServiceImpl implements DiscussionService {
                 list1.add(discussionInfoMapper.selectByPrimaryKey(discussRecord.getDiscussionId()));
             }
         }
-        //分页
-        if(currPage==null){currPage=1;}
-        PageHelper.startPage(currPage, pageSize);
         PageInfo<DiscussionDetail> pageInfo=new PageInfo<>(list1);
         return pageInfo;
     }
